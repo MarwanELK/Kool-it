@@ -22,7 +22,7 @@ public class BackendController {
         return backendService.getRecettes();
     }
 
-    @RequestMapping("/recettes/{id}")
+    @RequestMapping("/recette/{id}")
     public Recette getRecette(@PathVariable long id){
         return backendService.getRecette(id);
     }

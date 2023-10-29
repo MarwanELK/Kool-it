@@ -1,7 +1,10 @@
 package project.spring.backend_koolit.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import project.spring.backend_koolit.model.Recette;
+import project.spring.backend_koolit.repository.RecetteRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,37 +12,31 @@ import java.util.List;
 
 @Service
 public class BackendService {
-    static private ArrayList<Recette> recettes= new ArrayList<>(Arrays.asList(
-            new Recette(1,"Tarte au pomme"),
-            new Recette(2,"lasagne"),
-            new Recette(3,"cookie"),
-            new Recette(4,"pizza napolitaine"),
-            new Recette(5,"soupe aux pois"),
-            new Recette(6, "brownie")
-    ));
+   @Autowired
+    private RecetteRepository recetteRepository;
 
     public List<Recette> getRecettes(){
+        List<Recette> recettes = new ArrayList<>();
+        recetteRepository.findAll().forEach(recette -> {
+            recettes.add(recette);
+        });
         return recettes;
     }
 
     public Recette getRecette(long id) {
-        return recettes.stream().filter(recette -> recette.getId()== id).findFirst().orElse(null);
+        return recetteRepository.findById(id).orElse(null);
     }
 
     public void deleteRecette(long id) {
-        recettes.removeIf(car -> car.getId() == id);
+        recetteRepository.deleteById(id);
     }
 
 
     public void addRecette(Recette recette) {
-        recettes.add(recette);
+        recetteRepository.save(recette);
     }
 
     public void updateRecette(Recette recette, long id) {
-        recettes.forEach(r1 ->{
-            if(r1.getId()==id){
-                recettes.set(recettes.indexOf(r1), recette);
-            }
-        });
+        recetteRepository.save(recette);
     }
 }
