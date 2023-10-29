@@ -17,6 +17,7 @@ public class BackendController {
         return "Hello world !";
     }*/
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/recettes")
     public List<Recette> getRecettes(){
         return backendService.getRecettes();
