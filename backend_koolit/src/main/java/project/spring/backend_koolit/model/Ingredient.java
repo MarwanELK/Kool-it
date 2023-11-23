@@ -9,7 +9,7 @@ public class Ingredient {
     public enum TypeIngredient {
         Legume, Fruit, Viande, Boisson, Céréales, laitier, Poisson, Oeuf, Gras, Sucré
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
