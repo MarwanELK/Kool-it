@@ -1,5 +1,4 @@
 package project.spring.backend_koolit.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.Recette;
@@ -11,6 +10,8 @@ import java.util.List;
 public class BackendController {
     @Autowired
     private BackendService backendService;
+
+
 
     /*@RequestMapping("/hello")
     public String sayHello(){
@@ -41,4 +42,7 @@ public class BackendController {
     public void updateRecette(@RequestBody Recette recette, @PathVariable long id){
         backendService.updateRecette(recette, id);
     }
+
+
 }
+
