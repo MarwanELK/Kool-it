@@ -1,5 +1,10 @@
-package org.example;
+package project.spring.backend_koolit.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Magasin {
 
     private String adresse;
