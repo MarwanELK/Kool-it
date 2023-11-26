@@ -13,58 +13,58 @@ v1.0 28.11.2023
 
 == *PRÉSENTATION DU PROJET* ==  
 
-===Contexte:===
+=== Contexte:
 Koolit est un site web dédié à simplifier la cuisine quotidienne. Il propose une variété de recettes adaptées aux préférences et aux ingrédients disponibles chez l'utilisateur.
 
-===Problématique et Gain Attendu:===
+=== Problématique et Gain Attendu:
 Comment simplifier la préparation des repas tout en minimisant le gaspillage alimentaire ? Koolit vise à faciliter la vie quotidienne en proposant des recettes personnalisées et une gestion optimale des achats alimentaires.
 
-===Motivation de l'Équipe:===
+=== Motivation de l'Équipe:
 L'équipe de Koolit est motivée par la volonté de rendre la cuisine accessible à tous, en offrant une expérience simple et agréable pour la préparation des repas quotidiens.
 
-===Concurrence / État de l'Art:===
+=== Concurrence / État de l'Art:
 Bien que plusieurs plateformes proposent des recettes en ligne comme Marmiton ou alors FrigoMagic, Koolit se distingue par son approche personnalisée basée sur les préférences et les ingrédients disponibles chez l'utilisateur.
 
-===Personas et Fonctionnalités (Haut Niveau):===
+=== Personas et Fonctionnalités (Haut Niveau):
 * Utilisateur Lambda : Recherche de recettes en fonction des ingrédients disponibles.
 * Épicurien Pressé : Accès à des recettes rapides et simples.
 * Chef en Herbe : Exploration de nouvelles idées culinaires.
 * Gestionnaire de Cuisine : Liste de courses, suivi des achats, gestion des stocks.
 
-===Prévisions Marketing:===
+=== Prévisions Marketing:
 Les stratégies de marketing incluront une présence active sur les réseaux sociaux, des enquêtes pour comprendre les besoins des utilisateurs, et un site Web convivial présentant les fonctionnalités uniques de Koolit.
 
 == *ASPECTS TECHNIQUES* ==         
 
-===Type d'Application:===
+=== Type d'Application:
 Koolit est une application web.
 
-===Schéma Architectural:===
+=== Schéma Architectural:
 Frontend, API, Backend, Persistance.
 
-===Plateforme Technologique:===
+=== Plateforme Technologique:
 Utilisation de Java Spring Boot pour le backend, React pour le frontend, base de données SQLite.
 
-===Plateforme Opérationnelle:===
+=== Plateforme Opérationnelle:
 Gestion de versions avec Git, intégration continue.
 
-===Interconnection avec Systèmes/ API Distantes (En prévision M1 Semestre 2 et M2):===
+=== Interconnection avec Systèmes/ API Distantes (En prévision M1 Semestre 2 et M2):
 En prévision pour améliorer les fonctionnalités et intégrer des partenariats avec des commerces locaux.
 
-===Acquisition de Données, Usage Intelligent des Données (En prévision M2):===
+=== Acquisition de Données, Usage Intelligent des Données (En prévision M2):
 En prévision pour optimiser les recommandations de recettes et les suggestions d'achats.
 
 
 == *MODÉLISATION* ==          
 
-===Maquette du Front (Feature 1):
+=== Maquette du Front (Feature 1):
 Description de la maquette de l'interface à venir
 
-===Diagramme de Classes Global (Partie Métier):
+=== Diagramme de Classes Global (Partie Métier):
 Représentation du modèle de données à venir
 
-===Description API Backend (ex REST):
-.Endpoints :
+=== Description API Backend (ex REST):
+Endpoints :
 * GET /api/recettes
 ** Récupérer la liste des recettes disponibles.
 * GET /api/recettes/{id}
@@ -77,7 +77,7 @@ Représentation du modèle de données à venir
 ** Supprimer une recette par ID.
 
 
-===Diagrammes de Séquence Front/Back (Par Feature):===
+=== Diagrammes de Séquence Front/Back (Par Feature):
 Description des interactions front/back à venir
 
 
