@@ -64,7 +64,7 @@ Description de la maquette de l'interface à venir
 Représentation du modèle de données à venir
 
 === Description API Backend (ex REST):
-Endpoints :
+.Endpoints :
 * GET /api/recettes
 ** Récupérer la liste des recettes disponibles.
 * GET /api/recettes/{id}
