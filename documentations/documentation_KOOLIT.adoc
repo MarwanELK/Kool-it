@@ -1,17 +1,18 @@
-+---------------------------------------+
-|       PROJET DEVOPS KOOLIT            |
-|   image::KOOLIT.jpg[Logo KOOLIT]      |
-|                                       |
-+---------------------------------------+
+
+      = PROJET DEVOPS KOOLIT  
+      v1.0 28.11.2023          
+   :imagesdir:KOOLIT.jpg     
+                                      
+
 
    Equipe:
    * Amel BOUABDELLAH BOURSALI
    * Ayoub KHAYEF-ALLAH
    * Marwan EL KHADDAR
  
---------------------------------
-|     PRÉSENTATION DU PROJET   |
---------------------------------
+
+   .PRÉSENTATION DU PROJET   
+
    Contexte:
    Koolit est un site web dédié à simplifier la cuisine quotidienne. Il propose une variété de recettes adaptées aux préférences et aux ingrédients disponibles chez l'utilisateur.
 
@@ -33,9 +34,8 @@
    Prévisions Marketing:
    Les stratégies de marketing incluront une présence active sur les réseaux sociaux, des enquêtes pour comprendre les besoins des utilisateurs, et un site Web convivial présentant les fonctionnalités uniques de Koolit.
 
----------------------------------
-|     ASPECTS TECHNIQUES         |
----------------------------------
+    .ASPECTS TECHNIQUES         
+
    Type d'Application:
    Koolit est une application web.
 
@@ -54,9 +54,9 @@
    Acquisition de Données, Usage Intelligent des Données (En prévision M2):
    En prévision pour optimiser les recommandations de recettes et les suggestions d'achats.
 
----------------------------------
-|          MODÉLISATION          |
----------------------------------
+
+  .MODÉLISATION          
+
    Maquette du Front (Feature 1):
    [Description de la maquette de l'interface]
 
@@ -87,6 +87,4 @@
    Diagrammes de Séquence Front/Back (Par Feature):
    [Description des interactions front/back]
 
----------------------------------
-|         FIN DE LA SYNTHÈSE     |
----------------------------------
+
