@@ -6,7 +6,12 @@
     {{recette.nom}} |
     Ingrédient : [{{recette.listeIngredients}}] |
     Etape de préparation : [{{recette.etapesPreparation}}]
+    <br>
+    <button onclick="window.location.href = 'http://localhost:8080/recettes';">Ajouter les ingredients de cette recette dans le panier</button>
+    
   </li>
+  <br>
+  <button onclick="window.location.href = 'https://www.e.leclerc/';">Meilleur Magasin pour acheter sa liste courses</button>
 </ul>
 
 <router-outlet></router-outlet>

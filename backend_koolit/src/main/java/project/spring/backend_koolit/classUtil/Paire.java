@@ -15,7 +15,6 @@ public class Paire {
     private String snd;
 
     public Paire(){
-
     }
 
     public Paire(Long id, int fst, String snd) {
