@@ -17,9 +17,33 @@ public class Paire {
     public Paire(){
     }
 
-    public Paire(Long id, int fst, String snd) {
-        this.id = id;
+    public Paire(int fst, String snd) {
+        this.id=0L;
         this.fst = fst;
+        this.snd = snd;
+    }
+
+    public int getFst() {
+        return fst;
+    }
+
+    public String getSnd() {
+        return snd;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFst(int fst) {
+        this.fst = fst;
+    }
+
+    public void setSnd(String snd) {
         this.snd = snd;
     }
 }

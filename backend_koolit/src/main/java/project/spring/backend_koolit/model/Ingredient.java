@@ -25,6 +25,30 @@ public class Ingredient {
         Nom = nom;
         this.type = type;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return Nom;
+    }
+
+    public void setNom(String nom) {
+        Nom = nom;
+    }
+
+    public TypeIngredient getType() {
+        return type;
+    }
+
+    public void setType(TypeIngredient type) {
+        this.type = type;
+    }
 }
 
 
