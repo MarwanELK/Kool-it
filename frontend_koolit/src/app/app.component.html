@@ -1,17 +1,81 @@
-<p>
-  Bienvenue sur Kool'it le site de vos plaisirs
-</p>
-<ul>
-  <li *ngFor="let recette of recettes">
-    {{recette.nom}} |
-    Ingrédient : [{{recette.listeIngredients}}] |
-    Etape de préparation : [{{recette.etapesPreparation}}]
-    <br>
-    <button onclick="window.location.href = 'http://localhost:8080/recettes';">Ajouter les ingredients de cette recette dans le panier</button>
-    
-  </li>
-  <br>
-  <button onclick="window.location.href = 'https://www.e.leclerc/';">Meilleur Magasin pour acheter sa liste courses</button>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.component.css">
+    <title>KOOL'IT</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<router-outlet></router-outlet>
+</head>
+<body>
+    <header>
+        <img src="koolit.png" alt="KOOL'IT Logo">
+        <nav>
+            <ul>
+                <li><a routerLink="/accueil">Accueil</a></li>
+                <li><a routerLink="/produits">Produits</a></li>
+                <li><a routerLink="/apropos">À Propos</a></li>
+                <li><a routerLink="/contact">Contact</a></li>
+            </ul>
+            <ul id="recettesList"></ul>
+
+        </nav>
+    </header>
+
+    <section class="banner">
+        <h1>Bienvenue chez KOOL'IT</h1>
+        <p>Découvrez nos recettes innovantes.</p>
+        <a routerLink="/Recettes" class="cta-button">Voir les produits</a>
+    </section>
+    
+    <div id="recetteDetails">
+        <p>Nom: <span id="nom"></span></p>
+        <!-- Ajoutez d'autres détails de recette ici -->
+    </div>
+
+    <section class="products">
+        <h2>Nos Produits</h2>
+        <ul>
+            <li><a href="https://www.e-leclerc.com/">Leclerc</a></li>
+            <li><a href="https://www.carrefour.fr/">Carrefour</a></li>
+            <li><a href="https://www.auchan.fr/">Auchan</a></li>
+            <li><a href="https://www.intermarche.com/">Intermarché</a></li>
+            <!-- Ajoutez d'autres magasins ici -->
+        </ul>
+    </section>
+
+    <section class="testimonials">
+        <h2>Témoignages</h2>
+        <!-- Ajoutez des témoignages ici -->
+    </section>
+
+    <router-outlet></router-outlet>
+    
+    <footer>
+        <p>&copy; 2023 KOOL'IT. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+                function displayData(recettes) {
+            const recettesList = document.getElementById('recettesList');
+            recettes.forEach(recette => {
+                const listItem = document.createElement('li');
+                listItem.textContent = recette.nom;
+                recettesList.appendChild(listItem);
+            });
+        }
+
+        // Effectuez la requête et affichez les données
+        // (utilisez la même URL que celle utilisée dans la requête HTTP)
+        axios.get('http://localhost:8080/api/recettes')
+            .then(response => {
+                displayData(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des données', error);
+            });
+
+    </script>
+</body>
+</html>

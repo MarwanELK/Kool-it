@@ -1,26 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-
-import {KoolitService} from './koolit.service'
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers:[KoolitService]
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'frontend_koolit';
-  recettes: any = []
+export class AppComponent {
+  // Vous pouvez ajouter des propriétés ou des méthodes ici si nécessaire
 
-  constructor(private koolitService : KoolitService){
-
-  }
-
-  ngOnInit() : void {
-    console.log('On init....')
-    this.koolitService.getRecettes().subscribe((datas)=>{
-      this.recettes=datas;
-    })
+  // Par exemple, si vous voulez exécuter une action lors de l'initialisation de l'application
+  ngOnInit() {
+    console.log('Application initialized');
   }
 }

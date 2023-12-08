@@ -3,7 +3,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+// ajouter les quantités plus tard (mesure poid etc)
 @Entity
 public class Paire {
 
@@ -15,6 +15,7 @@ public class Paire {
     private String snd;
 
     public Paire(){
+
     }
 
     public Paire(Long id, int fst, String snd) {
