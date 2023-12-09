@@ -18,6 +18,11 @@ public class RecetteController {
     public RecetteController(RecetteService recetteService) {
         this.recetteService = recetteService;
     }
+
+    @GetMapping
+    public List<Recette> getAllRecettes() {
+        return recetteService.getAllRecettes();
+    }
 @GetMapping("{id}")
 public Recette findIngredientByRecetteId(@PathVariable Long id) {
     return recetteService.findRecetteByRecetteId(id);

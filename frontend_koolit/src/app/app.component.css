@@ -1,60 +1,56 @@
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
 }
 
 header {
-    background-color: #3498db;
-    color: #fff;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
+header img {
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
 }
 
 nav a {
     text-decoration: none;
-    color: #fff;
+    color: white;
+    font-size: 16px;
     margin: 0 15px;
 }
 
-.banner {
-    text-align: center;
-    padding: 100px 0;
-    background-color: #ecf0f1;
+.recettes-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-top: 20px;
 }
 
-.banner h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
+.recettes-list li {
+    margin-right: 15px;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.products, .testimonials {
-    text-align: center;
-    padding: 50px 0;
+router-outlet {
+    padding: 20px;
 }
 
 footer {
-    background-color: #34495e;
-    color: #fff;
+    background-color: #333;
+    color: white;
+    padding: 20px;
     text-align: center;
-    padding: 1em 0;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }

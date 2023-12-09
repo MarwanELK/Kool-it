@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +9,8 @@ import { AproposComponent } from './apropos/apropos.component';
 import { ContactComponent } from './contact/contact.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
+import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
+import { MagasinsComponent } from './magasins/magasins.component';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,12 @@ import { ProduitsListComponent } from './produits-list/produits-list.component';
     ProduitsComponent,
     AproposComponent,
     ContactComponent,
-    ProduitsListComponent
+    ProduitsListComponent,
+    ListeDeCoursesComponent,
+    MagasinsComponent
   ],
   imports: [
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule

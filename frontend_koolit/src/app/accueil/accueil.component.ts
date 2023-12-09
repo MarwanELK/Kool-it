@@ -1,3 +1,5 @@
+// accueil.component.ts
+
 import { Component } from '@angular/core';
 
 @Component({

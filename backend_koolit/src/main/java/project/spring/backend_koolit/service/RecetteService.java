@@ -10,6 +10,8 @@ import project.spring.backend_koolit.repository.RecetteRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
+
 @Service
 
 public class RecetteService {
@@ -21,8 +23,14 @@ public class RecetteService {
     }
 
     public Recette findRecetteByRecetteId(Long id) {
-        return repository.findRecetteByRecetteId(id);
+        Recette recette = repository.findRecetteByRecetteId(id);
+        if (recette != null) {
+            // Vérifiez les ingrédients dans les logs
+            System.out.println("Ingrédients associés à la recette : " + recette.getIngredients());
+        }
+        return recette;
     }
+
     public List<Recette> findAllRecettes() {
         return repository.findAll();
     }
@@ -37,5 +45,9 @@ public class RecetteService {
             retour.add(i);
         }
         return retour;
+    }
+
+    public List<Recette> getAllRecettes() {
+        return repository.findAll();
     }
 }

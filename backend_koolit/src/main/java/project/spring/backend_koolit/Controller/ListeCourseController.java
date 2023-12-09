@@ -1,50 +1,48 @@
-package project.spring.backend_koolit.service;
+package project.spring.backend_koolit.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.ListeCourse;
 import project.spring.backend_koolit.repository.ListeCourseRepository;
+import project.spring.backend_koolit.service.ListeCourseService;
 
 import java.util.Arrays;
 import java.util.List;
-@Service
-public class ListeCourseService {
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("/liste-course")
+public class ListeCourseController {
 
-    private final ListeCourseRepository listeCourseRepository;
+    private final ListeCourseService listeCourseService;
 
     @Autowired
-    public ListeCourseService(ListeCourseRepository listeCourseRepository) {
-        this.listeCourseRepository = listeCourseRepository;
+    public ListeCourseController(ListeCourseService listeCourseService) {
+        this.listeCourseService = listeCourseService;
+    }
+    @GetMapping
+    public List<ListeCourse> getAllListesCourses() {
+        return listeCourseService.getAllListesCourse();
     }
 
-    public List<ListeCourse> getAllListesCourse() {
-        List<ListeCourse> listesCourses = listeCourseRepository.findAll();
-        return convertStringIngredientsToList(listesCourses);
+    @GetMapping("/{idUtilisateur}")
+    public List<ListeCourse> getListesCourseByUtilisateur(@PathVariable Long idUtilisateur) {
+        return listeCourseService.getListesCourseByUtilisateur(idUtilisateur);
     }
 
-    public List<ListeCourse> getListesCourseByUtilisateur(Long idUtilisateur) {
-        List<ListeCourse> listesCourses = listeCourseRepository.findByUtilisateurId(idUtilisateur);
-        return convertStringIngredientsToList(listesCourses);
-    }
-
-    public ListeCourse ajouterListeCourse(Long idUtilisateur, List<String> nouveauxIngredients) {
-        String ingredientsAsString = String.join(", ", nouveauxIngredients);
-        ListeCourse nouvelleListeCourse = new ListeCourse(idUtilisateur, ingredientsAsString);
-        return listeCourseRepository.save(nouvelleListeCourse);
-    }
-
-    // Méthode pour convertir la chaîne d'ingrédients en liste
-    private List<ListeCourse> convertStringIngredientsToList(List<ListeCourse> listesCourses) {
-        for (ListeCourse listeCourse : listesCourses) {
-            String[] ingredientsArray = listeCourse.getIngredients().split(", ");
-            listeCourse.setIngredientsList(Arrays.asList(ingredientsArray));
+    @PostMapping("/{idUtilisateur}")
+    public ResponseEntity<ListeCourse> ajouterListeCourse(@RequestBody ListeCourse nouvelleListeCourse) {
+        try {
+            ListeCourse listeCourse = listeCourseService.ajouterListeCourse(nouvelleListeCourse);
+            return ResponseEntity.ok(listeCourse);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return listesCourses;
     }
 
-    public ListeCourse ajouterListeCourse(ListeCourse nouvelleListeCourse) {
-        // Convertir la chaîne d'ingrédients en liste
-        nouvelleListeCourse.setIngredientsList(Arrays.asList(nouvelleListeCourse.getIngredients().split(", ")));
-        return listeCourseRepository.save(nouvelleListeCourse);
-    }
+
+
 }
