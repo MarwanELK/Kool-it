@@ -1,6 +1,7 @@
 package project.spring.backend_koolit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import project.spring.backend_koolit.model.ListeDeCourses;
 import project.spring.backend_koolit.model.Recette;
 import project.spring.backend_koolit.service.BackendService;
 
@@ -12,13 +13,9 @@ public class BackendController {
     private BackendService backendService;
 
 
-
-    /*@RequestMapping("/hello")
-    public String sayHello(){
-        return "Hello world !";
-    }*/
-
     @CrossOrigin(origins = "*")
+
+    //Recettes
     @RequestMapping("/recettes")
     public List<Recette> getRecettes(){
         return backendService.getRecettes();
@@ -42,7 +39,12 @@ public class BackendController {
     public void updateRecette(@RequestBody Recette recette, @PathVariable long id){
         backendService.updateRecette(recette, id);
     }
-
+    @CrossOrigin(origins = "*")
+    //Liste de courses
+    @RequestMapping("/liste-de-courses")
+    public List<ListeDeCourses> getListeDeCourses(){
+        return backendService.getListeDeCourses();
+    }
 
 }
 

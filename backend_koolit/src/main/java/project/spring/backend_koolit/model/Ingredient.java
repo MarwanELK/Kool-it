@@ -26,6 +26,8 @@ public class Ingredient {
         this.type = type;
     }
 
+    
+
     public Long getId() {
         return id;
     }

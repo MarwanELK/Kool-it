@@ -6,6 +6,15 @@
     <title>Ma liste de course</title>
 </head>
 <body>
-    <p>ma liste de course ahahaahh .</p>
+    <p>
+        wesh
+        <li *ngFor="let listeDeCourses of listeDeCourses">
+            Liste de course no : {{listeDeCourses.id}}
+            <br>
+            Contenu : {{listeDeCourses.courses}}
+            <br>
+            <br>
+          </li>
+    </p>
 </body>
 </html>

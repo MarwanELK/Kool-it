@@ -48,6 +48,10 @@ public class Recette {
         this.ingredients.add(p);
     }
 
+    public List<Paire> mesIngredients(){
+        return ingredients;
+    }
+
     public List<String> covertStringListIngredient(){
         List<String> liste =  new ArrayList<>();
         for(Paire p : ingredients){

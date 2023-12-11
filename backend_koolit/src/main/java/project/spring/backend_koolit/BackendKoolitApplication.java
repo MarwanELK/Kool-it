@@ -1,10 +1,13 @@
 package project.spring.backend_koolit;
 import jakarta.el.BeanNameResolver;
+import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.context.ConfigurableApplicationContext;
 import project.spring.backend_koolit.classUtil.Paire;
+import project.spring.backend_koolit.model.ListeDeCourses;
 import project.spring.backend_koolit.model.Recette;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import project.spring.backend_koolit.repository.ListeDeCoursesRepository;
 import project.spring.backend_koolit.repository.RecetteRepository;
 import java.util.Arrays;
 
@@ -17,6 +20,8 @@ public class BackendKoolitApplication {
 		ConfigurableApplicationContext context=SpringApplication.run(BackendKoolitApplication.class, args);
 
 		RecetteRepository recetteRepository = context.getBean(RecetteRepository.class);
+
+		ListeDeCoursesRepository listeDeCoursesRepository = context.getBean(ListeDeCoursesRepository.class);
 
 		Recette recette1 = new Recette("Entree");
 		recette1.setNom("Soupe de carottes, lait de coco et gingembre");
@@ -43,22 +48,22 @@ public class BackendKoolitApplication {
 		recette3.getEtapesPreparation().add(" Déposer 1 carré de chocolat blanc dans chaque ramequin, puis recouvrir avec le reste de la préparation");
 		recette3.getEtapesPreparation().add(" Cuire 7 minutes au four.");
 
-		/*recette1.setEtapesPreparation(Arrays.asList("Étape 1", "Étape 2", "Étape 3"));
-
-		Recette recette2 = new Recette();
-		recette2.setNom("Recette 2");
-		// Initialisez les autres propriétés de recette2 de la même manière
-
-		Recette recette3 = new Recette();
-		recette3.setNom("Recette 3");
-		// Initialisez les autres propriétés de recette3 de la même manière
-		*/
-
 		// Enregistrez les recettes dans la base de données en utilisant la méthode saveAll héritée
 		recetteRepository.saveAll(Arrays.asList(recette1, recette2, recette3));
 
 		// Affichez un message pour indiquer que les recettes ont été ajoutées
 		System.out.println("Trois recettes ont été ajoutées à la base de données.");
+
+		ListeDeCourses liste1 = new ListeDeCourses();
+		ListeDeCourses liste2 = new ListeDeCourses();
+		ListeDeCourses liste3 = new ListeDeCourses();
+
+		for(Paire p : recette3.mesIngredients()){
+			liste1.ajouterCourse(p);
+		}
+
+
+		listeDeCoursesRepository.saveAll(Arrays.asList(liste1,liste2,liste3));
 
 	}
 }
