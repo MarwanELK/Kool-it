@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.service.MagasinService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/magasins")
@@ -83,15 +85,22 @@ public class MagasinController {
     public ResponseEntity<Void> ajouterTypeAliment(@PathVariable String nom, @RequestBody String typeAliment) {
         try {
             Magasin magasin = magasinService.getMagasinByNom(nom);
+
             if (magasin != null) {
                 String typeAlimentActuel = magasin.getTypeAliment();
                 if (typeAlimentActuel == null) {
-                    typeAlimentActuel = "[]";
+                    typeAlimentActuel = "[]"; // Initialisez avec une liste vide si elle est nulle
                 }
-                List<String> typesAliments = new ObjectMapper().readValue(typeAlimentActuel, List.class);
-                typesAliments.add(typeAliment.replace("\"", ""));
+
+               Set<String> typesAlimentsSet = new ObjectMapper().readValue(typeAlimentActuel, Set.class);
+
+                typesAlimentsSet.add(typeAliment.replace("\"", ""));
+
+                List<String> typesAliments = new ArrayList<>(typesAlimentsSet);
+
                 magasin.setTypeAliment(new ObjectMapper().writeValueAsString(typesAliments));
                 magasinService.ajouterMagasin(magasin);
+
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();
@@ -101,4 +110,5 @@ public class MagasinController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 }
