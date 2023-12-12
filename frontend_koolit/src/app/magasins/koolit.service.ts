@@ -66,9 +66,9 @@ rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
 }
 ajouterTypeAliment(nomMagasin: string, typeAliment: string): Observable<any> {
   const url = `${this.apiUrl}/magasins/ajouterTypeAliment/${nomMagasin}`;
-  const body = { typeAliment };
-  return this.httpClient.post(url, body);
+  return this.httpClient.post(url, typeAliment);
 }
+
 
   
   

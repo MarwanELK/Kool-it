@@ -17,12 +17,14 @@
 </div>
 
 <div class="magasins-container">
-    <div *ngFor="let magasin of magasins" class="magasins-item">
-        <h3>{{ magasin.nom }}</h3>
+    <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
+        <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
+        <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
         <p>Type: {{ magasin.type }}</p>
         <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
         <p>Type d'aliment: {{ magasin.typeAliment }}</p>
-        <button (click)="ajouterTypeAliment()">Ajouter Type d'Aliment</button>
+        <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
+        <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
         <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
     </div>
 </div>

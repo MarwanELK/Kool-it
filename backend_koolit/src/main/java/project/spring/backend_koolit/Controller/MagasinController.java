@@ -1,6 +1,8 @@
 package project.spring.backend_koolit.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.Magasin;
@@ -50,14 +52,53 @@ public class MagasinController {
     }
 
     @GetMapping("/rechercher")
-    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(@RequestParam String nomMagasin) {
-        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nomMagasin);
+    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(@RequestParam String nom) {
+        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nom);
         return ResponseEntity.ok(magasins);
     }
-    @PostMapping("/ajouterTypeAliment/{nomMagasin}")
-    public ResponseEntity<Void> ajouterTypeAliment(@PathVariable String nomMagasin, @RequestBody String typeAliment) {
-        // Implémentez la logique pour ajouter le type d'aliment au magasin spécifié
-        // Assurez-vous de mettre à jour la base de données en conséquence
-        return ResponseEntity.ok().build();
+
+    @GetMapping("/ajouterTypeAliment/{nom}")
+    public ResponseEntity<List<String>> getTypeAliment(@PathVariable String nom) {
+        try {
+            Magasin magasin = magasinService.getMagasinByNom(nom);
+
+            if (magasin != null) {
+                String typeAlimentActuel = magasin.getTypeAliment();
+                if (typeAlimentActuel == null) {
+                    typeAlimentActuel = "[]"; // Initialisez avec une liste vide si elle est nulle
+                }
+                List<String> typesAliments = new ObjectMapper().readValue(typeAlimentActuel, List.class);
+
+                return ResponseEntity.ok(typesAliments);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/ajouterTypeAliment/{nom}")
+    public ResponseEntity<Void> ajouterTypeAliment(@PathVariable String nom, @RequestBody String typeAliment) {
+        try {
+            Magasin magasin = magasinService.getMagasinByNom(nom);
+            if (magasin != null) {
+                String typeAlimentActuel = magasin.getTypeAliment();
+                if (typeAlimentActuel == null) {
+                    typeAlimentActuel = "[]";
+                }
+                List<String> typesAliments = new ObjectMapper().readValue(typeAlimentActuel, List.class);
+                typesAliments.add(typeAliment.replace("\"", ""));
+                magasin.setTypeAliment(new ObjectMapper().writeValueAsString(typesAliments));
+                magasinService.ajouterMagasin(magasin);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

@@ -50,7 +50,12 @@ public class MagasinService {
     public void supprimerMagasin(Long id) {
         magasinRepository.deleteById(id);
     }
-    public List<Magasin> rechercherMagasinParNom(String nomMagasin) {
-        return magasinRepository.findByNomContainingIgnoreCase(nomMagasin);
+
+    public List<Magasin> rechercherMagasinParNom(String nom) {
+        return magasinRepository.findByNomContainingIgnoreCase(nom);
+    }
+
+    public Magasin getMagasinByNom(String nom) {
+        return magasinRepository.findByNom(nom).orElse(null);
     }
 }

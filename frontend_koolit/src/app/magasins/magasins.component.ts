@@ -57,18 +57,26 @@ export class MagasinsComponent implements OnInit {
       this.chargerMagasins();
     }
   }
-
-  ajouterTypeAliment(): void {
-    // Utilisez la méthode du service pour ajouter un type d'aliment
-    this.koolitService.ajouterTypeAliment(this.magasinSelectionne.nom, this.nouveauTypeAliment).subscribe(
-      (response: any) => {
-        console.log('Type d\'aliment ajouté avec succès dans la base de données :', response);
-        // Rafraîchir la liste après l'ajout
-        this.chargerMagasins();
-      },
-      (error) => {
-        console.error('Erreur lors de l\'ajout du type d\'aliment dans la base de données :', error);
-      }
-    );
+  selectionnerMagasin(magasin: any): void {
+    // Affectez la valeur du magasin sélectionné
+    this.magasinSelectionne = magasin;
   }
+  ajouterTypeAliment(): void {
+    if (this.magasinSelectionne && this.magasinSelectionne.nom && this.nouveauTypeAliment.trim() !== '') {
+      this.koolitService.ajouterTypeAliment(this.magasinSelectionne.nom, this.nouveauTypeAliment).subscribe(
+        (response: any) => {
+          console.log('Type d\'aliment ajouté avec succès dans la base de données :', response);
+          // Rafraîchir la liste après l'ajout
+          this.chargerMagasins();
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout du type d\'aliment dans la base de données :', error);
+        }
+      );
+    } else {
+      console.error('Magasin sélectionné non valide ou type d\'aliment vide.');
+    }
+  }
+  
+  
 }
