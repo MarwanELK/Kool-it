@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KoolitService } from './koolit.service';
-import { Observable } from 'rxjs'; 
+import { Observable } from 'rxjs';  // Importez Observable depuis rxjs
 
 @Component({
   selector: 'app-magasins',
@@ -58,38 +58,17 @@ export class MagasinsComponent implements OnInit {
     }
   }
 
-  
-  ajouterTypeAliment(magasin: any): void {
-    // Assurez-vous que le magasin sélectionné et le nouveau type d'aliment sont définis
-    if (magasin.nom && this.nouveauTypeAliment) {
-      // Utilisez la méthode du service pour ajouter un type d'aliment
-      this.koolitService.ajouterTypeAliment(magasin.nom, this.nouveauTypeAliment).subscribe(
-        (response: any) => {
-          console.log('Type d\'aliment ajouté avec succès dans la base de données :', response);
-          // Rafraîchir la liste après l'ajout
-          this.chargerMagasins();
-          // Réinitialiser le champ du nouveau type d'aliment
-          this.nouveauTypeAliment = '';
-        },
-        (error) => {
-          console.error('Erreur lors de l\'ajout du type d\'aliment dans la base de données :', error);
-        }
-      );
-    } else {
-      console.error('Veuillez sélectionner un magasin et spécifier un nouveau type d\'aliment.');
-    }
+  ajouterTypeAliment(): void {
+    // Utilisez la méthode du service pour ajouter un type d'aliment
+    this.koolitService.ajouterTypeAliment(this.magasinSelectionne.nom, this.nouveauTypeAliment).subscribe(
+      (response: any) => {
+        console.log('Type d\'aliment ajouté avec succès dans la base de données :', response);
+        // Rafraîchir la liste après l'ajout
+        this.chargerMagasins();
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du type d\'aliment dans la base de données :', error);
+      }
+    );
   }
-
-
-selectionnerMagasin(magasin: any): void {
-  if (this.magasinSelectionne === magasin) {
-      
-      this.magasinSelectionne = {};
-  } else {
-     
-      this.magasinSelectionne = magasin;
-  }
-}
-
-
 }

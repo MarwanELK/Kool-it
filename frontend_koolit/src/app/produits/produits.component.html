@@ -42,9 +42,8 @@
                         <li *ngFor="let ingredient of recette.ingredients">
                             {{ ingredient.nom }}
                         </li>
+                        
                     </ul>
-                    <!-- Ajoutez le bouton ici pour ajouter les ingrédients à la liste de courses -->
-                    <button (click)="ajouterIngredientsALaListe(recette.ingredients)">Ajouter à la liste de courses</button>
                 </div>
             </div>
         </section>

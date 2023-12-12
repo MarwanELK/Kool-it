@@ -53,15 +53,4 @@ public class MagasinService {
     public List<Magasin> rechercherMagasinParNom(String nomMagasin) {
         return magasinRepository.findByNomContainingIgnoreCase(nomMagasin);
     }
-    public Magasin ajouterTypeAliment(String nomMagasin, String typeAliment) {
-        Magasin magasin = magasinRepository.findByNom(nomMagasin);
-        if (magasin != null) {
-            magasin.setTypeAliment(typeAliment);
-            return magasinRepository.save(magasin);
-        } else {
-            // Gérer le cas où le magasin n'est pas trouvé
-            return null;
-        }
-    }
-
 }

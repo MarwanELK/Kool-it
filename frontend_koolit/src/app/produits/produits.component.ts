@@ -1,7 +1,6 @@
 // produits.component.ts
 import { Component, OnInit } from '@angular/core';
-import { RecetteService } from './recette.service';
-import { KoolitService } from '../liste-de-courses/koolit.service';
+import { RecetteService } from './recette.service'; // Assurez-vous que le chemin est correct
 
 @Component({
   selector: 'app-produits',
@@ -10,10 +9,8 @@ import { KoolitService } from '../liste-de-courses/koolit.service';
 })
 export class ProduitsComponent implements OnInit {
   recettes: any[] = [];
-  listesDeCourses: any[] = []; // Ajoutez la déclaration de la propriété ici
 
-  constructor(private recetteService: RecetteService, private koolitService: KoolitService) { }
-  
+  constructor(private recetteService: RecetteService) {}
 
   ngOnInit(): void {
     this.recetteService.getRecettes().subscribe(
@@ -23,18 +20,6 @@ export class ProduitsComponent implements OnInit {
       },
       (error) => {
         console.error('Erreur lors de la récupération des recettes :', error);
-      }
-    );
-  }
-
-  ajouterIngredientsALaListe(ingredients: any[]): void {
-    const utilisateurId = 5;
-    this.koolitService.ajouterIngredientAListeCourse(utilisateurId, ingredients).subscribe(
-      (response: any) => {
-        console.log('Ingrédients ajoutés avec succès à la liste de courses :', response);
-      },
-      (error) => {
-        console.error('Erreur lors de l\'ajout des ingrédients à la liste de courses :', error);
       }
     );
   }

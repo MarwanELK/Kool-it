@@ -45,6 +45,10 @@ public class ListeCourseService {
 
     public ListeCourse ajouterListeCourse(ListeCourse nouvelleListeCourse) {
         return listeCourseRepository.save(nouvelleListeCourse);}
+
+    public void supprimerIngredient(Long id) {
+        listeCourseRepository.deleteById(id);
+    }
 }
 
 

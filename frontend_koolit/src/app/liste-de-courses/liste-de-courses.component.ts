@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { KoolitService } from './koolit.service';
 
-
 export interface Ingredient {
+  id: number; // Ajoutez cette ligne
   nom: string;
   type: string;
   ingredients: { nom: string, type: string }[];
@@ -18,99 +18,71 @@ export interface Ingredient {
 })
 export class ListeDeCoursesComponent implements OnInit {
 
-  nouvelIngredient: Ingredient = { nom: '', type: '', ingredients: [] };
+  nouvelIngredient: Ingredient = { id: 0, nom: '', type: '', ingredients: [] }; // Ajoutez 'id' ici
   listesCourses: Ingredient[] = [];
 
   constructor(private http: HttpClient, private koolitService: KoolitService) {}
 
+  ngOnInit(): void {
+    const utilisateurId = 5;
+    this.chargerListeDeCourses(utilisateurId);
+  }
 
-// liste-de-courses.component.ts
-ngOnInit(): void {
-  const utilisateurId = 5;
-  this.koolitService.getListeDeCourses(utilisateurId).subscribe(
-    (listeCoursesData: any[]) => {
-      console.log('Données de la liste de courses reçues du backend :', listeCoursesData);
-      this.listesCourses = listeCoursesData.map((course) => {
-        course.ingredientsList = JSON.parse(course.ingredients);
-        return course;
-      });
-    },
-    (error) => {
-      console.error('Erreur lors de la récupération de la liste de courses :', error);
-    }
-  );
+  ajouterALaListeDeCourses(): void {
+    const nouvelIngredientAEnvoyer = {
+      nom: this.nouvelIngredient.nom,
+      type: this.nouvelIngredient.type,
+    };
+  
+    const nouvelleListe = {
+      utilisateurId: 5, 
+      ingredients: JSON.stringify([nouvelIngredientAEnvoyer]),
+    };
+  
+    this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
+      (response: any) => {
+        console.log('Ingrédient ajouté avec succès dans la base de données:', response);
+        // Rafraîchir la liste après l'ajout
+        this.chargerListeDeCourses(5); // Fournir l'ID de l'utilisateur ici
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de l\'ingrédient dans la base de données :', error);
+      }
+    );
+  
+    // Réinitialisez nouvelIngredient
+    this.nouvelIngredient = { id: 0, nom: '', type: '', ingredients: [] };
+  }
+  
+
+  // Méthode pour charger la liste de courses
+  private chargerListeDeCourses(utilisateurId: number): void {
+    this.koolitService.getListeDeCourses(utilisateurId).subscribe(
+      (listeCoursesData: any[]) => {
+        console.log('Données de la liste de courses reçues du backend :', listeCoursesData);
+        this.listesCourses = listeCoursesData.map((course) => {
+          course.ingredientsList = JSON.parse(course.ingredients);
+          return course;
+        });
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la liste de courses :', error);
+      }
+    );
+  }
+
+  supprimerIngredient(ingredientId: number): void {
+    this.koolitService.supprimerIngredient(ingredientId).subscribe(
+      () => {
+        console.log('Ingrédient supprimé avec succès.');
+        // Rafraîchir la liste après la suppression
+        this.chargerListeDeCourses(5);
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de l\'ingrédient :', error);
+      }
+    );
+  }
+  
 }
 
-
-
-ajouterALaListeDeCourses(): void {
-  const nouvelIngredientAEnvoyer = {
-    nom: this.nouvelIngredient.nom,
-    type: this.nouvelIngredient.type,
-  };
-
-  const nouvelleListe = {
-    utilisateurId: 5, 
-    ingredients: JSON.stringify([nouvelIngredientAEnvoyer]),
-  };
-
-  this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
-    (response: any) => {
-      console.log('Ingrédient ajouté avec succès dans la base de données:', response);
-
-      // Rafraîchir la liste après l'ajout
-      this.chargerListeDeCourses();
-    },
-    (error) => {
-      console.error('Erreur lors de l\'ajout de l\'ingrédient dans la base de données :', error);
-    }
-  );
-
-  // Réinitialisez nouvelIngredient
-  this.nouvelIngredient = { nom: '', type: '', ingredients: [] };
-}
-
-ajouterIngredientsALaListe(ingredients: Ingredient[]): void {
-  const utilisateurId = 5;
-
-  // Créez un tableau d'ingrédients à ajouter à la liste de courses
-  const ingredientsAEnvoyer = {
-    nom: this.nouvelIngredient.nom,
-    type: this.nouvelIngredient.type,
-  };
-
-  const nouvelleListe = {
-    utilisateurId:5,
-    ingredients: JSON.stringify(ingredientsAEnvoyer),
-  };
-
-  this.koolitService.ajouterIngredient(utilisateurId, nouvelleListe).subscribe(
-    (response: any) => {
-      console.log('Ingrédients ajoutés avec succès dans la base de données:', response);
-
-      // Rafraîchir la liste après l'ajout
-      this.chargerListeDeCourses();
-    },
-    (error) => {
-      console.error('Erreur lors de l\'ajout des ingrédients dans la base de données :', error);
-    }
-  );
-}
-
-// Méthode pour charger la liste de courses
-private chargerListeDeCourses(): void {
-  const utilisateurId = 5;
-  this.koolitService.getListeDeCourses(utilisateurId).subscribe(
-    (listeCoursesData: any[]) => {
-      console.log('Données de la liste de courses reçues du backend :', listeCoursesData);
-      this.listesCourses = listeCoursesData.map((course) => {
-        course.ingredientsList = JSON.parse(course.ingredients);
-        return course;
-      });
-    },
-    (error) => {
-      console.error('Erreur lors de la récupération de la liste de courses :', error);
-    }
-  );
-}
-}

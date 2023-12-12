@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MagasinRepository extends JpaRepository<Magasin, Long> {
     List<Magasin> findByNomContainingIgnoreCase(String nomMagasin);
-    Magasin findByNom(String nom);}
+    // Vous pouvez ajouter des méthodes personnalisées ici si nécessaire
+}

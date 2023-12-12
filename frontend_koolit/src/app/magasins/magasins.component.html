@@ -8,7 +8,7 @@
 </head>
 <body>
 
-
+<!-- magasins.component.html -->
 
 <div>
     <label for="searchMagasin">Rechercher un magasin:</label>
@@ -16,42 +16,21 @@
     <button (click)="rechercherMagasin()">Rechercher</button>
 </div>
 
-
-
-
-
 <div class="magasins-container">
     <div *ngFor="let magasin of magasins" class="magasins-item">
-        <h3 (click)="selectionnerMagasin(magasin)">{{ magasin.nom }}</h3>
+        <h3>{{ magasin.nom }}</h3>
         <p>Type: {{ magasin.type }}</p>
         <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
         <p>Type d'aliment: {{ magasin.typeAliment }}</p>
-        <!-- Ajoutez magasin en tant qu'argument à la méthode -->
-        <button (click)="ajouterTypeAliment(magasin)">Ajouter Type d'Aliment</button>
+        <button (click)="ajouterTypeAliment()">Ajouter Type d'Aliment</button>
         <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
     </div>
 </div>
 
 
-  
-
-<div>
-    <h2>Ajouter un Type d'Aliment</h2>
-    <form (submit)="ajouterTypeAliment(magasinSelectionne)">
-        <label for="nomMagasin">Nom du Magasin: </label>
-        <input type="text" id="nomMagasin" [(ngModel)]="magasinSelectionne.nom" readonly>
-
-        <label for="typeAliment">Type d'Aliment: </label>
-        <input type="text" id="typeAliment" [(ngModel)]="nouveauTypeAliment" required>
-
-        <button type="submit">Ajouter Type d'Aliment</button>
-    </form>
-</div>
-
 <footer>
     <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
 </footer>
-
 
 </body>
 </html>

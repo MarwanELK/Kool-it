@@ -17,11 +17,10 @@
         <ul>
             <li *ngFor="let ingredient of listesCourses">
                 {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
             </li>
         </ul>
     </section>
-    
-    
     
     
 

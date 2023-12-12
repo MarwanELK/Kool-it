@@ -22,6 +22,7 @@ public class ListeCourseController {
     public ListeCourseController(ListeCourseService listeCourseService) {
         this.listeCourseService = listeCourseService;
     }
+
     @GetMapping
     public List<ListeCourse> getAllListesCourses() {
         return listeCourseService.getAllListesCourse();
@@ -43,6 +44,23 @@ public class ListeCourseController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> supprimerIngredient(@PathVariable Long id) {
+        try {
+            // Logique pour supprimer l'ingrédient avec l'ID spécifié
+            listeCourseService.supprimerIngredient(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
-
+    // Ajoutez cette méthode pour gérer les requêtes OPTIONS
+    @RequestMapping(value = "/{idUtilisateur}", method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> handleOptionsRequest() {
+        return ResponseEntity.ok().build();
+    }
 }
+
+
