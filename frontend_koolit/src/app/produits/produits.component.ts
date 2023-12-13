@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecetteService } from './recette.service';
 import { KoolitService } from './koolit.service';
 
+
 @Component({
   selector: 'app-produits',
   templateUrl: './produits.component.html',
@@ -53,6 +54,9 @@ export class ProduitsComponent implements OnInit {
       this.ajouterALaListeDeCourses(ingredient);
     }
   }
+  trierParNote(): void {
+    this.recettes.sort((a, b) => b.note - a.note);
+  }
  
   private chargerListeDeCourses(utilisateurId: number): void {
     this.koolitService.getListeDeCourses(utilisateurId).subscribe(
@@ -65,4 +69,16 @@ export class ProduitsComponent implements OnInit {
       }
     );
   }
+  noterRecette(recette: any, note: number): void {
+    this.recetteService.noterRecette(recette.recetteId, note).subscribe(
+      (recetteNotee: any) => {
+        console.log('Recette notée avec succès :', recetteNotee);
+        // Rafraîchissez les données si nécessaire
+        this.chargerListeDeCourses(5); // Assurez-vous d'ajuster cela en fonction de votre logique
+      },
+      (error: any) => { // Ajouter un type pour 'error'
+        console.error('Erreur lors de la notation de la recette :', error);
+      }
+    );
+}
 }

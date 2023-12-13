@@ -14,4 +14,11 @@ export class RecetteService {
   getRecettes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.backendUrl}/recettes`);
   }
+
+  noterRecette(recetteId: number, note: number): Observable<any> {
+    note = Math.min(Math.max(note, 0), 10);
+
+    const url = `${this.backendUrl}/recettes/${recetteId}/noter?note=${note}`;
+    return this.http.post<any>(url, {});
+  }
 }

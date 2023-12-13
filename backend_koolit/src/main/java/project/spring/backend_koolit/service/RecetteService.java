@@ -48,6 +48,35 @@ public class RecetteService {
     }
 
     public List<Recette> getAllRecettes() {
-        return repository.findAll();
+        List<Recette> recettes = repository.findAll();
+
+        for (Recette recette : recettes) {
+            double note = recette.getNote();
+            recette.setNote(note);
+        }
+
+        return recettes;
     }
-}
+    public Recette noterRecette(Long recetteId, Double note) {
+        Recette recette = repository.findRecetteByRecetteId(recetteId);
+        if (recette != null) {
+            if (recette.getNotes() == null) {
+                recette.setNotes(new ArrayList<>());
+            }
+            recette.getNotes().add(note);
+            recette.setNote(calculerMoyenneNotes(recette.getNotes()));
+            repository.save(recette);
+        }
+        return recette;
+    }
+
+    private Double calculerMoyenneNotes(List<Double> notes) {
+        if (notes != null && !notes.isEmpty()) {
+            double somme = 0;
+            for (Double note : notes) {
+                somme += note;
+            }
+            return somme / notes.size();
+        }
+        return 0.0;
+    }}

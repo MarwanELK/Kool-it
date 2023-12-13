@@ -31,20 +31,30 @@
     <header>
         <section class="recettes">
             <h2>Liste de Recettes</h2>
+            <button (click)="trierParNote()">Trier par note</button>
             <div class="recettes-container">
-              <div *ngFor="let recette of recettes" class="recette-card">
-                <h3>{{ recette.nom }}</h3>
-                <img src="https://www.seb.fr/medias/?context=bWFzdGVyfHJvb3R8Mjk2OTh8aW1hZ2UvanBlZ3xoMzEvaGRmLzE2NDgwMDU0Mzc4NTI2LmpwZ3xmZTUwODljOWE1ZDM3MzRlYjk5OGYxMDFmNTA2YWJlNzc2YWZlMzE0NjZkMmUxOWQyNjZiNTMxZGUyZmQ2ZDYz" alt="Photo de la recette">
-                <p>Ingrédients:</p>
-                <ul>
-                  <li *ngFor="let ingredient of recette.ingredients">
-                    {{ ingredient.nom }} - {{ ingredient.type }}
-                  </li>
-                </ul>
-                <button (click)="ajouterTousALaListeDeCourses(recette)">Ajouter tous à la Liste</button>
-              </div>
+                <div *ngFor="let recette of recettes" class="recette-card">
+                    <h3>{{ recette.nom }}</h3>
+                    <img src="https://www.seb.fr/medias/?context=bWFzdGVyfHJvb3R8Mjk2OTh8aW1hZ2UvanBlZ3xoMzEvaGRmLzE2NDgwMDU0Mzc4NTI2LmpwZ3xmZTUwODljOWE1ZDM3MzRlYjk5OGYxMDFmNTA2YWJlNzc2YWZlMzE0NjZkMmUxOWQyNjZiNTMxZGUyZmQ2ZDYz" alt="Photo de la recette">
+                    <p>Ingrédients:</p>
+                    <ul>
+                        <li *ngFor="let ingredient of recette.ingredients">
+                            {{ ingredient.nom }} - {{ ingredient.type }}
+                        </li>
+                    </ul>
+                    <p>Note: {{ recette.note }}</p>
+
+                    <!-- Ajouter un champ d'entrée pour la note -->
+                    <label for="note{{ recette.recetteId }}">Ajouter une note:</label>
+                    <input type="number" id="note{{ recette.recetteId }}" name="note{{ recette.recetteId }}" [(ngModel)]="recette.nouvelleNote" />
+
+                    <!-- Ajouter un bouton pour soumettre la note -->
+                    <button (click)="noterRecette(recette, recette.nouvelleNote)">Noter</button>
+
+                    <button (click)="ajouterTousALaListeDeCourses(recette)">Ajouter tous à la Liste</button>
+                </div>
             </div>
-          </section>
+        </section>
     </header>
 
     

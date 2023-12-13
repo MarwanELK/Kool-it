@@ -14,7 +14,10 @@ public class Recette {
 
     @Column(name = "nom")
     private String nom;
-
+    @Column(name = "note")
+    private double note;
+    @ElementCollection
+    private List<Double> notes;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "recette_ingredient",
@@ -60,5 +63,20 @@ public class Recette {
 
     public void setEtapesPreparation(List<String> etapesPreparation) {
         this.etapesPreparation = etapesPreparation;
+    }
+    public double getNote() {
+        return note;
+    }
+
+    public void setNote(double note) {
+        this.note = note;
+    }
+
+    public List<Double> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Double> notes) {
+        this.notes = notes;
     }
 }
