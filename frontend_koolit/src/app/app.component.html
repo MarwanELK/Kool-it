@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.component.css">
+    <title>KOOL'IT</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <img src="https://www.canva.com/design/DAF2IbubsKc/cmkm8JW408DG3dkxhKpKZg/edit?utm_content=DAF2IbubsKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"  >
+    </header>
+
+    <nav>
+        <a routerLink="/accueil">Accueil</a>
+        <a routerLink="/produits">Produits</a>
+        <a routerLink="/liste-de-courses">Liste de courses</a>
+        <a routerLink="/Magasins">Magasins</a>
+        <a routerLink="/apropos">À Propos</a>
+        <a routerLink="/contact">Contact</a>
+    </nav>
+
+    <ul class="recettes-list" id="recettesList"></ul>
+
+    <router-outlet></router-outlet>
+    
+    <footer>
+        <p>&copy; 2023 KOOL'IT. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
