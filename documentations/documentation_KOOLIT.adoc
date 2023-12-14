@@ -1,7 +1,7 @@
 
 = PROJET DEVOPS KOOLIT  
 v1.0 28.11.2023          
-imagesdir::KOOLIT.jpg[]     
+imagesdir::KOOLIT.jpg[LOGO KOOLIT]     
                                       
 
 
