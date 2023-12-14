@@ -61,7 +61,10 @@ En prévision pour optimiser les recommandations de recettes et les suggestions 
 Description de la maquette de l'interface à venir
 
 === Diagramme de Classes Global (Partie Métier):
-Représentation du modèle de données à venir
+[#diagram,link=http://www.plantuml.com/plantuml/uml/fLNRQjmm47ttL-XnGxG_O4AWJIyiRD8bQVkkhAUEm9OMNGgbz8Fo7Vcnoh8aoz9a2-cBGNDcpepcZCR7WMbDTg9Nq74GXlnk2DaIdWoxhYLxANfl5d9ioODHF9pDhnEqvAlxBWoDGoupnir5QQZ9QSvCKTgPfGUpow8t5wcuIw8Bh4xZl7zAtaMcEpbE1Ea-dc8oPiKK8LDDKqnnvH3hKRJumFAdQK3OiK1zp_VGsn4e-QGiDvHyvqnqxlXUSgsbeEJcvLczFBC1D2LxnWq7HSaXeb_0_g3ais8EVR17vpdbEdfnzrmRk95MQOZgvffQmmUkcG6hLbelxTChpJFxnDnw_glPuNeMFyiOrCyjI4AAPLiKhtLswkAQVil9ox0rYDHHa2qIwNfGSX2h_bMggHU-ihnlDQbtEzliRAfcfMzPppGNcChOomtkAxjL0sQUtDyDV7I59BklEJW7cUEfUiq59qNoK2p9csRWZUywNQKCpK7aCkK4fflLJ1bMDm0fANG3Boc2MDlAoRY78nWJtx-QJsTNkv36hR5EsiS1aa670VpWpTVrdl3eCiIpn-b96dbWvccL00mxWJueE37539S2soIXxasQW_jOUZaE2r3Sxl-7uquQl_HJCqACi-PTGg9qUkTBnrAmtY0jFR-1aFQUtqLbG45_YChKBLcWIhw2v6Cfv6lBhNRynmnaOvpzBRVR_7VI4jR4lLSYZqsSUuSi32qvvi0gf6l-0W00
+] 
+image::diagram.jpg[Diagram,200,100]
+
 
 === Description API Backend (ex REST):
 .Endpoints :
