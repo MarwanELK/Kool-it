@@ -30,6 +30,7 @@ export class ProduitsComponent implements OnInit {
    
     const ingredientAEnvoyer = {
       nom: ingredient.nom,
+      quantite: ingredient.quantite,
       type: ingredient.type,
     };
   

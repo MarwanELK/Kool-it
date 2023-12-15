@@ -7,8 +7,9 @@ export interface Ingredient {
   id: number; // Ajoutez cette ligne
   nom: string;
   type: string;
-  ingredients: { nom: string, type: string }[];
-  ingredientsList?: { nom: string, quantite: any,type: string }[];
+  quantite:number
+  ingredients: { nom: string, quantite: number, type: string }[];
+  ingredientsList?: { nom: string, quantite:number, type: string }[];
 }
 
 @Component({
@@ -18,7 +19,7 @@ export interface Ingredient {
 })
 export class ListeDeCoursesComponent implements OnInit {
 
-  nouvelIngredient: Ingredient = { id: 0, nom: '', type: '', ingredients: [] }; // Ajoutez 'id' ici
+  nouvelIngredient: Ingredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] }; // Ajoutez 'id' ici
   listesCourses: Ingredient[] = [];
 
   constructor(private http: HttpClient, private koolitService: KoolitService) {}
@@ -31,6 +32,7 @@ export class ListeDeCoursesComponent implements OnInit {
   ajouterALaListeDeCourses(): void {
     const nouvelIngredientAEnvoyer = {
       nom: this.nouvelIngredient.nom,
+      quantite: this.nouvelIngredient.quantite,
       type: this.nouvelIngredient.type,
     };
   
@@ -51,7 +53,7 @@ export class ListeDeCoursesComponent implements OnInit {
     );
   
     // Réinitialisez nouvelIngredient
-    this.nouvelIngredient = { id: 0, nom: '', type: '', ingredients: [] };
+    this.nouvelIngredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] };
   }
   
 
