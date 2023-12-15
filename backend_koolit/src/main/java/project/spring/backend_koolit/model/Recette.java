@@ -14,6 +14,10 @@ public class Recette {
 
     @Column(name = "nom")
     private String nom;
+
+    @Column(name = "nbPersonnes")
+    private Integer nbPersonnes=4;
+
     @Column(name = "note")
     private double note;
     @ElementCollection
@@ -28,6 +32,7 @@ public class Recette {
 
     @Column(name = "image")
     private String photoPath;
+
 
     @ElementCollection
     private List<String> etapesPreparation;
@@ -79,4 +84,27 @@ public class Recette {
     public void setNotes(List<Double> notes) {
         this.notes = notes;
     }
+
+    public Integer getNbPersonnes() {
+        return nbPersonnes;
+    }
+
+    public void setNbPersonnes(Integer nbPersonnes) {
+        for(Ingredient i : ingredients){
+            if(i.getQuantite()==0) {
+                i.setQuantite(1);
+            }
+            double newQTE=(i.getQuantite()/this.nbPersonnes*nbPersonnes);
+            i.setQuantite((int)newQTE);
+        }
+        this.nbPersonnes = nbPersonnes;
+    }
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
 }

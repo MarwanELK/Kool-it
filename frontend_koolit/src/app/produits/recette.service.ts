@@ -21,4 +21,10 @@ export class RecetteService {
     const url = `${this.backendUrl}/recettes/${recetteId}/noter?note=${note}`;
     return this.http.post<any>(url, {});
   }
-}
+
+  augmenterPart(recetteId: number, nbPersonne: any): Observable<any> {
+    "/{recetteId}/augmenterPersonnes"
+    const url = `${this.backendUrl}/recettes/${recetteId}/augmenterPersonnes?nbPersonnes=${nbPersonne}`;
+    return this.http.post<any>(url, {});
+  }
+} 

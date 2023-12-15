@@ -22,14 +22,24 @@ public class RecetteController {
     public List<Recette> getAllRecettes() {
         return recetteService.getAllRecettes();
     }
-@GetMapping("{id}")
-public Recette findIngredientByRecetteId(@PathVariable Long id) {
-    return recetteService.findRecetteByRecetteId(id);
-}
+    @GetMapping("{id}")
+    public Recette findIngredientByRecetteId(@PathVariable Long id) {
+        return recetteService.findRecetteByRecetteId(id);
+    }
 
     @PostMapping("/{recetteId}/noter")
     public ResponseEntity<Recette> noterRecette(@PathVariable Long recetteId, @RequestParam Double note) {
         Recette recette = recetteService.noterRecette(recetteId, note);
+        if (recette != null) {
+            return new ResponseEntity<>(recette, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{recetteId}/augmenterPersonnes")
+    public ResponseEntity<Recette> augmenterPart(@PathVariable Long recetteId, @RequestParam Integer nbPersonnes) {
+        Recette recette = recetteService.augmenterPart(recetteId,nbPersonnes);
         if (recette != null) {
             return new ResponseEntity<>(recette, HttpStatus.OK);
         } else {

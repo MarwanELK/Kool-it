@@ -2,29 +2,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="produits.component.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
     <title>KOOL'IT</title>
     <style>
           .recettes-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between; }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
-        .recette-card {
-            width: 48%; 
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+.recette-card {
+    width: 48%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
 
-        .recette-card img {
-            max-width: 100%;
-            height: auto;
-        }
+.recette-card img {
+    max-width: 30%; /* Ajustez la largeur de l'image pour occuper 100% du conteneur */
+    height: auto;
+}
+
+    input {
+        width: 5%;
+        margin-bottom: 20px;
+    }
     </style>
 </head>
 <body>
@@ -34,21 +43,31 @@
             <button (click)="trierParNote()">Trier par note</button>
             <div class="recettes-container">
                 <div *ngFor="let recette of recettes" class="recette-card">
-                    <h3>{{ recette.nom }}</h3>
-                    <img src="https://www.seb.fr/medias/?context=bWFzdGVyfHJvb3R8Mjk2OTh8aW1hZ2UvanBlZ3xoMzEvaGRmLzE2NDgwMDU0Mzc4NTI2LmpwZ3xmZTUwODljOWE1ZDM3MzRlYjk5OGYxMDFmNTA2YWJlNzc2YWZlMzE0NjZkMmUxOWQyNjZiNTMxZGUyZmQ2ZDYz" alt="Photo de la recette">
+                    <img src="{{recette.photoPath}}" alt="Photo de la recette">
+                    <h3>{{ recette.nom }} (pour {{ recette.nbPersonnes }} personnes)</h3>
+                    
                     <p>Ingrédients:</p>
                     <ul>
                         <li *ngFor="let ingredient of recette.ingredients">
-                            {{ ingredient.nom }} - {{ ingredient.type }}
+                            {{ ingredient.quantite }} {{ ingredient.nom }} - {{ ingredient.type }}
                         </li>
                     </ul>
                     <p>Note: {{ recette.note }}</p>
 
-                    <!-- Ajouter un champ d'entrée pour la note -->
+                    <form action="/votre-endpoint-de-soumission" method="post">
+
+                
+                        <label for="nombrePersonnes{{ recette.recetteId }}">Nombre de Personnes :</label>
+                        <input type="number" id="nombrePersonnes{{ recette.recetteId }}" name="nombrePersonnes{{ recette.recetteId }}" [(ngModel)]="recette.personnesEnPlus" min="1" value="4" >
+                        
+                        <button (click)="augmenterPart(recette, recette.personnesEnPlus)">Soumettre</button>
+                    </form>
+
+
                     <label for="note{{ recette.recetteId }}">Ajouter une note:</label>
                     <input type="number" id="note{{ recette.recetteId }}" name="note{{ recette.recetteId }}" [(ngModel)]="recette.nouvelleNote" />
 
-                    <!-- Ajouter un bouton pour soumettre la note -->
+
                     <button (click)="noterRecette(recette, recette.nouvelleNote)">Noter</button>
 
                     <button (click)="ajouterTousALaListeDeCourses(recette)">Ajouter tous à la Liste</button>

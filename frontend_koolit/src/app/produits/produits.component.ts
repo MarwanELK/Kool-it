@@ -30,6 +30,7 @@ export class ProduitsComponent implements OnInit {
    
     const ingredientAEnvoyer = {
       nom: ingredient.nom,
+      quantite: ingredient.quantite,
       type: ingredient.type,
     };
   
@@ -81,4 +82,18 @@ export class ProduitsComponent implements OnInit {
       }
     );
 }
+
+augmenterPart(recette : any, personnesEnPlus:any):void{
+  this.recetteService.augmenterPart(recette.recetteId, recette.personnesEnPlus).subscribe(
+    (recetteNotee: any) => {
+      console.log('Nombre de personnes augmenté avec succès :', recetteNotee);
+      // Rafraîchissez les données si nécessaire
+      this.chargerListeDeCourses(5); // Assurez-vous d'ajuster cela en fonction de votre logique
+    },
+    (error: any) => { // Ajouter un type pour 'error'
+      console.error('Erreur lors de l augmentation du nombre de personne :', error);
+    }
+  );
+}
+
 }

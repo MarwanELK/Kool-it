@@ -70,6 +70,18 @@ public class RecetteService {
         return recette;
     }
 
+    public Recette augmenterPart(Long recetteId, Integer nbPersonnes){
+        Recette recette = repository.findRecetteByRecetteId(recetteId);
+        if (recette != null) {
+            if (recette.getNbPersonnes()== null) {
+                recette.setNotes(new ArrayList<>());
+            }
+            recette.setNbPersonnes(nbPersonnes);
+            repository.save(recette);
+        }
+        return recette;
+    }
+
     private Double calculerMoyenneNotes(List<Double> notes) {
         if (notes != null && !notes.isEmpty()) {
             double somme = 0;

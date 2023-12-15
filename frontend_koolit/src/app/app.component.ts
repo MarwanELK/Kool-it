@@ -13,6 +13,7 @@ interface RecetteData {
 })
 export class AppComponent implements OnInit {
   recetteData: RecetteData | undefined;
+  title = 'KoolIt';
 
   constructor(private http: HttpClient) {}
 
