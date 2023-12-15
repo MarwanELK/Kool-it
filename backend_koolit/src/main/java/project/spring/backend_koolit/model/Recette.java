@@ -33,6 +33,8 @@ public class Recette {
     @Column(name = "image")
     private String photoPath;
 
+
+
     @ElementCollection
     private List<String> etapesPreparation;
 
@@ -97,5 +99,13 @@ public class Recette {
             i.setQuantite((int)newQTE);
         }
         this.nbPersonnes = nbPersonnes;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 }
