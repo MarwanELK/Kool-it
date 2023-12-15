@@ -23,6 +23,7 @@ export class KoolitService {
         return data.map(ingredient => ({
           nom: ingredient.nom,
           type: ingredient.type,
+          quantite: ingredient.quantite,
           ingredientsList: JSON.parse(ingredient.ingredients)
         }));
       }),

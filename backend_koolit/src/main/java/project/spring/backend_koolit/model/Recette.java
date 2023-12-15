@@ -89,6 +89,13 @@ public class Recette {
     }
 
     public void setNbPersonnes(Integer nbPersonnes) {
+        for(Ingredient i : ingredients){
+            if(i.getQuantite()==0) {
+                i.setQuantite(1);
+            }
+            double newQTE=(i.getQuantite()/this.nbPersonnes*nbPersonnes);
+            i.setQuantite((int)newQTE);
+        }
         this.nbPersonnes = nbPersonnes;
     }
 }

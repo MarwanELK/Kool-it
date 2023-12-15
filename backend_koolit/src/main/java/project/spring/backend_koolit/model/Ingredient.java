@@ -17,6 +17,7 @@ public class Ingredient {
 
     @Column(name = "quantite")
     private int quantite;
+
     @Enumerated(EnumType.STRING)
     private TypeIngredient type;
 

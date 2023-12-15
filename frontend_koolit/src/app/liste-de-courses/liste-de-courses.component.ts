@@ -8,7 +8,7 @@ export interface Ingredient {
   nom: string;
   type: string;
   ingredients: { nom: string, type: string }[];
-  ingredientsList?: { nom: string, type: string }[];
+  ingredientsList?: { nom: string, quantite: any,type: string }[];
 }
 
 @Component({
