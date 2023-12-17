@@ -17,7 +17,7 @@ public class IngredientTest {
 
         ingredient.setIngredientId(ingredientId);
         ingredient.setNom(nom);
-        ingredient.setType(type);
+        ingredient.setType(Ingredient.TypeIngredient.valueOf(type));
 
         assertEquals(ingredientId, ingredient.getIngredientId());
         assertEquals(nom, ingredient.getNom());

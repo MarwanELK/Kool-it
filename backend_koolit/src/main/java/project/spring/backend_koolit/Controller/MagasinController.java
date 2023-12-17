@@ -12,9 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 @RestController
 @RequestMapping("/magasins")
 public class MagasinController {
+    private static final Logger logger = LoggerFactory.getLogger(MagasinController.class);
 
     private final MagasinService magasinService;
 
@@ -58,6 +63,16 @@ public class MagasinController {
         List<Magasin> magasins = magasinService.rechercherMagasinParNom(nom);
         return ResponseEntity.ok(magasins);
     }
+    @GetMapping("/typesAliment/rechercher")
+    public ResponseEntity<List<String>> rechercherTypeAlimentParNom(@RequestParam String nomType) {
+        try {
+            List<String> typesAliment = magasinService.rechercherTypeAlimentParNom(nomType);
+            return ResponseEntity.ok(typesAliment);
+        } catch (Exception e) {
+            logger.error("Une erreur s'est produite lors de la recherche de types d'aliment.", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @GetMapping("/ajouterTypeAliment/{nom}")
     public ResponseEntity<List<String>> getTypeAliment(@PathVariable String nom) {
@@ -92,7 +107,7 @@ public class MagasinController {
                     typeAlimentActuel = "[]"; // Initialisez avec une liste vide si elle est nulle
                 }
 
-                Set<String> typesAlimentsSet = new ObjectMapper().readValue(typeAlimentActuel, Set.class);
+               Set<String> typesAlimentsSet = new ObjectMapper().readValue(typeAlimentActuel, Set.class);
 
                 typesAlimentsSet.add(typeAliment.replace("\"", ""));
 

@@ -70,6 +70,12 @@ ajouterTypeAliment(nomMagasin: string, typeAliment: string): Observable<any> {
 }
 
 
+rechercherTypesAliment(nomMagasin: string): Observable<string[]> {
+  return this.httpClient.get<string[]>(`${this.apiUrl}/magasins/typesAliment/rechercher?nomType=${nomMagasin}`);
+}
+
+
+
   
   
 }
