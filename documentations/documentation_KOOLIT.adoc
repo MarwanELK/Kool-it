@@ -43,7 +43,7 @@ Koolit est une application web.
 Frontend, API, Backend, Persistance.
 
 === Plateforme Technologique:
-Utilisation de Java Spring Boot pour le backend, React pour le frontend, base de données SQLite.
+Utilisation de Java Spring Boot pour le backend, React pour le frontend, base de données Mysql.
 
 === Plateforme Opérationnelle:
 Gestion de versions avec Git, intégration continue.
