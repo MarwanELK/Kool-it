@@ -15,6 +15,7 @@ imagesdir::KOOLIT.jpg[LOGO KOOLIT]
 
 === Contexte:
 Koolit est un site web dédié à simplifier la cuisine quotidienne. Il propose une variété de recettes adaptées aux préférences et aux ingrédients disponibles chez l'utilisateur.
+Chez KOOLIT, notre motivation est de simplifier votre expérience culinaire en vous offrant un outil complet pour planifier vos repas, découvrir de délicieuses recettes, et faciliter votre liste de courses. Notre objectif est de rendre la cuisine accessible à tous, que vous soyez un novice enthousiaste ou un chef chevronné.
 
 === Problématique et Gain Attendu:
 Comment simplifier la préparation des repas tout en minimisant le gaspillage alimentaire ? Koolit vise à faciliter la vie quotidienne en proposant des recettes personnalisées et une gestion optimale des achats alimentaires.
@@ -30,6 +31,15 @@ Bien que plusieurs plateformes proposent des recettes en ligne comme Marmiton ou
 * Épicurien Pressé : Accès à des recettes rapides et simples.
 * Chef en Herbe : Exploration de nouvelles idées culinaires.
 * Gestionnaire de Cuisine : Liste de courses, suivi des achats, gestion des stocks.
+
+=== User Story :
+* Explorer des Recettes - Découvrez une variété de recettes allant des plats simples aux créations gastronomiques.
+* Gestion de Liste de Courses - Ajoutez facilement les ingrédients d'une recette à votre liste de courses personnalisée.
+* Localisation des Magasins - Trouvez des magasins à proximité en fonction des types d'aliments qu'ils proposent.
+
+=== Gestion de Projet Collaborative :
+* Méthodologie Agile - Nous adoptons une approche agile pour nous adapter rapidement aux changements et livrer des fonctionnalités de manière itérative.
+* Communication Transparente - Une communication ouverte avec notre communauté d'utilisateurs est essentielle pour comprendre vos besoins et améliorer constamment notre service.
 
 === Prévisions Marketing:
 Les stratégies de marketing incluront une présence active sur les réseaux sociaux, des enquêtes pour comprendre les besoins des utilisateurs, et un site Web convivial présentant les fonctionnalités uniques de Koolit.
@@ -79,7 +89,5 @@ image::diagram.jpg[Diagram,200,100]
 ** Supprimer une recette par ID.
 
 
-=== Diagrammes de Séquence Front/Back (Par Feature):
-Description des interactions front/back à venir
 
 
