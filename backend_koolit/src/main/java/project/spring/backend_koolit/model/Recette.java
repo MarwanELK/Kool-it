@@ -1,97 +1,124 @@
 package project.spring.backend_koolit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import project.spring.backend_koolit.classUtil.Paire;
-import project.spring.backend_koolit.model.Ingredient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "recettetest")
 public class Recette {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long recetteId;
 
-    private static long cpt=0L;
-
+    @Column(name = "nom")
     private String nom;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "recette_id")
-    private List<Paire> ingredients; //Liste quantité et nom ingredient
+    @Column(name = "nbPersonnes")
+    private Integer nbPersonnes=4;
+
+    @Column(name = "note")
+    private double note;
+    @ElementCollection
+    private List<Double> notes;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "recette_ingredient",
+            joinColumns = @JoinColumn(name = "recette_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
+    private List<Ingredient> ingredients;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "recette_commentaire",
+            joinColumns = @JoinColumn(name = "recette_id"),
+            inverseJoinColumns = @JoinColumn(name = "commentaire_id")
+    )
+    private List<Commentaire> commentaires;
+
+
+    @Column(name = "image")
+    private String photoPath;
+
 
     @ElementCollection
     private List<String> etapesPreparation;
 
-    public Recette() {
-    }
-
-    public Recette(String nom) {
-        cpt++;
-        this.id = cpt;
-        this.nom = nom;
-        this.ingredients=new ArrayList<>();
-        this.etapesPreparation=new ArrayList<>();
-    }
-
-
-
-    public void afficheRecette(){
-        for(Paire p : ingredients){
-            System.out.println(p);
-        }
-    }
-
-    public void ajouterIngredient(Paire p){
-        this.ingredients.add(p);
-    }
-
-    public List<Paire> mesIngredients(){
+    @JsonIgnoreProperties("recettes")
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public List<String> covertStringListIngredient(){
-        List<String> liste =  new ArrayList<>();
-        for(Paire p : ingredients){
-            String ingredient=p.getFst()+p.getSnd();
-            liste.add(ingredient);
-        }
-        return liste;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setIngredients(List<Paire> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public void setEtapesPreparation(List<String> etapesPreparation) {
-        this.etapesPreparation = etapesPreparation;
+    public Long getRecetteId() {
+        return recetteId;
     }
 
-    public Long getId() {
-        return id;
+    public void setRecetteId(Long recetteId) {
+        this.recetteId = recetteId;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public List<String> getIngredients() {
-        return covertStringListIngredient();
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public List<String> getEtapesPreparation() {
         return etapesPreparation;
     }
+
+    public void setEtapesPreparation(List<String> etapesPreparation) {
+        this.etapesPreparation = etapesPreparation;
+    }
+    public double getNote() {
+        return note;
+    }
+
+    public void setNote(double note) {
+        this.note = note;
+    }
+
+    public List<Double> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Double> notes) {
+        this.notes = notes;
+    }
+
+    public Integer getNbPersonnes() {
+        return nbPersonnes;
+    }
+
+    public void setNbPersonnes(Integer nbPersonnes) {
+        for(Ingredient i : ingredients){
+            if(i.getQuantite()==0) {
+                i.setQuantite(1);
+            }
+            double newQTE=(i.getQuantite()/this.nbPersonnes*nbPersonnes);
+            i.setQuantite((int)newQTE);
+        }
+        this.nbPersonnes = nbPersonnes;
+    }
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
 }
-
-
