@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecetteService } from './recette.service';
 import { KoolitService } from './koolit.service';
-
+import { Commentaire } from '../model/recette.model';
 
 @Component({
   selector: 'app-produits',
@@ -11,7 +11,7 @@ import { KoolitService } from './koolit.service';
 })
 export class ProduitsComponent implements OnInit {
   recettes: any[] = [];
-
+  nouveauCommentaire: { username: string, contenu: string } = { username: '', contenu: '' };
   constructor(private recetteService: RecetteService, private koolitService: KoolitService) {}
 
   ngOnInit(): void {
@@ -82,7 +82,37 @@ export class ProduitsComponent implements OnInit {
       }
     );
 }
+envoyerCommentaire(recette: any): void {
+  if (this.nouveauCommentaire.username.trim() !== '' && this.nouveauCommentaire.contenu.trim() !== '') {
+    // Créez un objet Commentaire
+    const commentaire: Commentaire = {
+      username: this.nouveauCommentaire.username,
+      contenu: this.nouveauCommentaire.contenu
+    };
 
+    // Ajoutez le commentaire à la liste de commentaires de la recette
+    recette.commentaires.push(commentaire);
+
+    // Appelez le service pour envoyer le commentaire au backend
+    this.recetteService.envoyerCommentaire(recette.recetteId, commentaire).subscribe(
+      (recetteMiseAJour: any) => {
+        // Mise à jour de la recette dans la liste
+        const index = this.recettes.findIndex(r => r.recetteId === recetteMiseAJour.recetteId);
+        if (index !== -1) {
+          this.recettes[index] = recetteMiseAJour;
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de l\'envoi du commentaire à la recette :', error);
+      }
+    );
+
+    // Réinitialisez le formulaire de commentaire
+    this.nouveauCommentaire = { username: '', contenu: '' };
+  } else {
+    console.warn('Le commentaire ou le nom d\'utilisateur est vide. Veuillez saisir les deux.');
+  }
+}
 augmenterPart(recette : any, personnesEnPlus:any):void{
   this.recetteService.augmenterPart(recette.recetteId, recette.personnesEnPlus).subscribe(
     (recetteNotee: any) => {

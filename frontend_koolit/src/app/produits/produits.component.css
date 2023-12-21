@@ -1,0 +1,25 @@
+
+/* Style pour le conteneur des commentaires */
+.commentaires-container {
+    margin-top: 20px;
+  }
+  
+  /* Style pour chaque commentaire */
+  .commentaire {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Style pour le nom d'utilisateur dans le commentaire */
+  .commentaire-username {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Style pour le contenu du commentaire */
+  .commentaire-contenu {
+    margin-top: 5px;
+    color: #555;
+  }

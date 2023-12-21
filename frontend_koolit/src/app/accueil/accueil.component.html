@@ -12,37 +12,26 @@
     <header class="banner">
         <h1>Bienvenue chez KOOL'IT</h1>
         <p>Découvrez nos recettes innovantes et créez votre liste de courses facilement.</p>
-        <a href="#recettes" class="cta-button">Voir les recettes</a>
+        
     </header>
 
-    <section id="recettes" class="featured-recipes">
+  
+    <section class="recettes">
         <h2>Recettes en Vedette</h2>
-
-        <!-- Replace the following with actual recipe images and links -->
-        <div class="recipe-card">
-            <img src="recipe1.jpg" alt="Recette 1">
-            <h3>Recette Savoureuse</h3>
-            <p>Une description courte de la recette.</p>
-            <a href="#">Voir la recette</a>
-        </div>
-
-        <div class="recipe-card">
-            <img src="recipe2.jpg" alt="Recette 2">
-            <h3>Recette Rapide</h3>
-            <p>Une description courte de la recette.</p>
-            <a href="#">Voir la recette</a>
-        </div>
-
-        <!-- Add more recipe cards as needed -->
-
+      
+        <div class="recettes-container">
+            <div *ngFor="let recette of recettes" class="recette-card">
+                <img src="{{recette.photoPath}}" alt="Photo de la recette">
+                <h3>{{ recette.nom }} </h3>
+                
+               
+               
+            <p>Note: {{ recette.note }}</p>
+            
+                    
+        </div> </div> 
     </section>
-
-    <section id="create-list" class="create-list-section">
-        <h2>Créez Votre Liste de Courses</h2>
-        <p>Planifiez vos repas de la semaine et générez automatiquement une liste de courses.</p>
-        <a href="#liste-course" class="cta-button">Commencez maintenant</a>
-    </section>
-
+  
   
 
     <section class="testimonials">

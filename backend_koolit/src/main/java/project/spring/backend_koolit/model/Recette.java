@@ -29,6 +29,14 @@ public class Recette {
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
     private List<Ingredient> ingredients;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "recette_commentaire",
+            joinColumns = @JoinColumn(name = "recette_id"),
+            inverseJoinColumns = @JoinColumn(name = "commentaire_id")
+    )
+    private List<Commentaire> commentaires;
+
 
     @Column(name = "image")
     private String photoPath;
@@ -106,5 +114,11 @@ public class Recette {
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
     }
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
 
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
 }

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { tap } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +9,30 @@ import { HttpParams } from '@angular/common/http';
 export class KoolitService {
 
   private apiUrl = "http://localhost:8080";
+  backendUrl = 'http://localhost:8080';
 
   readonly ENDPOINT_RECETTES = "/recettes";
-  readonly ENDPOINT_MAGASINS = "/magasins";
-  
+  readonly ENDPOINT_LISTE_COURSE = "/liste-course";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
- 
 
-  
+  getRecettes(): Observable<any[]> {
+    const url = `${this.backendUrl}/recettes`;
+    return this.http.get<any[]>(url);
+  }
+
+  ajouterIngredientAListeCourse(utilisateurId: number, data: any): Observable<any> {
+    const url = `${this.backendUrl}/ajouterIngredientAListeCourse/${utilisateurId}`;
+    return this.http.post<any>(url, data);
+  }
+
+  getListeDeCourses(utilisateurId: number): Observable<any[]> {
+    const url = `${this.backendUrl}/listeDeCourses/${utilisateurId}`;
+    return this.http.get<any[]>(url);
+  }
+  ajouterIngredient(utilisateurId: number, nouvelIngredient: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/liste-course/${utilisateurId}`, nouvelIngredient);
+  }
   
 }

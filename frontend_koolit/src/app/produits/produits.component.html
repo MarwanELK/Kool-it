@@ -53,7 +53,24 @@
                         </li>
                     </ul>
                     <p>Note: {{ recette.note }}</p>
+                    <div class="commentaires-container">
+                        <h3>Commentaires</h3>
+                        <div *ngFor="let commentaire of recette.commentaires" class="commentaire">
+                          <p class="commentaire-username">@{{ commentaire.username }}:</p>
+                          <p class="commentaire-contenu">{{ commentaire.contenu }}</p>
+                        </div>
+                    </div>
+                   <!-- Formulaire pour envoyer un commentaire -->
+                    <div>
+                        <h3>Ajouter un Commentaire</h3>
+                        <label for="nomUtilisateur">Nom d'utilisateur:</label>
+                        <input type="text" id="nomUtilisateur" name="nomUtilisateur" [(ngModel)]="nouveauCommentaire.username" required>
 
+                        <label for="contenuCommentaire">Commentaire:</label>
+                        <textarea id="contenuCommentaire" name="contenuCommentaire" [(ngModel)]="nouveauCommentaire.contenu" required></textarea>
+
+                        <button (click)="envoyerCommentaire(recette)">Envoyer Commentaire</button>
+                    </div>
                     <form action="/votre-endpoint-de-soumission" method="post">
 
                 

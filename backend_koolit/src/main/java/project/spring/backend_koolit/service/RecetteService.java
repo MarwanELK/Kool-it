@@ -1,8 +1,10 @@
 package project.spring.backend_koolit.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.spring.backend_koolit.model.Commentaire;
 import project.spring.backend_koolit.model.Ingredient;
 import project.spring.backend_koolit.model.Recette;
 import project.spring.backend_koolit.repository.RecetteRepository;
@@ -91,4 +93,19 @@ public class RecetteService {
             return somme / notes.size();
         }
         return 0.0;
+    }
+    public List<Commentaire> getCommentaireByRecetteId(Long recetteId) {
+        return repository.findCommentaireByRecetteId(recetteId);
+    }
+
+    public Recette envoyerCommentaire(Long recetteId, Commentaire commentaire) {
+        // Vérifiez si la recette existe
+        Recette recette = repository.findById(recetteId)
+                .orElseThrow(() -> new EntityNotFoundException("Recette non trouvée avec l'ID: " + recetteId));
+
+        // Ajoutez le commentaire à la liste de commentaires de la recette
+        recette.getCommentaires().add(commentaire);
+
+        // Enregistrez la recette mise à jour
+        return repository.save(recette);
     }}
