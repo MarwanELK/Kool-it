@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Liste de Courses</title>
+</head>
+<body>
+
+<!-- magasins.component.html -->
+
+<div>
+    <label for="searchMagasin">Rechercher un magasin:</label>
+    <input type="text" id="searchMagasin" [(ngModel)]="nomMagasinRecherche" />
+    <button (click)="rechercherMagasin()">Rechercher</button>
+</div>
+
+<div class="magasins-container">
+    <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
+        <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
+        <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
+        <p>Type: {{ magasin.type }}</p>
+        <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
+        <p>Type d'aliment: {{ magasin.typeAliment }}</p>
+        <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
+        <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
+        <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
+    </div>
+</div>
+
+
+<footer>
+    <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

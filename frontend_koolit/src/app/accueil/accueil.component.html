@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.component.css">
+    <title>KOOL'IT</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+
+    <section class="banner">
+        <h1>Bienvenue chez KOOL'IT</h1>
+        <p>Découvrez nos recettes innovantes.</p>
+        <a routerLink="/Recettes" class="cta-button">Voir les produits</a>
+    </section>
+    
+    <p>TEST</p>
+    <div *ngIf="recetteData">
+        <h1>{{ recetteData.nom }}</h1>
+        <h2>Ingrédients Gateau :</h2>
+        <ul>
+          <li *ngFor="let ingredient of recetteData.ingredients">
+            {{ ingredient.nom }} - {{ingredient.type}}</li>
+        </ul>
+      </div>
+      
+ 
+        <h2>Nos Magasins</h2>
+        <ul>
+            <li><a href="https://www.e-leclerc.com/">Leclerc</a></li>
+            <li><a href="https://www.carrefour.fr/">Carrefour</a></li>
+            <li><a href="https://www.auchan.fr/">Auchan</a></li>
+            <li><a href="https://www.intermarche.com/">Intermarché</a></li>
+            <!-- Ajoutez d'autres magasins ici -->
+        </ul>
+
+
+       
+      <h2>Nos Magasins</h2>
+      <ul>
+          <li><a href="https://www.e-leclerc.com/">Leclerc</a></li>
+          <li><a href="https://www.carrefour.fr/">Carrefour</a></li>
+          <li><a href="https://www.auchan.fr/">Auchan</a></li>
+          <li><a href="https://www.intermarche.com/">Intermarché</a></li>
+          <!-- Ajoutez d'autres magasins ici -->
+      </ul>
+      <section class="testimonials">
+        <h2>Témoignages</h2>
+        <!-- Ajoutez des témoignages ici -->
+    </section>
+
+    </body>
+    </html>
