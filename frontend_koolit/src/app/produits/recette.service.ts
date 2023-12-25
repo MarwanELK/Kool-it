@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Commentaire } from '../model/recette.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,9 +29,18 @@ export class RecetteService {
     return this.http.post<any>(url, {});
   }
 
-  envoyerCommentaire(recetteId: number, commentaire: any): Observable<any> {
+  enregistrerCommentaire(commentaire:Commentaire):Observable<any>{
+    const url = `${this.backendUrl}/commentaires`; // Assurez-vous que l'URL correspond à votre endpoint backend
+    return this.http.post(url, commentaire);
+  }
+
+  envoyerCommentaire(recetteId: number, commentaire: Commentaire): Observable<any> {
     const url = `${this.backendUrl}/recettes/${recetteId}/commentaires`; // Assurez-vous que l'URL correspond à votre endpoint backend
     return this.http.post(url, commentaire);
+  }
+
+  supprimerCommentaire(CommentaireId: number): Observable<any> {
+    return this.http.delete(`${this.backendUrl}/recettes/${CommentaireId}`);
   }
 
   

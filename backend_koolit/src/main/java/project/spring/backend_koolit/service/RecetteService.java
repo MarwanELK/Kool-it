@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import project.spring.backend_koolit.model.Commentaire;
 import project.spring.backend_koolit.model.Ingredient;
 import project.spring.backend_koolit.model.Recette;
+import project.spring.backend_koolit.repository.CommentaireRepository;
 import project.spring.backend_koolit.repository.RecetteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
@@ -101,14 +104,20 @@ public class RecetteService {
 
     public Recette envoyerCommentaire(Long recetteId, Commentaire commentaire) {
         // Vérifiez si la recette existe
-        Recette recette = repository.findById(recetteId)
-                .orElseThrow(() -> new EntityNotFoundException("Recette non trouvée avec l'ID: " + recetteId));
+        Recette recette = repository.findById(recetteId).orElseThrow(() -> new EntityNotFoundException("Recette non trouvée avec l'ID: " + recetteId));
 
         // Ajoutez le commentaire à la liste de commentaires de la recette
+        if(recette.getCommentaires().isEmpty()){
+            List<Commentaire> lc = new ArrayList<>();
+            recette.setCommentaires(lc);
+        }
         recette.getCommentaires().add(commentaire);
-
         // Enregistrez la recette mise à jour
         return repository.save(recette);
+    }
+
+    public void supprimerCommentaire(Long commentaireId){
+        repository.deleteById(commentaireId);
     }
 
 }

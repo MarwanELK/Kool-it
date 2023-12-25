@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.Commentaire;
 import project.spring.backend_koolit.model.Recette;
+import project.spring.backend_koolit.service.CommentaireService;
 import project.spring.backend_koolit.service.RecetteService;
 
 import java.util.List;
@@ -61,6 +62,17 @@ public Recette findIngredientByRecetteId(@PathVariable Long id) {
             return new ResponseEntity<>(recette, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{commentaireId}")
+    public ResponseEntity<?> supprimerIngredient(@PathVariable Long commentaireId) {
+        try {
+            recetteService.supprimerCommentaire(commentaireId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

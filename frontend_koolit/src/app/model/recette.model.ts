@@ -1,5 +1,6 @@
 // recette.model.ts
 export interface Recette {
+    recetteId:number;
     nom: string;
     ingredients: { nom: string, quantite:number, type: string }[];
     note: number;
@@ -8,6 +9,7 @@ export interface Recette {
   }
   
   export interface Commentaire {
+    commentaireId:number;
     username: string;
     contenu: string;
   }

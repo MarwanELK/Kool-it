@@ -52,7 +52,17 @@
                         </div>
                     </div>
                    <!-- Formulaire pour envoyer un commentaire -->
-                   
+                   <div class="EnvoyerCommentaire-container">
+                    <h3>Envoyer un Commentaire</h3>
+                    <form >
+                        <label for="username">Nom d'utilisateur :</label>
+                        <input type="text" id="username" name="username" required [(ngModel)]="nouveauCommentaire.username">
+                        <br>
+                        <label for="contenu">Commentaire :</label>
+                        <textarea id="contenu" name="contenu" required [(ngModel)]="nouveauCommentaire.contenu"></textarea>
+                        <button type="button" (click)="envoyerCommentaire(recette.recetteId)">Envoyer</button>
+                    </form>
+                   </div>
                     <br>
                     <!-- Ajouter des personnes pour les parts  -->
                     <form action="/votre-endpoint-de-soumission" method="post">
