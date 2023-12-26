@@ -39,10 +39,8 @@ export class RecetteService {
     return this.http.post(url, commentaire);
   }
 
-  supprimerCommentaire(CommentaireId: number): Observable<any> {
-    return this.http.delete(`${this.backendUrl}/recettes/${CommentaireId}`);
-  }
-
+  supprimerCommentaire(recetteId: number, commentaireId: number): Observable<any> {
+    return this.http.delete(`${this.backendUrl}/recettes/${recetteId}/commentaire?commentaireId=${commentaireId}`,{});
+  }  
   
-
 }

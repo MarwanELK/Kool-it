@@ -65,10 +65,10 @@ public Recette findIngredientByRecetteId(@PathVariable Long id) {
         }
     }
 
-    @DeleteMapping("/{commentaireId}")
-    public ResponseEntity<?> supprimerIngredient(@PathVariable Long commentaireId) {
+    @DeleteMapping("/{recetteId}/commentaire") //@RequestParam
+    public ResponseEntity<?> supprimerCommentaire(@PathVariable Long recetteId, @RequestParam Long commentaireId) {
         try {
-            recetteService.supprimerCommentaire(commentaireId);
+            recetteService.supprimerCommentaire(recetteId, commentaireId);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();

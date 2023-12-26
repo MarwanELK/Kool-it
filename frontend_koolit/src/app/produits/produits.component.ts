@@ -58,8 +58,8 @@ export class ProduitsComponent implements OnInit {
     this.nouveauCommentaire = {commentaireId:0, username: '', contenu: '' };
   }
 
-  supprimerIngredient(commentaireId: number): void {
-    this.recetteService.supprimerCommentaire(commentaireId).subscribe(
+  supprimerCommentaire(recetteId:number, commentaireId: number): void {
+    this.recetteService.supprimerCommentaire(recetteId, commentaireId).subscribe(
       () => {
         console.log('Commentaire supprimé avec succès.');
         // Rafraîchir la liste après la suppression

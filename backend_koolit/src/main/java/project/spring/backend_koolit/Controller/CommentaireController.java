@@ -27,4 +27,15 @@ public class CommentaireController {
         Commentaire commentaireAjoute = commentaireService.ajouterCommentaire(nouveauCommentaire);
         return new ResponseEntity<>(commentaireAjoute, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{commentaireId}")
+    public ResponseEntity<?> supprimerCommentaire(@PathVariable Long commentaireId) {
+        try {
+            commentaireService.supprimerCommentaire(commentaireId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
