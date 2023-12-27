@@ -2,6 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { KoolitService } from './koolit.service';
+import { saveAs } from 'file-saver';
+;
+
 
 export interface Ingredient {
   id: number; // Ajoutez cette ligne
@@ -20,6 +23,7 @@ export class ListeDeCoursesComponent implements OnInit {
 
   nouvelIngredient: Ingredient = { id: 0, nom: '', type: '', ingredients: [] }; // Ajoutez 'id' ici
   listesCourses: Ingredient[] = [];
+  selectedFormat: string = 'csv';
 
   constructor(private http: HttpClient, private koolitService: KoolitService) {}
 
@@ -83,6 +87,60 @@ export class ListeDeCoursesComponent implements OnInit {
       }
     );
   }
+  telechargerListeCSV(): void {
+    const csvData = this.convertToCSV(this.listesCourses);
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
+    saveAs(blob, 'liste_courses.csv');
+  }
+
+  private convertToCSV(data: Ingredient[]): string {
+    const header = 'nom,type\n';
+    const csv = data
+      .map(
+        (row) =>
+          `"${this.formatIngredientsList(row.ingredientsList)}"\n`
+      )
+      .join('');
+    return header + csv;
+  }
+  
+  private formatIngredientsList(ingredientsList: { nom: string; type: string }[] | undefined): string {
+    if (!ingredientsList) {
+      return '';
+    }
+    return ingredientsList
+      .map(ingredient => `${ingredient.nom} ${ingredient.type}`)
+      .join(', ');
+  }
+  
+  telechargerListeNote(): void {
+    const noteData = this.convertToNoteFormat(this.listesCourses);
+    const blob = new Blob([noteData], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'liste_courses_note.txt');
+  }
+  telechargerListe(): void {
+    if (this.selectedFormat === 'csv') {
+      this.telechargerListeCSV();
+    } else if (this.selectedFormat === 'note') {
+      this.telechargerListeNote();
+    }
+  }
+  private convertToNoteFormat(data: Ingredient[]): string {
+    return data
+      .map(
+        (row) =>
+          `${this.formatNomType(row)}\n`
+      )
+      .join('');
+  }
+  
+  private formatNomType(row: Ingredient): string {
+    const nom = row.ingredientsList?.[0]?.nom || '';
+    const type = row.ingredientsList?.[0]?.type || '';
+    return `${nom} ${type}`;
+  }
+
+
   
 }
 

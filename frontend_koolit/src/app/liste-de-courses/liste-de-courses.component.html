@@ -8,10 +8,6 @@
 </head>
 
 <body>
-
-  
-
-
     <section class="shopping-list">
         <h2>Votre Liste de Courses</h2>
         <ul>
@@ -20,30 +16,27 @@
                 <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
             </li>
         </ul>
+        <label for="formatSelection">Choisir le format :</label>
+        <select id="formatSelection" [(ngModel)]="selectedFormat">
+            <option value="csv">CSV</option>
+            <option value="note">Note</option>
+        </select>
+        <button (click)="telechargerListe()">Télécharger</button>
     </section>
-    
-    
 
-      
-
-<section class="add-to-list">
-    <h2>Ajouter à la Liste</h2>
-    <form>
-        <label for="nom">Nouvel ingrédient :</label>
-        <input type="text" id="nom" name="nom" required [(ngModel)]="nouvelIngredient.nom">
-        <label for="type">Type :</label>
-        <input type="text" id="type" name="type" required [(ngModel)]="nouvelIngredient.type">
-        <button type="button" (click)="ajouterALaListeDeCourses()">Ajouter</button>
-    </form>
-</section>
-
-
-
-   
+    <section class="add-to-list">
+        <h2>Ajouter à la Liste</h2>
+        <form>
+            <label for="nom">Nouvel ingrédient :</label>
+            <input type="text" id="nom" name="nom" required [(ngModel)]="nouvelIngredient.nom">
+            <label for="type">Type :</label>
+            <input type="text" id="type" name="type" required [(ngModel)]="nouvelIngredient.type">
+            <button type="button" (click)="ajouterALaListeDeCourses()">Ajouter</button>
+        </form>
+    </section>
 
     <footer>
         <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
     </footer>
-
 </body>
 </html>
