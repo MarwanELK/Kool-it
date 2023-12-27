@@ -15,14 +15,14 @@ export class MapComponent implements AfterViewInit{
   }
 
   createMap(){
-    const parcThabor = {
+    const Paris = {
       lat: 48.8566,
       lng: 2.3522,
     };
 
     const zoomLevel = 12;
     this.map = L.map('map',{
-      center: [parcThabor.lat, parcThabor.lng],
+      center: [Paris.lat, Paris.lng],
       zoom: zoomLevel
     });
 
