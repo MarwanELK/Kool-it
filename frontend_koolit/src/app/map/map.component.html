@@ -6,7 +6,7 @@
 </div>
 <!-- Fin ma carte -->
 <div id="sidebar">
-    <h2><img src="images/logo.png" alt="Logo" class="logo-img"></h2>
+    <h2><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_MAGASIN_Blanc_4.jpg" alt="Logo" class="logo-img"></h2>
     <form id="searchForm">
         <label for="cityInput">Ville :</label>
         <input type="text" id="cityInput" name="city" required>
@@ -14,18 +14,17 @@
         <input type="number" id="radiusInput" name="radius" min="1" value="3000">
         <button type="button" id="searchButton">Rechercher</button>
     </form>
-    <a href="/Map" id="closeButton">Nos services</a>
 </div>
 
-<div class="modal fade" id="vetDetailsModal" tabindex="-1" aria-labelledby="vetDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="magasinDetailsModal" tabindex="-1" aria-labelledby="magasinDetailsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="vetDetailsModalLabel">Détails du vétérinaire</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="magasinDetailsModalLabel">Détails du Magasin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Selectionner</button>
             </div>
-            <div class="modal-body" id="vetDetailsBody">
-                <!-- Les détails du vétérinaire seront affichés ici -->
+            <div class="modal-body" id="magasinDetailsBody">
+                <!-- Les détails du magasin seront affichés ici -->
             </div>
         </div>
     </div>

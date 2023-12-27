@@ -27,8 +27,8 @@ export class MapComponent implements AfterViewInit{
     });
 
     const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      minZoom: 12,
-      maxZoom: 20,
+      minZoom: 12, //dezoomer (jusqu'à map monde)
+      maxZoom: 20, //augmenter capacité du zoom
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
