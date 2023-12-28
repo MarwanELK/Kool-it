@@ -30,7 +30,10 @@ export class MapComponent implements AfterViewInit{
       lat: 48.8736459,
       lng: 2.3321271,
     };
-
+    const printemps ={
+      lat: 48.8739230,
+      lng: 2.328092,
+    }
     const zoomLevel = 12;
     this.map = L.map('map',{
       center: [gal_la_fay.lat, gal_la_fay.lng],
@@ -44,13 +47,48 @@ export class MapComponent implements AfterViewInit{
     });
 
     mainLayer.addTo(this.map);
-    this.addMarker(gal_la_fay);
-
+    const descriptionWikipediaGLF = `
+    Les Galeries Lafayette sont une enseigne de grands magasins,
+    appartenant au groupe Galeries Lafayette,
+    qui est membre de l'Association Internationale des Grands Magasins depuis 1960.
+    `;
+    const descriptionWikipediaPRTMPS = `
+    Le Printemps est une entreprise française exploitante de grands magasins,
+    qui se positionne principalement sur des marques de mode, de luxe et de beauté. 
+    Le Printemps est également l'un des leaders français des listes de mariage.
+    `;
+    const popupOption ={
+      coords1 : gal_la_fay,
+      coords2 : printemps,
+      text1: descriptionWikipediaGLF,
+      text2: descriptionWikipediaPRTMPS,
+      open : true
+    }
+    this.addMarker(popupOption);
+    
   }
 
-  addMarker(coords:any){
-    const marker = L.marker([coords.lat, coords.lng], {icon:this.smallIcon});
-    marker.addTo(this.map);
+  addMarker(option:any){
+    const marker1 = L.marker([option.coords1.lat, option.coords1.lng], {icon:this.smallIcon});
+    if(option.open){
+      marker1.addTo(this.map).bindPopup(option.text1).openPopup(); //un seul popup ouvert a la fois 
+    }else{
+      marker1.addTo(this.map).bindPopup(option.text1);
+    }
+    const marker2 = L.marker([option.coords2.lat, option.coords2.lng], {icon:this.smallIcon});
+    marker2.addTo(this.map).bindPopup(option.text2);
   }
+
+  //Version alternative !!!!!!!!
+   addMarker2({coords1,coords2,text1,text2,open} : any){ //
+    const marker1 = L.marker([coords1.lat, coords1.lng], {icon:this.smallIcon}); //
+    if(open){ //
+      marker1.addTo(this.map).bindPopup(text1).openPopup(); //
+    }else{ //
+      marker1.addTo(this.map).bindPopup(text1); //
+    } //
+    const marker2 = L.marker([coords2.lat, coords2.lng], {icon:this.smallIcon}); //
+    marker2.addTo(this.map).bindPopup(text2).openPopup(); //
+  } //
 
 }
