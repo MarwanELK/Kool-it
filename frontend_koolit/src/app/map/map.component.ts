@@ -11,6 +11,7 @@ import { KoolitService } from './koolit.service';
 export class MapComponent implements AfterViewInit{
   map: any;
   magasins: any[]=[];
+  ville: any;
 
   smallIcon = new L.Icon({
     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -25,16 +26,31 @@ export class MapComponent implements AfterViewInit{
   constructor(private koolitService: KoolitService) { }
 
   ngAfterViewInit(): void {
-    this.getMagasinsNanterre(); // faire une super fonction qui appel les autres fonction
+    this.getMagasinsParVille(); // faire une super fonction qui appel les autres fonction
     //this.createMap();
   }
 
-  getMagasinsNanterre(){
+  rechercheParVille(nomVille: string){
+    this.koolitService.getVilleParNom(nomVille).subscribe(
+      (data)=> {
+        this.ville = data;
+        console.log('Données de la ville :', this.ville);
+        this.map.off(); // Désactivez tous les gestionnaires d'événements sur la carte
+        this.map.remove(); // Supprimez la carte actuelle
+        this.createMap('ok'); // Créez une nouvelle carte avec les nouvelles données de la ville et des magasins
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des données de la ville :', error);
+      }
+    );
+  }
+
+  getMagasinsParVille(){
     this.koolitService.getMagasinsParVille().subscribe(
       (data) => {
         this.magasins = data;
         console.log('Données des magasins :', this.magasins);
-        this.createMap(); // Appel à une fonction d'initialisation de la carte
+        this.createMap(''); // Appel à une fonction d'initialisation de la carte
       },
       (error) => {
         console.error('Erreur lors de la récupération des données des magasins :', error);
@@ -42,7 +58,7 @@ export class MapComponent implements AfterViewInit{
     );
   }
 
-  createMap(){
+  createMap(nomVille:string){
 
     const NanterreUniversite = {
       lat:48.9010513,
@@ -58,10 +74,21 @@ export class MapComponent implements AfterViewInit{
       lng: 2.328092,
     }
     const zoomLevel = 12;
-    this.map = L.map('map',{
-      center: [NanterreUniversite.lat, NanterreUniversite.lng],
-      zoom: zoomLevel
-    });
+
+    if(nomVille==''){
+      this.map = L.map('map',{
+        center: [NanterreUniversite.lat, NanterreUniversite.lng],
+        zoom: zoomLevel
+      });
+    }else{
+      console.log('je sui dans le else', this.ville);
+      console.log('lat de la ville :', this.ville.lat);
+      this.map = L.map('map',{
+        center: [this.ville.lat, this.ville.lng],
+        zoom: zoomLevel
+      });
+    }
+    
 
     const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       minZoom: 14, //dezoomer (jusqu'à map monde)
@@ -70,43 +97,15 @@ export class MapComponent implements AfterViewInit{
     });
 
     mainLayer.addTo(this.map);
-    const descriptionWikipediaGLF = `
-    Les Galeries Lafayette sont une enseigne de grands magasins,
-    appartenant au groupe Galeries Lafayette,
-    qui est membre de l'Association Internationale des Grands Magasins depuis 1960.
-    `;
-    const descriptionWikipediaPRTMPS = `
-    Le Printemps est une entreprise française exploitante de grands magasins,
-    qui se positionne principalement sur des marques de mode, de luxe et de beauté. 
-    Le Printemps est également l'un des leaders français des listes de mariage.
-    `;
-
-    const popupOption ={
-      coords1 : gal_la_fay,
-      coords2 : printemps,
-      text1: descriptionWikipediaGLF,
-      text2: descriptionWikipediaPRTMPS,
-      open : false
-    }
-    
-    this.magasins.forEach((magasin) => {
-      const marker = L.marker([magasin.lat, magasin.lng], {icon:this.smallIcon}); //
-      marker.addTo(this.map).bindPopup(magasin.nom); //un seul popup ouvert a la fois 
-    });
-
-    //this.addMarker(popupOption); // separer du reste
+    this.addMarker(this.magasins); // separer du reste
     
   }
 
-  addMarker(option:any){
-    const marker1 = L.marker([option.coords1.lat, option.coords1.lng], {icon:this.smallIcon});
-    if(option.open){
-      marker1.addTo(this.map).bindPopup(option.text1).openPopup(); //un seul popup ouvert a la fois 
-    }else{
-      marker1.addTo(this.map).bindPopup(option.text1);
-    }
-    const marker2 = L.marker([option.coords2.lat, option.coords2.lng], {icon:this.smallIcon});
-    marker2.addTo(this.map).bindPopup(option.text2);
+  addMarker(magasins:any[]){
+    this.magasins.forEach((magasin) => {
+      const marker = L.marker([magasin.lat, magasin.lng], {icon:this.smallIcon}); //
+      marker.addTo(this.map).bindPopup(magasin.nom); //.openPopupun() un seul popup ouvert a la fois 
+    });
   }
 
   //Version alternative !!!!!!!!

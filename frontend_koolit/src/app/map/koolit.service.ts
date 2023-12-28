@@ -14,7 +14,7 @@ export class KoolitService {
 
   readonly ENDPOINT_RECETTES = "/recettes";
   readonly ENDPOINT_MAGASINS = "/magasins";
-
+  readonly ENDPOINT_VILLES = "/villes";
   constructor(private httpClient: HttpClient) { }
 
   getListeDeCourses(utilisateurId: number): Observable<any[]> {
@@ -77,5 +77,14 @@ getCoccinelle(): Observable<any> {
 getMagasinsParVille(): Observable<any> {
   return this.httpClient.get<any>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/nanterre`);
 }
-  
+
+getVilleParNom(nomVille:string): Observable<any> {
+  const params = new HttpParams().set('nomVille', nomVille);
+  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_VILLES}/rechercherNom`, { params }).pipe(
+    catchError((error: any) => {
+      console.error('Erreur lors de la recherche de ville par nom :', error);
+      throw error;
+    })
+  );
+}  
 }
