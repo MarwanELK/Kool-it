@@ -152,9 +152,9 @@ public class MagasinController {
         return ResponseEntity.ok(magasin);
     }
 
-    @GetMapping("/nanterre")
-    public ResponseEntity<List<Magasin>> getMagasinsParVille() {
-        List<Magasin> magasins = magasinService.rechercherMagasinsParVille("Nanterre");
+    @GetMapping("/ville")
+    public ResponseEntity<List<Magasin>> getMagasinsParVille(String ville) {
+        List<Magasin> magasins = magasinService.rechercherMagasinsParVille(ville);
         return ResponseEntity.ok(magasins);
     }
 

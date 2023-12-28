@@ -74,8 +74,14 @@ getCoccinelle(): Observable<any> {
   return this.httpClient.get<any>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/coccinelle`);
 }
 
-getMagasinsParVille(): Observable<any> {
-  return this.httpClient.get<any>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/nanterre`);
+getMagasinsParVille(ville:string): Observable<any> {
+  const params = new HttpParams().set('ville', ville);
+  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/ville`, { params }).pipe(
+    catchError((error: any) => {
+      console.error('Erreur lors de la recherche de magasin par ville :', error);
+      throw error;
+    })
+  );
 }
 
 getVilleParNom(nomVille:string): Observable<any> {

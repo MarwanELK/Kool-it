@@ -12,6 +12,11 @@ export class MapComponent implements AfterViewInit{
   map: any;
   magasins: any[]=[];
   ville: any;
+  NanterreUniversite = {
+      nom:'Nanterre',
+      lat:48.9010513,
+      lng:2.2133626
+    };
 
   smallIcon = new L.Icon({
     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -26,7 +31,7 @@ export class MapComponent implements AfterViewInit{
   constructor(private koolitService: KoolitService) { }
 
   ngAfterViewInit(): void {
-    this.getMagasinsParVille(); // faire une super fonction qui appel les autres fonction
+    this.getMagasinsParVille(this.NanterreUniversite.nom,true); // faire une super fonction qui appel les autres fonction
     //this.createMap();
   }
 
@@ -37,7 +42,8 @@ export class MapComponent implements AfterViewInit{
         console.log('Données de la ville :', this.ville);
         this.map.off(); // Désactivez tous les gestionnaires d'événements sur la carte
         this.map.remove(); // Supprimez la carte actuelle
-        this.createMap('ok'); // Créez une nouvelle carte avec les nouvelles données de la ville et des magasins
+        this.getMagasinsParVille(nomVille,false);
+        //this.createMap('ok'); // Créez une nouvelle carte avec les nouvelles données de la ville et des magasins
       },
       (error) => {
         console.error('Erreur lors de la récupération des données de la ville :', error);
@@ -45,12 +51,12 @@ export class MapComponent implements AfterViewInit{
     );
   }
 
-  getMagasinsParVille(){
-    this.koolitService.getMagasinsParVille().subscribe(
+  getMagasinsParVille(ville:string,first:boolean){
+    this.koolitService.getMagasinsParVille(ville).subscribe(
       (data) => {
         this.magasins = data;
         console.log('Données des magasins :', this.magasins);
-        this.createMap(''); // Appel à une fonction d'initialisation de la carte
+        this.createMap(first); // Appel à une fonction d'initialisation de la carte
       },
       (error) => {
         console.error('Erreur lors de la récupération des données des magasins :', error);
@@ -58,26 +64,12 @@ export class MapComponent implements AfterViewInit{
     );
   }
 
-  createMap(nomVille:string){
-
-    const NanterreUniversite = {
-      lat:48.9010513,
-      lng:2.2133626
-    };
-
-    const gal_la_fay = {
-      lat: 48.8736459,
-      lng: 2.3321271,
-    };
-    const printemps ={
-      lat: 48.8739230,
-      lng: 2.328092,
-    }
+  createMap(first:boolean){
     const zoomLevel = 12;
 
-    if(nomVille==''){
+    if(first){
       this.map = L.map('map',{
-        center: [NanterreUniversite.lat, NanterreUniversite.lng],
+        center: [this.NanterreUniversite.lat, this.NanterreUniversite.lng],
         zoom: zoomLevel
       });
     }else{
