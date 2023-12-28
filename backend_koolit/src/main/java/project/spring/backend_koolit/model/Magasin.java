@@ -15,6 +15,9 @@ public class Magasin {
     private Long id;
     @Column(name = "nom")
     private String nom;
+
+    @Column(name="description")
+    private String description;
     @Column(name = "type_magasin")
     private String typeMagasin;
     @Column(name = "url_magasin")
@@ -23,10 +26,13 @@ public class Magasin {
     @Column(name = "type_aliment")
     private String typeAliment;
 
+    @Column(name="ville")
+    private String ville;
+
     @Column(name = "latitude")
     private double lat;
     @Column(name = "longitude")
-    private double lon;
+    private double lng;
 
     public Magasin() {
         // Constructeur par défaut nécessaire pour JPA
@@ -39,16 +45,36 @@ public class Magasin {
         this.typeAliment = typeAliment;
     }
 
-    public Magasin(Long id, String nom, String typeMagasin, String urlMagasin, String typeAliment, double lat, double lon) {
+    public Magasin(Long id, String nom, String description, String typeMagasin, String urlMagasin, String typeAliment, String ville, double lat, double lng) {
         this.id = id;
         this.nom = nom;
+        this.description = description;
         this.typeMagasin = typeMagasin;
         this.urlMagasin = urlMagasin;
         this.typeAliment = typeAliment;
+        this.ville = ville;
         this.lat = lat;
-        this.lon = lon;
+        this.lng = lng;
     }
-// Getters et setters
+
+    // Getters et setters
+
+
+    public String getVille() {
+        return this.ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public double getLat() {
         return lat;
@@ -58,12 +84,12 @@ public class Magasin {
         this.lat = lat;
     }
 
-    public double getLon() {
-        return lon;
+    public double getLng() {
+        return lng;
     }
 
-    public void setLon(double lon) {
-        this.lon = lon;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public Long getId() {

@@ -146,6 +146,18 @@ public class MagasinController {
         }
     }
 
+    @GetMapping("/coccinelle")
+    public ResponseEntity<Magasin> getCoccinelle() {
+        Magasin magasin = magasinService.getMagasinByNom("Coccinelle Supermarché");
+        return ResponseEntity.ok(magasin);
+    }
+
+    @GetMapping("/nanterre")
+    public ResponseEntity<List<Magasin>> getMagasinsParVille() {
+        List<Magasin> magasins = magasinService.rechercherMagasinsParVille("Nanterre");
+        return ResponseEntity.ok(magasins);
+    }
+
 
 
 }

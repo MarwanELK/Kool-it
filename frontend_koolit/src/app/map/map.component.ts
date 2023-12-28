@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { KoolitService } from './koolit.service';
+
 
 @Component({
   selector: 'app-map',
@@ -8,6 +10,7 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit{
   map: any;
+  magasins: any[]=[];
 
   smallIcon = new L.Icon({
     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -19,13 +22,33 @@ export class MapComponent implements AfterViewInit{
     shadowSize:  [41, 41]
   });
 
-  constructor() { }
+  constructor(private koolitService: KoolitService) { }
 
   ngAfterViewInit(): void {
-    this.createMap();
+    this.getMagasinsNanterre(); // faire une super fonction qui appel les autres fonction
+    //this.createMap();
+  }
+
+  getMagasinsNanterre(){
+    this.koolitService.getMagasinsParVille().subscribe(
+      (data) => {
+        this.magasins = data;
+        console.log('Données des magasins :', this.magasins);
+        this.createMap(); // Appel à une fonction d'initialisation de la carte
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des données des magasins :', error);
+      }
+    );
   }
 
   createMap(){
+
+    const NanterreUniversite = {
+      lat:48.9010513,
+      lng:2.2133626
+    };
+
     const gal_la_fay = {
       lat: 48.8736459,
       lng: 2.3321271,
@@ -36,12 +59,12 @@ export class MapComponent implements AfterViewInit{
     }
     const zoomLevel = 12;
     this.map = L.map('map',{
-      center: [gal_la_fay.lat, gal_la_fay.lng],
+      center: [NanterreUniversite.lat, NanterreUniversite.lng],
       zoom: zoomLevel
     });
 
     const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      minZoom: 12, //dezoomer (jusqu'à map monde)
+      minZoom: 14, //dezoomer (jusqu'à map monde)
       maxZoom: 20, //augmenter capacité du zoom
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
@@ -57,14 +80,21 @@ export class MapComponent implements AfterViewInit{
     qui se positionne principalement sur des marques de mode, de luxe et de beauté. 
     Le Printemps est également l'un des leaders français des listes de mariage.
     `;
+
     const popupOption ={
       coords1 : gal_la_fay,
       coords2 : printemps,
       text1: descriptionWikipediaGLF,
       text2: descriptionWikipediaPRTMPS,
-      open : true
+      open : false
     }
-    this.addMarker(popupOption);
+    
+    this.magasins.forEach((magasin) => {
+      const marker = L.marker([magasin.lat, magasin.lng], {icon:this.smallIcon}); //
+      marker.addTo(this.map).bindPopup(magasin.nom); //un seul popup ouvert a la fois 
+    });
+
+    //this.addMarker(popupOption); // separer du reste
     
   }
 

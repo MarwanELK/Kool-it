@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.repository.MagasinRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,5 +58,9 @@ public class MagasinService {
 
     public Magasin getMagasinByNom(String nom) {
         return magasinRepository.findByNom(nom).orElse(null);
+    }
+
+    public List<Magasin> rechercherMagasinsParVille(String ville){
+        return magasinRepository.findMagasinsByVille(ville);
     }
 }
