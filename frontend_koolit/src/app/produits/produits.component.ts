@@ -37,6 +37,12 @@ export class ProduitsComponent implements OnInit {
     this.recetteService.enregistrerCommentaire(nouveauCommentaireAEnvoyer).subscribe(
       (response: any) => {
         console.log('Commentaire ajouté avec succès dans la base de données:', response);
+        
+        const recetteIndex = this.recettes.findIndex((recette) => recette.recetteId === recetteId);
+        if (recetteIndex !== -1) {
+          this.recettes[recetteIndex].commentaires.push(nouveauCommentaireAEnvoyer);
+        }
+        
         // Rafraîchir la liste après l'ajout
         this.chargerListeDeCourses(5); // Fournir l'ID de l'utilisateur ici
       },
@@ -64,6 +70,17 @@ export class ProduitsComponent implements OnInit {
         console.log('Commentaire supprimé avec succès.');
         // Rafraîchir la liste après la suppression
         this.chargerListeDeCourses(5);
+        const recetteIndex = this.recettes.findIndex((recette) => recette.recetteId === recetteId);
+      if (recetteIndex !== -1) {
+        const commentaireIndex = this.recettes[recetteIndex].commentaires.findIndex(
+          (commentaire:any) => commentaire.commentaireId === commentaireId
+        );
+
+        if (commentaireIndex !== -1) {
+          this.recettes[recetteIndex].commentaires.splice(commentaireIndex, 1);
+        }
+      }
+
       },
       (error) => {
         console.error('Erreur lors de la suppression du commentaire :', error);
