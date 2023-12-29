@@ -12,11 +12,17 @@ export class MapComponent implements AfterViewInit{
   map: any;
   magasins: any[]=[];
   ville: any;
+  
   NanterreUniversite = {
       nom:'Nanterre',
       lat:48.9010513,
       lng:2.2133626
     };
+
+  coords : any = {
+    lat:48.9010513,
+    lng:2.2133626
+  };
 
   smallIcon = new L.Icon({
     iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon.png',
@@ -42,6 +48,8 @@ export class MapComponent implements AfterViewInit{
         console.log('Données de la ville :', this.ville);
         this.map.off(); // Désactivez tous les gestionnaires d'événements sur la carte
         this.map.remove(); // Supprimez la carte actuelle
+        this.coords.lat=this.ville.lat;
+        this.coords.lng=this.ville.lng;
         this.getMagasinsParVille(nomVille,false);
         //this.createMap('ok'); // Créez une nouvelle carte avec les nouvelles données de la ville et des magasins
       },
