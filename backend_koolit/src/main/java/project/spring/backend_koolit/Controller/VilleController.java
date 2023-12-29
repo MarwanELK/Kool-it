@@ -23,4 +23,10 @@ public class VilleController {
         Ville ville = villeService.getVilleParNom(nomVille);
         return ResponseEntity.ok(ville);
     }
+
+    @GetMapping("/rechercherCoords")
+    public ResponseEntity<Ville> rechercherVilleParCoords(double lat, double lng){
+        Ville ville = villeService.getVilleParCoords(lat,lng);
+        return ResponseEntity.ok(ville);
+    }
 }

@@ -18,4 +18,8 @@ public class VilleService {
     public Ville getVilleParNom(String nomVille){
         return villeRepository.findByNom(nomVille);
     }
+
+    public Ville getVilleParCoords(double lat, double lng){
+        return villeRepository.findByLatAndLng(lat,lng);
+    }
 }

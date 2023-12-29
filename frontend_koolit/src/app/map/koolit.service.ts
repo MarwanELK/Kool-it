@@ -54,43 +54,57 @@ export class KoolitService {
   }
   // koolit.service.ts
 
-rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
-  // Utilisation des paramètres de requête pour envoyer le nom du magasin
-  const params = new HttpParams().set('nomMagasin', nomMagasin);
+  rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
+    // Utilisation des paramètres de requête pour envoyer le nom du magasin
+    const params = new HttpParams().set('nomMagasin', nomMagasin);
 
-  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercher`, { params }).pipe(
-    catchError((error: any) => {
-      console.error('Erreur lors de la recherche de magasin par nom :', error);
-      throw error;
-    })
-  );
-}
-ajouterTypeAliment(nomMagasin: string, typeAliment: string): Observable<any> {
-  const url = `${this.apiUrl}/magasins/ajouterTypeAliment/${nomMagasin}`;
-  return this.httpClient.post(url, typeAliment);
-}
+    return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercher`, { params }).pipe(
+      catchError((error: any) => {
+        console.error('Erreur lors de la recherche de magasin par nom :', error);
+        throw error;
+      })
+    );
+  }
+  ajouterTypeAliment(nomMagasin: string, typeAliment: string): Observable<any> {
+    const url = `${this.apiUrl}/magasins/ajouterTypeAliment/${nomMagasin}`;
+    return this.httpClient.post(url, typeAliment);
+  }
 
-getCoccinelle(): Observable<any> {
-  return this.httpClient.get<any>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/coccinelle`);
-}
+  getCoccinelle(): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/coccinelle`);
+  }
 
-getMagasinsParVille(ville:string): Observable<any> {
-  const params = new HttpParams().set('ville', ville);
-  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/ville`, { params }).pipe(
-    catchError((error: any) => {
-      console.error('Erreur lors de la recherche de magasin par ville :', error);
-      throw error;
-    })
-  );
-}
+  getMagasinsParVille(ville:string): Observable<any> {
+    const params = new HttpParams().set('ville', ville);
+    return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/ville`, { params }).pipe(
+      catchError((error: any) => {
+        console.error('Erreur lors de la recherche de magasin par ville :', error);
+        throw error;
+      })
+    );
+  }
 
-getVilleParNom(nomVille:string): Observable<any> {
-  const params = new HttpParams().set('nomVille', nomVille);
-  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_VILLES}/rechercherNom`, { params }).pipe(
-    catchError((error: any) => {
-      console.error('Erreur lors de la recherche de ville par nom :', error);
-      throw error;
-    })
-  );
-}  
+  getVilleParNom(nomVille:string): Observable<any> {
+    const params = new HttpParams().set('nomVille', nomVille);
+    return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_VILLES}/rechercherNom`, { params }).pipe(
+      catchError((error: any) => {
+        console.error('Erreur lors de la recherche de ville par nom :', error);
+        throw error;
+      })
+    );
+  }
+
+  getVilleParCoords(lat:number,lng:number): Observable<any> {
+    const params = new HttpParams()
+        .set('lat', lat)
+        .set('lng', lng);
+
+    return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_VILLES}/rechercherCoords`, { params }).pipe(
+        catchError((error: any) => {
+            console.error('Erreur lors de la recherche de ville par ses coords :', error);
+            throw error;
+        })
+    );
+    
+  }
 }

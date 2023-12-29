@@ -11,15 +11,8 @@ import { KoolitService } from './koolit.service';
 export class MapComponent implements AfterViewInit{
   map: any;
   magasins: any[]=[];
-  ville: any;
-  
-  NanterreUniversite = {
-      nom:'Nanterre',
-      lat:48.9010513,
-      lng:2.2133626
-    };
-
-  coords : any = {
+  ville: any = {
+    nom:'Nanterre',
     lat:48.9010513,
     lng:2.2133626
   };
@@ -37,8 +30,32 @@ export class MapComponent implements AfterViewInit{
   constructor(private koolitService: KoolitService) { }
 
   ngAfterViewInit(): void {
-    this.getMagasinsParVille(this.NanterreUniversite.nom,true); // faire une super fonction qui appel les autres fonction
+    this.getMagasinsParVille(this.ville.nom); // faire une super fonction qui appel les autres fonction
     //this.createMap();
+  }
+
+  rechercheParCoords(lat:number, lng:number){
+    this.koolitService.getVilleParCoords(lat,lng).subscribe(
+      (data)=> {
+        if(data!=null){
+          this.ville = data;
+          console.log('Données de la ville :', this.ville);
+          this.map.off(); // Désactivez tous les gestionnaires d'événements sur la carte
+          this.map.remove(); // Supprimez la carte actuelle
+          this.getMagasinsParVille(this.ville.nom);
+        }else{
+          this.ville.nom='';
+          this.ville.lat=lat;
+          this.ville.lng=lng;
+          this.map.off(); // Désactivez tous les gestionnaires d'événements sur la carte
+          this.map.remove(); // Supprimez la carte actuelle
+          this.createMap();
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des données de la ville :', error);
+      }
+    );
   }
 
   rechercheParVille(nomVille: string){
@@ -48,10 +65,7 @@ export class MapComponent implements AfterViewInit{
         console.log('Données de la ville :', this.ville);
         this.map.off(); // Désactivez tous les gestionnaires d'événements sur la carte
         this.map.remove(); // Supprimez la carte actuelle
-        this.coords.lat=this.ville.lat;
-        this.coords.lng=this.ville.lng;
-        this.getMagasinsParVille(nomVille,false);
-        //this.createMap('ok'); // Créez une nouvelle carte avec les nouvelles données de la ville et des magasins
+        this.getMagasinsParVille(nomVille);
       },
       (error) => {
         console.error('Erreur lors de la récupération des données de la ville :', error);
@@ -59,12 +73,12 @@ export class MapComponent implements AfterViewInit{
     );
   }
 
-  getMagasinsParVille(ville:string,first:boolean){
+  getMagasinsParVille(ville:string){
     this.koolitService.getMagasinsParVille(ville).subscribe(
       (data) => {
         this.magasins = data;
         console.log('Données des magasins :', this.magasins);
-        this.createMap(first); // Appel à une fonction d'initialisation de la carte
+        this.createMap(); // Appel à une fonction d'initialisation de la carte
       },
       (error) => {
         console.error('Erreur lors de la récupération des données des magasins :', error);
@@ -72,22 +86,14 @@ export class MapComponent implements AfterViewInit{
     );
   }
 
-  createMap(first:boolean){
+  createMap(){
     const zoomLevel = 12;
 
-    if(first){
-      this.map = L.map('map',{
-        center: [this.NanterreUniversite.lat, this.NanterreUniversite.lng],
-        zoom: zoomLevel
-      });
-    }else{
-      console.log('je sui dans le else', this.ville);
-      console.log('lat de la ville :', this.ville.lat);
-      this.map = L.map('map',{
-        center: [this.ville.lat, this.ville.lng],
-        zoom: zoomLevel
-      });
-    }
+    
+    this.map = L.map('map',{
+      center: [this.ville.lat, this.ville.lng],
+      zoom: zoomLevel
+    });
     
 
     const mainLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
