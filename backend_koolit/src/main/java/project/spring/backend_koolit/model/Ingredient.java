@@ -1,3 +1,4 @@
+
 package project.spring.backend_koolit.model;
 
 import jakarta.persistence.*;
@@ -11,6 +12,8 @@ public class Ingredient {
     @Id
     @Column(name = "ingredient_id")
     private Long ingredientId;
+    @Column(name = "quantite")
+    private int quantite;
 
     @Column(name = "nom")
     private String nom;
@@ -18,8 +21,18 @@ public class Ingredient {
     @Enumerated(EnumType.STRING)
     private TypeIngredient type;
 
+    public Ingredient(long ingredientId, String carotte, String legume) {
+    }
+
+    public Integer getQuantite() {
+        return quantite;
+    }
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
     public enum TypeIngredient {
-        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré
+        Extrait, Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré,Tablette, Sec, Frais, Doux, Fruits, Épice, Poudre, Tablettes, Liquide;
     }
 
 

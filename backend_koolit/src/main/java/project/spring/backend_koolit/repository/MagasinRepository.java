@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface MagasinRepository extends JpaRepository<Magasin, Long> {
     List<Magasin> findByNomContainingIgnoreCase(String nomMagasin);
     Optional<Magasin> findByNom(String nom);
+
+    List<String> findDistinctTypeAlimentByNomContainingIgnoreCase(String nomType);
 }

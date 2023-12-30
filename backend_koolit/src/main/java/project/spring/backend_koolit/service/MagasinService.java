@@ -54,6 +54,10 @@ public class MagasinService {
     public List<Magasin> rechercherMagasinParNom(String nom) {
         return magasinRepository.findByNomContainingIgnoreCase(nom);
     }
+    public List<String> rechercherTypeAlimentParNom(String nomType) {
+        return magasinRepository.findDistinctTypeAlimentByNomContainingIgnoreCase(nomType);
+    }
+
 
     public Magasin getMagasinByNom(String nom) {
         return magasinRepository.findByNom(nom).orElse(null);

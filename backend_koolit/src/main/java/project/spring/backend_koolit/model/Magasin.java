@@ -24,7 +24,7 @@ public class Magasin {
     private String typeAliment;
 
     public Magasin() {
-        // Constructeur par défaut nécessaire pour JPA
+
     }
 
     public Magasin(String nom, String typeMagasin, String urlMagasin, String typeAliment) {

@@ -37,7 +37,7 @@ Bien que plusieurs plateformes proposent des recettes en ligne comme Marmiton ou
 * Gestion de Liste de Courses - Ajoutez facilement les ingrédients d'une recette à votre liste de courses personnalisée.
 * Localisation des Magasins - Trouvez des magasins à proximité en fonction des types d'aliments qu'ils proposent.
 
-===Personas : 
+=== Personas : 
 * Persona 1 - Amélie, Chef Amateur :
 Amélie, 28 ans, adore cuisiner et expérimenter de nouvelles recettes le week-end. Elle recherche une plateforme conviviale pour découvrir des plats variés et ajouter facilement les ingrédients à sa liste de courses.
 * Persona 2 - Sofiane, Étudiant Pressé :
@@ -75,8 +75,38 @@ En prévision pour optimiser les recommandations de recettes et les suggestions 
 
 == *MODÉLISATION* ==          
 
-=== Maquette du Front (Feature 1):
-Une page web avec plusieurs onglets : Accueil, Produits, Liste de courses, Magasins, A propos, Contact.
+=== Schéma architectural:
+@startuml
+
+!define RECTANGLE class
+!define INTERFACE interface
+!define END end
+
+RECTANGLEFrontend {
+PageAccueil
+PageRecette
+PageListeDeCourses
+PageMagasin
+PageAPropos
+PageContact
+}
+
+Rectangle Backend {
+API_REST
+Ingredient
+ListeDeCourse
+Magasin
+Recette
+}
+
+RECTANGLE BaseDeDonnees {
+ingredients
+liste_course
+magasin
+recette_ingredient
+recette_test
+utilisateur
+}
 
 === Diagramme de Classes Global (Partie Métier):
 [#diagram,link=http://www.plantuml.com/plantuml/uml/nLZRRjiu47ttL-ZHGPKVC0el4ZTT6CZ5SBfzPsN6uK8Y1P8ArYZwGVsE_jXI52_3YsGvMs0VOaHpEHpE3CzGgceaHB6bHuuF15DPV5yKnNL1d61xM1NtZ1wrcB9cLJnBJiopFBLuLNnHlnvXeJGV0EBoAXQau2L4BhEm0yeHootmNbwvu3uK8jAbooZhDqOE5kcHDJs0su-6w8KWcCYbZwdtYRPiVBKs6xn1-R5OODeraLRd_1uVkmQNnMVU4LaMNmcY1_LuouWGZ9R5vjTF_kidgh4eYtj49C6yB7PM-uIxbxBuaoEbVUugPTclLUdYtXCXyOPrN61RNLZJJfAQ22HnnuDQ-_I9eEP0tYElDFx7mM0z51-iQAeF9Pa5oznglk9fdLLrypNz2uB7Rg4o4qS4vaiaqaQ1obpqer1zBdHaC6yfg3QRJ3Regg7I3-Y81A6vAkTEhZ4Fv1slS-BU_AOcZGh4oNNCnjYKsJubfpd2B3FhbBb5tjK3xppNRYknArHcDXDteDjPYWHqQG8o8Pbiv4EoobpQuixOumfBQSy_7vucgPqogMZimBflDNO2OHhmanQlKvxGMj_4WqNxoYJR8VaQB80bQh7OSTmYZYHXDCSa9kwbwuEz3Jrk1w-8TlVVc-EHIKtwBXd6HqbXbZ9Umfrpdp7dB9QPb4upK2QzqrmKEqJmErkPD2LUbPGl0hcB2pb6RgdXcHv8sXYCaGsZahEwnjmqTUrrpvY_aGgleBsH9GFAuopd8RXMlAbhhHM3sXS8-AojCRIyFO51f4WCFBcMpGEXlradCOVJbBBk3QlmWIo8Mc7jiMWP5VYEIY9FAQhesfOh_k3mZkPFJ-J-npePE4ajca7kilWGF0UJ0-H_sWlctMXqoZEx-sZqQvT-8xWzXLCZyhLkCDUMhnjBraPmnhjX1_92l3jnDvqBWLnnOgJKxwiwAuEJei1NpFi_uxL3FEMuMPc3a-QykpcuGGP74FBpVcHJyI1BEiwGlkkTVV0S31FGSTDUiEECnXzo8nXs-aBemH-UsvCVHa6rj50xzCpFxN2B1bPfPkydErMYZ0Ghe-xOvmzpLM6PGVgsmroz8T1-pcoLtH7p2SGSqPfaf2oxnoqJH39-2WZ7YnEkDL3BIq36wFR_OTkCUrykHS6e-sURJ5u_nm28nguOVSDS3WR0yGlJz_uQ3fPCVBzvGiJHdPa8sRUEi4yCoy7oFiIYO0xOtfZZE3OA0WOxG_r6F9FgeVL5r0uTfwZSNQZcKVVqJbDx6qRCes7HE4YwCOYh5Vej9psk73SQrGnYxAr_3zrcxyfpoFn2RlQnlvUBFKA5wgfJW-c1dR2octfB6Fxp1VKxzGNGPHtIbMiAy04hH_mZEE57bBby6hF5U93zU4Q4zhHuf8pZ3T8SrgHlo-aX6DlfKzk_NA3QMyS78HlFPMqxhoEJHbRzcFQX2Y__hdDzdNkfIU_XoYwwTASt9sKJNvCoSpzS4V11nFj-HM0JqOnV4VAA_JYXjE2ZwAhOi4ORgT916_kLQrNS2C4gebyS5_y2
