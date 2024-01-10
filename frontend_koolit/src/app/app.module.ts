@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
+import { BoutiqueDetailComponent } from './boutique/boutique-detail/boutique-detail.component';
+import { ArticleListComponent } from './boutique/article-list/article-list.component';
+
 
 @NgModule({
   declarations: [
@@ -21,9 +25,12 @@ import { MagasinsComponent } from './magasins/magasins.component';
     ContactComponent,
     ProduitsListComponent,
     ListeDeCoursesComponent,
-    MagasinsComponent
+    MagasinsComponent,
+    BoutiqueDetailComponent,
+    ArticleListComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,

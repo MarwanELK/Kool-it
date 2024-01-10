@@ -41,8 +41,11 @@
         <section class="recettes">
             <h2>Liste de Recettes</h2>
             <button (click)="trierParNote()">Trier par note</button>
+            <button (click)="ajouterTousALaListeDeCourses1()">Ajouter tous à la Liste</button>
+
             <div class="recettes-container">
                 <div *ngFor="let recette of recettes" class="recette-card">
+                    <input type="checkbox" [(ngModel)]="recette.isSelected" (change)="toggleSelection(recette)">
                     <img src="{{recette.photoPath}}" alt="Photo de la recette">
                     <h3>{{ recette.nom }} (pour {{ recette.nbPersonnes }} personnes)</h3>
                     
@@ -87,10 +90,11 @@
 
                     <button (click)="noterRecette(recette, recette.nouvelleNote)">Noter</button>
 
-                    <button (click)="ajouterTousALaListeDeCourses(recette)">Ajouter tous à la Liste</button>
+                    
+                    <button (click)="ajouterTousALaListeDeCourses(recette)">Ajouter Ingrédients à la Liste</button>
                 </div>
             </div>
-        </section>
+            </section>
     </header>
 
     
