@@ -3,8 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
-
-
+import { Article } from './boutique/article.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +31,10 @@ export class KoolitService {
     );
   }
   
-  
+  getArticlesFromUniqueBoutique(): Observable<Article[]> {
+    const uniqueBoutiqueId = 1; // Remplacez par l'ID de votre seule boutique
+    return this.httpClient.get<Article[]>(`${this.apiUrl}/boutiques/${uniqueBoutiqueId}/articles`);
+  }
 
   getRecettes(): Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.apiUrl}/recettes/1`);

@@ -20,7 +20,6 @@ public class Boutique {
     @OneToMany(mappedBy = "boutique", cascade = CascadeType.ALL)
     private List<Article> articles;
 
-    // Constructeurs
 
     public Boutique() {
     }

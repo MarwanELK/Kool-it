@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
-import { BoutiqueDetailComponent } from './boutique/boutique-detail/boutique-detail.component';
+import { BoutiqueComponent } from './boutique/boutique.component';
 import { ArticleListComponent } from './boutique/article-list/article-list.component';
 
 
@@ -26,7 +26,7 @@ import { ArticleListComponent } from './boutique/article-list/article-list.compo
     ProduitsListComponent,
     ListeDeCoursesComponent,
     MagasinsComponent,
-    BoutiqueDetailComponent,
+    BoutiqueComponent,
     ArticleListComponent,
   ],
   imports: [

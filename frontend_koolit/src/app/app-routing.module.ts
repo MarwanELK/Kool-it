@@ -7,7 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
-import { BoutiqueDetailComponent } from './boutique/boutique-detail/boutique-detail.component';
+import { BoutiqueComponent } from './boutique/boutique.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'produits-list', component: ProduitsListComponent }, 
   { path: 'liste-de-courses', component: ListeDeCoursesComponent },
   { path: 'Magasins', component: MagasinsComponent },
-  { path: 'boutiques', component: BoutiqueDetailComponent },
+  { path: 'boutique', component: BoutiqueComponent },
   { path: '', redirectTo: '/boutiques', pathMatch: 'full' },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: '**', redirectTo: '/accueil' }
