@@ -13,7 +13,7 @@ public class Magasin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "nom")
+    @Column(name="nom")
     private String nom;
 
     @Column(name="description")
@@ -38,12 +38,7 @@ public class Magasin {
         // Constructeur par défaut nécessaire pour JPA
     }
 
-    public Magasin(String nom, String typeMagasin, String urlMagasin, String typeAliment) {
-        this.nom = nom;
-        this.typeMagasin = typeMagasin;
-        this.urlMagasin = urlMagasin;
-        this.typeAliment = typeAliment;
-    }
+
 
     public Magasin(Long id, String nom, String description, String typeMagasin, String urlMagasin, String typeAliment, String ville, double lat, double lng) {
         this.id = id;
@@ -66,6 +61,14 @@ public class Magasin {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getDescription() {
@@ -100,13 +103,7 @@ public class Magasin {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
-    }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 
     public String getTypeMagasin() {
         return typeMagasin;

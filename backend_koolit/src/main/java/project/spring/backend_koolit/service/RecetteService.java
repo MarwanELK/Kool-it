@@ -21,7 +21,7 @@ import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 public class RecetteService {
     private final RecetteRepository repository;
-    private static Long cpt=3L;
+    private static Long cpt=0L;
 
     @Autowired
     public RecetteService(RecetteRepository repository) {

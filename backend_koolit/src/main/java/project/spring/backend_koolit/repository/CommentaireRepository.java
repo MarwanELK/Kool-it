@@ -6,5 +6,6 @@ import project.spring.backend_koolit.model.Ingredient;
 import project.spring.backend_koolit.model.Recette;
 
 public interface CommentaireRepository extends JpaRepository<Commentaire, Long>{
+    Commentaire findByCommentaireId(Long commentaireId);
 
 }

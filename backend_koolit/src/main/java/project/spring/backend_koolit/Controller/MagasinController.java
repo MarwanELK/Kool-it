@@ -89,8 +89,9 @@ public class MagasinController {
     }
 
     @GetMapping("/rechercher")
-    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(@RequestParam String nom) {
-        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nom);
+    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(String nomMagasin) {
+        System.out.println("Le param transmis est "+nomMagasin);
+        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nomMagasin);
         return ResponseEntity.ok(magasins);
     }
 
@@ -157,7 +158,5 @@ public class MagasinController {
         List<Magasin> magasins = magasinService.rechercherMagasinsParVille(ville);
         return ResponseEntity.ok(magasins);
     }
-
-
 
 }

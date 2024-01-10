@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class Commentaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "commentaireId")
+    @Column(name = "commentaire_id")
     private Long commentaireId;
 
     @Column(name = "username")

@@ -10,6 +10,12 @@ import { Observable } from 'rxjs';  // Importez Observable depuis rxjs
 export class MagasinsComponent implements OnInit {
   nomMagasinRecherche: string = '';
   magasins: any[] = [];
+  magasin : any = {
+    nom:'',
+    typeMagasin:'',
+    urlMagasin:'',
+    typeAliment:''
+  };
   magasinSelectionne: any = {};
   nouveauTypeAliment: string = '';
 
@@ -36,7 +42,22 @@ export class MagasinsComponent implements OnInit {
     );
   }
 
-  rechercherMagasin(): void {
+  rechercherMagasin(nom: string){
+    this.koolitService.rechercherMagasinParNom2(this.nomMagasinRecherche).subscribe(
+      (data)=> {
+        this.magasin=data;
+        this.magasins=data;
+        console.log('Données du nom de magasin :', this.magasin);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des données du nom de magasin:', error);
+      }
+    );
+  }
+
+  
+
+  /*rechercherMagasin(nom): void {
     if (this.nomMagasinRecherche.trim() !== '') {
       this.koolitService.rechercherMagasinParNom(this.nomMagasinRecherche).subscribe(
         (magasinsData: any[]) => {
@@ -56,7 +77,7 @@ export class MagasinsComponent implements OnInit {
       // Si la barre de recherche est vide, rechargez tous les magasins
       this.chargerMagasins();
     }
-  }
+  }*/
   selectionnerMagasin(magasin: any): void {
     // Affectez la valeur du magasin sélectionné
     this.magasinSelectionne = magasin;

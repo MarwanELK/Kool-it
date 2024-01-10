@@ -53,7 +53,13 @@ public class MagasinService {
     }
 
     public List<Magasin> rechercherMagasinParNom(String nom) {
-        return magasinRepository.findByNomContainingIgnoreCase(nom);
+        List<Magasin> magasins = magasinRepository.findMagasinByNom(nom);
+        if(magasins.isEmpty()){
+            System.out.println("la liste magasin est vide");
+        }else{
+            System.out.println("la liste magasin est PAS vide");
+        }
+        return (List<Magasin>) magasinRepository.findMagasinByNom(nom);
     }
 
     public Magasin getMagasinByNom(String nom) {
@@ -63,4 +69,6 @@ public class MagasinService {
     public List<Magasin> rechercherMagasinsParVille(String ville){
         return magasinRepository.findMagasinsByVille(ville);
     }
+
+
 }

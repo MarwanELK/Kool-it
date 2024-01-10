@@ -54,10 +54,8 @@ export class KoolitService {
   }
   // koolit.service.ts
 
-rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
-  // Utilisation des paramètres de requête pour envoyer le nom du magasin
+rechercherMagasinParNom(nomMagasin:string): Observable<any> {
   const params = new HttpParams().set('nomMagasin', nomMagasin);
-
   return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercher`, { params }).pipe(
     catchError((error: any) => {
       console.error('Erreur lors de la recherche de magasin par nom :', error);
@@ -65,6 +63,17 @@ rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
     })
   );
 }
+
+rechercherMagasinParNom2(nomMagasin:string): Observable<any> {
+  const params = new HttpParams().set('nomMagasin', nomMagasin);
+  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercherMagasinsByNom`, { params }).pipe(
+    catchError((error: any) => {
+      console.error('Erreur lors de la recherche de magasin par nom :', error);
+      throw error;
+    })
+  );
+}
+
 ajouterTypeAliment(nomMagasin: string, typeAliment: string): Observable<any> {
   const url = `${this.apiUrl}/magasins/ajouterTypeAliment/${nomMagasin}`;
   return this.httpClient.post(url, typeAliment);

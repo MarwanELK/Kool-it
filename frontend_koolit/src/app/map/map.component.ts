@@ -11,6 +11,13 @@ import { KoolitService } from './koolit.service';
 export class MapComponent implements AfterViewInit{
   map: any;
   magasins: any[]=[];
+  magasin : any = {
+    nom:'',
+    typeMagasin:'',
+    ville:'',
+    urlMagasin:'',
+    typeAliment:''
+  };
   ville: any = {
     nom:'Nanterre',
     lat:48.9010513,
@@ -26,12 +33,15 @@ export class MapComponent implements AfterViewInit{
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     shadowSize:  [41, 41]
   });
+  magasinSelectionne: any = {};
+  nomMagasinRecherche: string = '';
 
   constructor(private koolitService: KoolitService) { }
 
   ngAfterViewInit(): void {
     this.getMagasinsParVille(this.ville.nom); // faire une super fonction qui appel les autres fonction
     //this.createMap();
+    //this.chargerMagasins();
   }
 
   rechercheParCoords(lat:number, lng:number){
@@ -84,6 +94,22 @@ export class MapComponent implements AfterViewInit{
         console.error('Erreur lors de la récupération des données des magasins :', error);
       }
     );
+    this.koolitService.getMagasinsParVille(ville).subscribe(
+      (magasinsData: any[]) => {
+        console.log('Données des magasins reçues du backend :', magasinsData);
+        this.magasins = magasinsData.map((magasin) => ({
+          nom: magasin.nom,
+          type: magasin.typeMagasin,
+          ville: magasin.ville,
+          url: magasin.urlMagasin,
+          typeAliment: magasin.typeAliment
+        }));
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des magasins :', error);
+      }
+    );
+    
   }
 
   createMap(){
@@ -110,7 +136,8 @@ export class MapComponent implements AfterViewInit{
   addMarker(magasins:any[]){
     this.magasins.forEach((magasin) => {
       const marker = L.marker([magasin.lat, magasin.lng], {icon:this.smallIcon}); //
-      marker.addTo(this.map).bindPopup(magasin.nom); //.openPopupun() un seul popup ouvert a la fois 
+      const lien = `<a href="http://localhost:4200/magasins" target="_blank">${magasin.nom}</a>`;
+      marker.addTo(this.map).bindPopup(lien); //.openPopupun() un seul popup ouvert a la fois 
     });
   }
 
@@ -125,5 +152,30 @@ export class MapComponent implements AfterViewInit{
     const marker2 = L.marker([coords2.lat, coords2.lng], {icon:this.smallIcon}); //
     marker2.addTo(this.map).bindPopup(text2).openPopup(); //
   } //
+
+  rechercherMagasin(nom:string): void {
+    if(this.nomMagasinRecherche==''){
+      //this.getMagasinsParVille(this.ville.nom);
+    }
+    this.koolitService.rechercherMagasinParNom(nom).subscribe(
+      (magasinsData: any[]) => {
+        console.log('Données des magasins reçues du backend :', nom);
+        this.magasins = magasinsData.map((magasin) => ({
+          nom: magasin.nom,
+          type: magasin.typeMagasin,
+          ville: magasin.ville,
+          url: magasin.urlMagasin,
+          typeAliment: magasin.typeAliment
+        }));
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des magasins :', error);
+      }
+    );
+  }
+  selectionnerMagasin(magasin: any): void {
+    // Affectez la valeur du magasin sélectionné
+    this.magasinSelectionne = magasin;
+  }
 
 }

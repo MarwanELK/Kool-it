@@ -10,7 +10,7 @@ import project.spring.backend_koolit.repository.CommentaireRepository;
 @Service
 public class CommentaireService {
     private final CommentaireRepository commentaireRepository;
-    private static Long cpt=3L;
+    private static Long cpt=0L;
 
     @Autowired
     public CommentaireService(CommentaireRepository commentaireRepository) {

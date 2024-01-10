@@ -63,3 +63,28 @@ body, html {
     max-width: 100%;
     height: auto;
 }
+/* magasins.component.css */
+
+.magasins-container {
+    display: flex;
+    overflow-x: auto; /* Ajoutez cette ligne pour activer la barre de défilement horizontale */
+  }
+  
+  .magasins-item {
+    flex: 0 0 auto;
+    width: 300px; /* Ajustez la largeur des magasins selon vos besoins */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-right: 10px; /* Ajoutez une marge entre les magasins */
+    border-radius: 5px;
+  }
+  
+  .magasins-item a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .magasins-item a:hover {
+    text-decoration: underline;
+  }
+  

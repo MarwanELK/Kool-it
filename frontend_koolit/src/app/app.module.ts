@@ -24,7 +24,7 @@ import { MapComponent } from './map/map.component';
     ProduitsListComponent,
     ListeDeCoursesComponent,
     MagasinsComponent,
-    MapComponent
+    MapComponent,
   ],
   imports: [
     FormsModule,
