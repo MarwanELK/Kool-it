@@ -137,7 +137,10 @@ export class MapComponent implements AfterViewInit{
     this.magasins.forEach((magasin) => {
       const marker = L.marker([magasin.lat, magasin.lng], {icon:this.smallIcon}); //
       const lien = `<a href="http://localhost:4200/magasins" target="_blank">${magasin.nom}</a>`;
-      marker.addTo(this.map).bindPopup(lien); //.openPopupun() un seul popup ouvert a la fois 
+      const boutton = document.createElement('button');
+        boutton.innerHTML = magasin.nom;
+        boutton.addEventListener('click', () => this.rechercherMagasin(magasin.nom));
+      marker.addTo(this.map).bindPopup(boutton); //.openPopupun() un seul popup ouvert a la fois 
     });
   }
 
@@ -154,9 +157,6 @@ export class MapComponent implements AfterViewInit{
   } //
 
   rechercherMagasin(nom:string): void {
-    if(this.nomMagasinRecherche==''){
-      //this.getMagasinsParVille(this.ville.nom);
-    }
     this.koolitService.rechercherMagasinParNom(nom).subscribe(
       (magasinsData: any[]) => {
         console.log('Données des magasins reçues du backend :', nom);
@@ -177,5 +177,17 @@ export class MapComponent implements AfterViewInit{
     // Affectez la valeur du magasin sélectionné
     this.magasinSelectionne = magasin;
   }
+
+  /*FicheMagasin(nom:string): void {
+    this.koolitService.ficheMagasin(nom).subscribe(
+      (magasinsData: any[]) => {
+        console.log('Données des magasins reçues du backend :', nom);
+        this.magasins =magasinsData;
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des magasins :', error);
+      }
+    );
+  }*/
 
 }
