@@ -52,14 +52,14 @@ public class MagasinService {
         magasinRepository.deleteById(id);
     }
 
-    public List<Magasin> rechercherMagasinParNom(String nom) {
-        List<Magasin> magasins = magasinRepository.findMagasinByNom(nom);
+    public List<Magasin> rechercherMagasinParNom(String nom, String ville) {
+        List<Magasin> magasins = magasinRepository.findMagasinsByNomAndVille(nom,ville);
         if(magasins.isEmpty()){
             System.out.println("la liste magasin est vide");
         }else{
             System.out.println("la liste magasin est PAS vide");
         }
-        return (List<Magasin>) magasinRepository.findMagasinByNom(nom);
+        return (List<Magasin>) magasinRepository.findMagasinsByNomAndVille(nom,ville);
     }
 
     public Magasin getMagasinByNom(String nom) {

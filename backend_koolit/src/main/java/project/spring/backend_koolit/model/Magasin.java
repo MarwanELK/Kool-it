@@ -3,6 +3,8 @@ package project.spring.backend_koolit.model;
 import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.List;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @Entity
@@ -34,6 +36,14 @@ public class Magasin {
     @Column(name = "longitude")
     private double lng;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "magasin_ingredient",
+            joinColumns = @JoinColumn(name = "magasin_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
+    private List<Ingredient> ingredients;
+
     public Magasin() {
         // Constructeur par défaut nécessaire pour JPA
     }
@@ -54,6 +64,14 @@ public class Magasin {
 
     // Getters et setters
 
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public String getVille() {
         return this.ville;

@@ -89,9 +89,9 @@ public class MagasinController {
     }
 
     @GetMapping("/rechercher")
-    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(String nomMagasin) {
-        System.out.println("Le param transmis est "+nomMagasin);
-        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nomMagasin);
+    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(String nomMagasin, String ville) {
+        System.out.println("Le param transmis est "+ville);
+        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nomMagasin, ville);
         return ResponseEntity.ok(magasins);
     }
 

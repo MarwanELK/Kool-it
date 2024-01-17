@@ -157,7 +157,25 @@ export class MapComponent implements AfterViewInit{
   } //
 
   rechercherMagasin(nom:string): void {
-    this.koolitService.rechercherMagasinParNom(nom).subscribe(
+     // Vérifier si la barre de recherche est vide
+  if (!this.nomMagasinRecherche.trim()) {
+    this.koolitService.getMagasinsParVille(this.ville.nom).subscribe(
+      (magasinsData: any[]) => {
+        console.log('Données des magasins reçues du backend :', magasinsData);
+        this.magasins = magasinsData.map((magasin) => ({
+          nom: magasin.nom,
+          type: magasin.typeMagasin,
+          ville: magasin.ville,
+          url: magasin.urlMagasin,
+          typeAliment: magasin.typeAliment
+        }));
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des magasins :', error);
+      }
+    );
+  }else{
+    this.koolitService.rechercherMagasinParNom(nom,this.ville.nom).subscribe(
       (magasinsData: any[]) => {
         console.log('Données des magasins reçues du backend :', nom);
         this.magasins = magasinsData.map((magasin) => ({
@@ -173,6 +191,7 @@ export class MapComponent implements AfterViewInit{
       }
     );
   }
+}
   selectionnerMagasin(magasin: any): void {
     // Affectez la valeur du magasin sélectionné
     this.magasinSelectionne = magasin;
