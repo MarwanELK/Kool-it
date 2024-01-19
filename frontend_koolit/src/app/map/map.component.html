@@ -46,6 +46,11 @@
                         <p>Ville: {{ magasin.ville }}</p>
                         <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
                         <p>Type d'aliment: {{ magasin.typeAliment }}</p>
+                        <p>Vous y trouverez :</p>
+                        <li *ngFor="let ingredient of magasin.listesCourses">
+                            {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                            <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
+                        </li>
                         <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
                     </div>
                 </div>

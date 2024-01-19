@@ -26,6 +26,9 @@ public class ListeCourseService {
 
     public List<ListeCourse> getListesCourseByUtilisateur(Long idUtilisateur) {
         List<ListeCourse> listesCourses = listeCourseRepository.findByUtilisateurId(idUtilisateur);
+        for(ListeCourse lc : listesCourses){
+            System.out.println(lc.getIngredients());
+        }
         return convertStringIngredientsToList(listesCourses);
     }
 

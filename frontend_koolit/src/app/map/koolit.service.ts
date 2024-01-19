@@ -15,23 +15,15 @@ export class KoolitService {
   readonly ENDPOINT_RECETTES = "/recettes";
   readonly ENDPOINT_MAGASINS = "/magasins";
   readonly ENDPOINT_VILLES = "/villes";
+  readonly ENDPOINT_LISTE_COURSE = "/liste-course";
   constructor(private httpClient: HttpClient) { }
 
-  getListeDeCourses(utilisateurId: number): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/liste-course/${utilisateurId}`).pipe(
-      map((data: any[]) => {
-        return data.map(ingredient => ({
-          nom: ingredient.nom,
-          type: ingredient.type,
-          quantite: ingredient.quantite,
-          ingredientsList: JSON.parse(ingredient.ingredients)
-        }));
-      }),
-      catchError((error: any) => {
-        console.error('Erreur lors de la récupération de la liste de courses :', error);
-        throw error;
-      })
-    );
+  getListeDeCourses(utilisateurId: number): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}${this.ENDPOINT_LISTE_COURSE}/${utilisateurId}`);
+  }
+
+  supprimerIngredient(ingredientId: number): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}${this.ENDPOINT_LISTE_COURSE}/${ingredientId}`);
   }
 
   getRecettes(): Observable<any[]> {

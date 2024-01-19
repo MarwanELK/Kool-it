@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { KoolitService } from './koolit.service';
+import { Ingredient } from '../model/ingredient.model';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class MapComponent implements AfterViewInit{
     typeMagasin:'',
     ville:'',
     urlMagasin:'',
-    typeAliment:''
+    typeAliment:'',
+    listesCourses: []
   };
   ville: any = {
     nom:'Nanterre',
@@ -35,6 +37,11 @@ export class MapComponent implements AfterViewInit{
   });
   magasinSelectionne: any = {};
   nomMagasinRecherche: string = '';
+  nouvelIngredient: Ingredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] }; // Ajoutez 'id' ici
+  listesCourses: Ingredient[] = [];
+  ListeDeLC: any[]=[];
+  mesCourses : any[]=[];
+  utilisateurId = 5;
 
   constructor(private koolitService: KoolitService) { }
 
@@ -109,7 +116,16 @@ export class MapComponent implements AfterViewInit{
         console.error('Erreur lors de la récupération des magasins :', error);
       }
     );
-    
+    this.koolitService.getMagasinsParVille(ville).subscribe(
+      (magasinsData: any[]) => {
+        console.log('Données des magasins reçues du backend :', magasinsData);
+        this.magasins = magasinsData;
+        this.chargerListeDeCourses(5);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des magasins :', error);
+      }
+    );    
   }
 
   createMap(){
@@ -195,6 +211,50 @@ export class MapComponent implements AfterViewInit{
   selectionnerMagasin(magasin: any): void {
     // Affectez la valeur du magasin sélectionné
     this.magasinSelectionne = magasin;
+  }
+
+  private chargerListeDeCourses(utilisateurId: number): void {
+    this.koolitService.getListeDeCourses(utilisateurId).subscribe(
+      (listeCoursesData: any[]) => {
+        console.log('listeCourseData :', listeCoursesData);
+        for (let i = 0; i < this.magasins.length; i++) {
+          this.magasin=this.magasins[i];
+          this.listesCourses = listeCoursesData
+        .map((course) => {
+          course.ingredientsList = JSON.parse(course.ingredients);
+          return course;
+        }).filter((course) => course.ingredientsList?.[0].type === this.magasin.typeAliment);
+        console.log('Je suis numero :', i,"/5");
+        this.ListeDeLC.push(this.listesCourses);
+        }
+        this.ElemLdcParMagasin();
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la liste de courses :', error);
+      }
+    );
+  }
+
+  ElemLdcParMagasin():void{
+    for (let i = 0; i < this.magasins.length; i++) {
+      this.magasin=this.magasins[i];
+      this.magasin.listesCourses=this.ListeDeLC[i];
+      this.magasins[i]=this.magasin;
+    }
+    console.log('listesCourses Marwan ok :', this.listesCourses); //.filter((course) => course.ingredientsList?.[0].type === "Sucré");
+  }
+
+  supprimerIngredient(ingredientId: number): void {
+    this.koolitService.supprimerIngredient(ingredientId).subscribe(
+      () => {
+        console.log('Ingrédient supprimé avec succès.');
+        // Rafraîchir la liste après la suppression
+        this.chargerListeDeCourses(5);
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de l\'ingrédient :', error);
+      }
+    );
   }
 
   /*FicheMagasin(nom:string): void {
