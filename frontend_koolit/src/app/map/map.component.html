@@ -42,10 +42,10 @@
                     <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
                         <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
                         <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
-                        <p>Type: {{ magasin.type }}</p>
+                        <p>Type: {{ magasin.typeMagasin }}</p>
                         <p>Ville: {{ magasin.ville }}</p>
                         <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
-                        <p>Type d'aliment: {{ magasin.typeAliment }}</p>
+                        <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
                         <p>Vous y trouverez :</p>
                         <li *ngFor="let ingredient of magasin.listesCourses">
                             {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}

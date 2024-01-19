@@ -22,7 +22,7 @@ public class Ingredient {
     private TypeIngredient type;
 
     public enum TypeIngredient {
-        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré
+        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré, Viennoiserie, Pain, Pâtisserie
     }
 
 

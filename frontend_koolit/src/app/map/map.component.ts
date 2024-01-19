@@ -18,6 +18,7 @@ export class MapComponent implements AfterViewInit{
     ville:'',
     urlMagasin:'',
     typeAliment:'',
+    listeTypeAliment:[],
     listesCourses: []
   };
   ville: any = {
@@ -219,12 +220,15 @@ export class MapComponent implements AfterViewInit{
         console.log('listeCourseData :', listeCoursesData);
         for (let i = 0; i < this.magasins.length; i++) {
           this.magasin=this.magasins[i];
+          const listeDeChaines: string[] = this.magasin.typeAliment.split(','); 
+          this.magasin.listeTypeAliment=listeDeChaines;
+          this.magasins[i]=this.magasin;
           this.listesCourses = listeCoursesData
         .map((course) => {
           course.ingredientsList = JSON.parse(course.ingredients);
           return course;
-        }).filter((course) => course.ingredientsList?.[0].type === this.magasin.typeAliment);
-        console.log('Je suis numero :', i,"/5");
+        }).filter((course:any) =>  this.typePresent(course.ingredientsList?.[0].type)); //this.magasin.typesAliments.some((type) => type === ingredient.type);
+        console.log('ma liste verife :',this.listesCourses);
         this.ListeDeLC.push(this.listesCourses);
         }
         this.ElemLdcParMagasin();
@@ -239,9 +243,19 @@ export class MapComponent implements AfterViewInit{
     for (let i = 0; i < this.magasins.length; i++) {
       this.magasin=this.magasins[i];
       this.magasin.listesCourses=this.ListeDeLC[i];
+      const listeDeChaines: string[] = this.magasin.typeAliment.split(','); 
       this.magasins[i]=this.magasin;
+      console.log('ma liste de type :', this.magasin.typeAliment);
     }
-    console.log('listesCourses Marwan ok :', this.listesCourses); //.filter((course) => course.ingredientsList?.[0].type === "Sucré");
+  }
+
+  typePresent(type:string):boolean{
+    for (let i = 0; i < this.magasin.listeTypeAliment.length; i++){
+      if(this.magasin.listeTypeAliment[i]===type){
+        return true;
+      }
+    }
+    return false;
   }
 
   supprimerIngredient(ingredientId: number): void {

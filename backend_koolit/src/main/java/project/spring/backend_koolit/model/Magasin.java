@@ -3,6 +3,7 @@ package project.spring.backend_koolit.model;
 import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,6 +29,10 @@ public class Magasin {
     @Column(name = "type_aliment")
     private String typeAliment;
 
+    @Transient
+    @Column(name = "type_aliment")
+    private List<String> listeTypeAliment;
+
     @Column(name="ville")
     private String ville;
 
@@ -48,22 +53,31 @@ public class Magasin {
         // Constructeur par défaut nécessaire pour JPA
     }
 
-
-
-    public Magasin(Long id, String nom, String description, String typeMagasin, String urlMagasin, String typeAliment, String ville, double lat, double lng) {
+    public Magasin(Long id, String nom, String description, String typeMagasin, String urlMagasin, String typeAliment, List<String> listeTypeAliment, String ville, double lat, double lng, List<Ingredient> ingredients) {
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.typeMagasin = typeMagasin;
         this.urlMagasin = urlMagasin;
         this.typeAliment = typeAliment;
+        this.listeTypeAliment = listeTypeAliment;
         this.ville = ville;
         this.lat = lat;
         this.lng = lng;
+        this.ingredients = ingredients;
     }
+
 
     // Getters et setters
 
+
+    public List<String> getListeTypeAliment() {
+        return listeTypeAliment;
+    }
+
+    public void setListeTypeAliment(List<String> listeTypeAliment) {
+        this.listeTypeAliment = listeTypeAliment;
+    }
 
     public List<Ingredient> getIngredients() {
         return ingredients;
