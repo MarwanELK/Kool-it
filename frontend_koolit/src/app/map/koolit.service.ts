@@ -100,4 +100,12 @@ export class KoolitService {
     );
     
   }
+  ajouterIngredientAListeCourse(utilisateurId: number, data: any): Observable<any> {
+    const url = `${this.apiUrl}/ajouterIngredientAListeCourse/${utilisateurId}`;
+    return this.httpClient.post<any>(url, data);
+  }
+
+  ajouterIngredient(utilisateurId: number, nouvelIngredient: any): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/liste-course/${utilisateurId}`, nouvelIngredient);
+  }
 }

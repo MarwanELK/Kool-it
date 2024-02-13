@@ -18,6 +18,9 @@ public class Ingredient {
     @Column(name = "quantite")
     private int quantite;
 
+    @Column(name = "acheté")
+    private boolean estAchete;
+
     @Enumerated(EnumType.STRING)
     private TypeIngredient type;
 
@@ -29,12 +32,22 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public Ingredient(Long ingredientId, String nom, TypeIngredient type, int quantite) {
+    public Ingredient(Long ingredientId, String nom, int quantite, TypeIngredient type) {
         this.ingredientId = ingredientId;
         this.nom = nom;
+        this.quantite = quantite;
+        this.estAchete = false;
         this.type = type;
-        this.quantite=quantite;
     }
+
+    public boolean isEstAchete() {
+        return estAchete;
+    }
+
+    public void setEstAchete(boolean estAchete) {
+        this.estAchete = estAchete;
+    }
+
 
     public int getQuantite() {
         return quantite;

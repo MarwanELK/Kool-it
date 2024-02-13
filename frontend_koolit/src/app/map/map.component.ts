@@ -43,6 +43,7 @@ export class MapComponent implements AfterViewInit{
   ListeDeLC: any[]=[];
   mesCourses : any[]=[];
   utilisateurId = 5;
+  cpt=1;
 
   constructor(private koolitService: KoolitService) { }
 
@@ -104,7 +105,7 @@ export class MapComponent implements AfterViewInit{
     );
     this.koolitService.getMagasinsParVille(ville).subscribe(
       (magasinsData: any[]) => {
-        console.log('Données des magasins reçues du backend :', magasinsData);
+        console.log('Données des magasins reçues du backend 1:', magasinsData);
         this.magasins = magasinsData.map((magasin) => ({
           nom: magasin.nom,
           type: magasin.typeMagasin,
@@ -119,7 +120,7 @@ export class MapComponent implements AfterViewInit{
     );
     this.koolitService.getMagasinsParVille(ville).subscribe(
       (magasinsData: any[]) => {
-        console.log('Données des magasins reçues du backend :', magasinsData);
+        console.log('Données des magasins reçues du backend 2:', magasinsData);
         this.magasins = magasinsData;
         this.chargerListeDeCourses(5);
       },
@@ -175,7 +176,7 @@ export class MapComponent implements AfterViewInit{
 
   rechercherMagasin(nom:string): void {
      // Vérifier si la barre de recherche est vide
-  if (!this.nomMagasinRecherche.trim()) {
+  if (!this.nomMagasinRecherche.trim() && !nom.trim()) {
     this.koolitService.getMagasinsParVille(this.ville.nom).subscribe(
       (magasinsData: any[]) => {
         console.log('Données des magasins reçues du backend :', magasinsData);
@@ -185,7 +186,9 @@ export class MapComponent implements AfterViewInit{
           ville: magasin.ville,
           url: magasin.urlMagasin,
           typeAliment: magasin.typeAliment
-        }));
+        }
+        ));
+        this.chargerListeDeCourses(5);
       },
       (error) => {
         console.error('Erreur lors de la récupération des magasins :', error);
@@ -207,6 +210,16 @@ export class MapComponent implements AfterViewInit{
         console.error('Erreur lors de la récupération des magasins :', error);
       }
     );
+    this.koolitService.rechercherMagasinParNom(nom,this.ville.nom).subscribe(
+      (magasinsData: any[]) => {
+        console.log('Données des magasins reçues du backend 2:', magasinsData);
+        this.magasins = magasinsData;
+        this.chargerListeDeCourses(5);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des magasins :', error);
+      }
+    );    
   }
 }
   selectionnerMagasin(magasin: any): void {
@@ -217,6 +230,7 @@ export class MapComponent implements AfterViewInit{
   private chargerListeDeCourses(utilisateurId: number): void {
     this.koolitService.getListeDeCourses(utilisateurId).subscribe(
       (listeCoursesData: any[]) => {
+        this.ListeDeLC=[];
         console.log('listeCourseData :', listeCoursesData);
         for (let i = 0; i < this.magasins.length; i++) {
           this.magasin=this.magasins[i];
@@ -225,10 +239,10 @@ export class MapComponent implements AfterViewInit{
           this.magasins[i]=this.magasin;
           this.listesCourses = listeCoursesData
         .map((course) => {
+          const tmp = JSON.parse(course.ingredients);
           course.ingredientsList = JSON.parse(course.ingredients);
           return course;
         }).filter((course:any) =>  this.typePresent(course.ingredientsList?.[0].type)); //this.magasin.typesAliments.some((type) => type === ingredient.type);
-        console.log('ma liste verife :',this.listesCourses);
         this.ListeDeLC.push(this.listesCourses);
         }
         this.ElemLdcParMagasin();
@@ -243,15 +257,14 @@ export class MapComponent implements AfterViewInit{
     for (let i = 0; i < this.magasins.length; i++) {
       this.magasin=this.magasins[i];
       this.magasin.listesCourses=this.ListeDeLC[i];
-      const listeDeChaines: string[] = this.magasin.typeAliment.split(','); 
       this.magasins[i]=this.magasin;
-      console.log('ma liste de type :', this.magasin.typeAliment);
     }
   }
 
   typePresent(type:string):boolean{
     for (let i = 0; i < this.magasin.listeTypeAliment.length; i++){
       if(this.magasin.listeTypeAliment[i]===type){
+        this.cpt=this.cpt+1;
         return true;
       }
     }
@@ -269,6 +282,37 @@ export class MapComponent implements AfterViewInit{
         console.error('Erreur lors de la suppression de l\'ingrédient :', error);
       }
     );
+  }
+
+  ajouterALaListeDeCourses(ingredient: any): void {
+   
+    const ingredientAEnvoyer = {
+      nom: ingredient.nom,
+      quantite: ingredient.quantite,
+      type: ingredient.type,
+    };
+  
+    const nouvelleListe = {
+      utilisateurId: 5,  
+      ingredients: JSON.stringify([ingredientAEnvoyer]),
+    };
+  
+    this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
+      (response: any) => {
+        console.log('Ingrédient ajouté avec succès dans la base de données :', response);
+       
+        this.chargerListeDeCourses(5); 
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de l\'ingrédient dans la base de données :', error);
+      }
+    );
+  }
+
+  ajouterTousALaListeDeCourses(recette: any): void {
+    for (const ingredient of recette.ingredients) {
+      this.ajouterALaListeDeCourses(ingredient);
+    }
   }
 
   /*FicheMagasin(nom:string): void {

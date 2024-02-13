@@ -10,17 +10,28 @@
 <body>
 
   
-
-
-    <section class="shopping-list">
-        <h2>Votre Liste de Courses</h2>
-        <ul>
+    <div class="shopping-container">
+        <section class="shopping-list">
+          <h2>Votre Liste de Courses</h2>
+          <ul>
             <li *ngFor="let ingredient of listesCourses">
                 {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
                 <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
+                <button (click)="acheterIngredient(ingredient.id)">Acheter</button>
             </li>
-        </ul>
-    </section>
+          </ul>
+        </section>
+      
+        <section class="shopping-list-ok">
+          <h2>Liste de courses (avec le lieu d'achat sélectionné)</h2>
+          <ul>
+            <li *ngFor="let ingredient of listesCoursesOk">
+                {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
+            </li>
+          </ul>
+        </section>
+      </div>
     
     
 
