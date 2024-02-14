@@ -31,7 +31,10 @@ public class BoutiqueController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @GetMapping
+    public List<Boutique> getAllBoutiques() {
+        return boutiqueService.getAllBoutiques();
+    }
     @GetMapping("/{id}")
     public Boutique getBoutiqueById(@PathVariable Long id) {
         return boutiqueService.getBoutiqueById(id);

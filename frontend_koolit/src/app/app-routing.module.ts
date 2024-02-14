@@ -9,6 +9,7 @@ import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.com
 import { MagasinsComponent } from './magasins/magasins.component';
 import { BoutiqueComponent } from './boutique/boutique.component';
 
+
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'produits', component: ProduitsComponent },

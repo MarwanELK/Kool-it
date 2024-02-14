@@ -9,3 +9,4 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     // Ajoutez des méthodes de requête personnalisées ici
     // Exemple : List<Article> findByBoutiqueId(Long boutiqueId);
 }
+
