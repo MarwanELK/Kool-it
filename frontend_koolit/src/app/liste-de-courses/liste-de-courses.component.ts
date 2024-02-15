@@ -116,6 +116,12 @@ export class ListeDeCoursesComponent implements OnInit {
     );
   }
 
+  supprimerListeIngredientAchete():void{
+    for (const ingredient of this.listesCoursesAchetes) {
+      this.supprimerIngredientAchete(ingredient.id);
+    }
+  }
+
   acheterIngredient(ingredientId: number): void {
     this.koolitService.acheterIngredient(ingredientId).subscribe(
       (ingredientData:any) => {

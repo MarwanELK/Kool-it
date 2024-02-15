@@ -316,6 +316,11 @@ export class MapComponent implements AfterViewInit{
     }
   }
 
+  acheterIngredient(ingredient:any):void{
+    this.ajouterALaListeDeCourses(ingredient);
+    this.supprimerIngredient(ingredient.id);
+  }
+
   /*FicheMagasin(nom:string): void {
     this.koolitService.ficheMagasin(nom).subscribe(
       (magasinsData: any[]) => {
