@@ -49,10 +49,10 @@
                         <p>Vous y trouverez :</p>
                         <li *ngFor="let ingredient of magasin.listesCourses">
                             {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }}
-                            <button (click)=" acheterIngredient(ingredient)">acheter</button>
+                            <button (click)=" acheterIngredient(ingredient)">Produit acheté</button>
                         </li>
                         <br>
-                        <button (click)="ajouterTousALaListeDeCourses(magasin)">Ajouter tous à la Liste</button>
+                        <button (click)="ajouterTousALaListeDeCourses(magasin)">Tous les produits achetés</button>
                         <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
                         
                     </div>

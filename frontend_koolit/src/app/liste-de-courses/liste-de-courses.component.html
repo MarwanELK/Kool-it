@@ -16,6 +16,7 @@
           <ul>
             <li *ngFor="let ingredient of listesCourses">
                 {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                <button (click)="acheterIngredient(ingredient)">Produit acheté</button>
                 <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
           </ul>
         </section>

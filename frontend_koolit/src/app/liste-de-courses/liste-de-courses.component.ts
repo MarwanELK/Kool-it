@@ -122,19 +122,32 @@ export class ListeDeCoursesComponent implements OnInit {
     }
   }
 
-  acheterIngredient(ingredientId: number): void {
-    this.koolitService.acheterIngredient(ingredientId).subscribe(
-      (ingredientData:any) => {
-        this.ingredientAchete = ingredientData;
-        this.ingredientAchete.ingredientsList=JSON.parse(this.ingredientAchete.ingredients);
-        console.log('Données de l\'/ingredient de courses reçues du backend :',  this.ingredientAchete);
-        this.listesCoursesAchetes.push(this.ingredientAchete);
-        console.log('Ingrédient acheté avec succès.');
-        // Rafraîchir la liste après l'achat
-        this.chargerListeDeCourses(5);
+  acheterIngredient(ingredient:any):void{
+    this.ajouterALaListeDeCoursesAchete(ingredient);
+    this.supprimerIngredient(ingredient.id);
+  }
+
+  ajouterALaListeDeCoursesAchete(ingredient: any): void {
+   
+    const ingredientAEnvoyer = {
+      nom: ingredient.nom,
+      quantite: ingredient.quantite,
+      type: ingredient.type,
+    };
+  
+    const nouvelleListe = {
+      utilisateurId: 5,  
+      ingredients: ingredient.ingredients,
+    };
+    console.log('Ingrédient on va voir :',ingredient.ingredients);
+    this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
+      (response: any) => {
+        console.log('Ingrédient ajouté avec succès dans la base de données :', response);
+       
+        this.chargerListeDeCourses(5); 
       },
       (error) => {
-        console.error('Erreur lors de la suppression de l\'ingrédient :', error);
+        console.error('Erreur lors de l\'ajout de l\'ingrédient dans la base de données :', error);
       }
     );
   }
