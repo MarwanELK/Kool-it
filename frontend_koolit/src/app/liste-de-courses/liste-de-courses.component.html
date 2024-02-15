@@ -22,12 +22,12 @@
           </ul>
         </section>
       
-        <section class="shopping-list-ok">
+        <section class="shopping-list-Achete">
           <h2>Liste de courses (avec le lieu d'achat sélectionné)</h2>
           <ul>
-            <li *ngFor="let ingredient of listesCoursesOk">
+            <li *ngFor="let ingredient of listesCoursesAchetes">
                 {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
-                <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
+                <button (click)="supprimerIngredientAchete(ingredient.id)">Supprimer</button>
             </li>
           </ul>
         </section>

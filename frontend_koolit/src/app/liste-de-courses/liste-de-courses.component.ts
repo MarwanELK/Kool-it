@@ -21,7 +21,7 @@ export class ListeDeCoursesComponent implements OnInit {
 
   nouvelIngredient: Ingredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] }; // Ajoutez 'id' ici
   listesCourses: Ingredient[] = [];
-  listesCoursesOk: Ingredient[] = [];
+  listesCoursesAchetes: Ingredient[] = [];
   ingredientAchete:any;
 
   constructor(private http: HttpClient, private koolitService: KoolitService) {}
@@ -33,6 +33,7 @@ export class ListeDeCoursesComponent implements OnInit {
 
   ajouterALaListeDeCourses(): void {
     const nouvelIngredientAEnvoyer = {
+      id: this.nouvelIngredient.id,
       nom: this.nouvelIngredient.nom,
       quantite: this.nouvelIngredient.quantite,
       type: this.nouvelIngredient.type,
@@ -68,6 +69,20 @@ export class ListeDeCoursesComponent implements OnInit {
           course.ingredientsList = JSON.parse(course.ingredients);
           return course;
         });
+        console.log('ma liste de course 1: ', this.listesCourses);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la liste de courses :', error);
+      }
+    );
+    this.koolitService.getListeDeCoursesAchetes(utilisateurId).subscribe(
+      (listeCoursesData: any[]) => {
+        console.log('Données des ingredient acheté :', listeCoursesData);
+        this.listesCoursesAchetes = listeCoursesData.map((course) => {
+          course.ingredientsList = JSON.parse(course.ingredients);
+          return course;
+        });
+        console.log('ma liste de course 2: ', this.listesCoursesAchetes);
       },
       (error) => {
         console.error('Erreur lors de la récupération de la liste de courses :', error);
@@ -88,13 +103,26 @@ export class ListeDeCoursesComponent implements OnInit {
     );
   }
 
+  supprimerIngredientAchete(ingredientId: number): void {
+    this.koolitService.supprimerIngredientAchete(ingredientId).subscribe(
+      () => {
+        console.log('Ingrédient supprimé avec succès.',ingredientId);
+        // Rafraîchir la liste après la suppression
+        this.chargerListeDeCourses(5);
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de l\'ingrédient :', error);
+      }
+    );
+  }
+
   acheterIngredient(ingredientId: number): void {
     this.koolitService.acheterIngredient(ingredientId).subscribe(
       (ingredientData:any) => {
         this.ingredientAchete = ingredientData;
         this.ingredientAchete.ingredientsList=JSON.parse(this.ingredientAchete.ingredients);
         console.log('Données de l\'/ingredient de courses reçues du backend :',  this.ingredientAchete);
-        this.listesCoursesOk.push(this.ingredientAchete);
+        this.listesCoursesAchetes.push(this.ingredientAchete);
         console.log('Ingrédient acheté avec succès.');
         // Rafraîchir la liste après l'achat
         this.chargerListeDeCourses(5);
