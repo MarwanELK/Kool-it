@@ -26,6 +26,9 @@ export class KoolitService {
   ajouterIngredient(utilisateurId: number, nouvelIngredient: any): Observable<any> {
     return this.httpClient.post(`${this.apiUrl}/liste-courseAchete/${utilisateurId}`, nouvelIngredient);
   }
+  ajouterIngredientEcris(utilisateurId: number, nouvelIngredient: any): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/liste-course/${utilisateurId}`, nouvelIngredient);
+  }
   supprimerIngredient(ingredientId: number): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}${this.ENDPOINT_LISTE_COURSE}/${ingredientId}`);
   }
