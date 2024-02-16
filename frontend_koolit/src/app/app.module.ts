@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MagasinsComponent } from './magasins/magasins.component';
     ContactComponent,
     ProduitsListComponent,
     ListeDeCoursesComponent,
-    MagasinsComponent
+    MagasinsComponent,
+    MapComponent,
   ],
   imports: [
     FormsModule,

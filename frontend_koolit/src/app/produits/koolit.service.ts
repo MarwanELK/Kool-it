@@ -28,7 +28,7 @@ export class KoolitService {
   }
 
   getListeDeCourses(utilisateurId: number): Observable<any[]> {
-    const url = `${this.backendUrl}/listeDeCourses/${utilisateurId}`;
+    const url = `${this.backendUrl}/liste-course/${utilisateurId}`;
     return this.http.get<any[]>(url);
   }
   ajouterIngredient(utilisateurId: number, nouvelIngredient: any): Observable<any> {

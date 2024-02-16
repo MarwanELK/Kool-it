@@ -7,8 +7,9 @@ export interface Ingredient {
   id: number; // Ajoutez cette ligne
   nom: string;
   type: string;
-  ingredients: { nom: string, type: string }[];
-  ingredientsList?: { nom: string, type: string }[];
+  quantite:number
+  ingredients: { nom: string, quantite: number, achete:boolean, type: string }[];
+  ingredientsList?: { nom: string, quantite:number, achete:boolean ,type: string }[];
 }
 
 @Component({
@@ -18,8 +19,10 @@ export interface Ingredient {
 })
 export class ListeDeCoursesComponent implements OnInit {
 
-  nouvelIngredient: Ingredient = { id: 0, nom: '', type: '', ingredients: [] }; // Ajoutez 'id' ici
+  nouvelIngredient: Ingredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] }; // Ajoutez 'id' ici
   listesCourses: Ingredient[] = [];
+  listesCoursesOk: Ingredient[] = [];
+  ingredientAchete:any;
 
   constructor(private http: HttpClient, private koolitService: KoolitService) {}
 
@@ -31,6 +34,7 @@ export class ListeDeCoursesComponent implements OnInit {
   ajouterALaListeDeCourses(): void {
     const nouvelIngredientAEnvoyer = {
       nom: this.nouvelIngredient.nom,
+      quantite: this.nouvelIngredient.quantite,
       type: this.nouvelIngredient.type,
     };
   
@@ -51,7 +55,7 @@ export class ListeDeCoursesComponent implements OnInit {
     );
   
     // Réinitialisez nouvelIngredient
-    this.nouvelIngredient = { id: 0, nom: '', type: '', ingredients: [] };
+    this.nouvelIngredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] };
   }
   
 
@@ -74,8 +78,25 @@ export class ListeDeCoursesComponent implements OnInit {
   supprimerIngredient(ingredientId: number): void {
     this.koolitService.supprimerIngredient(ingredientId).subscribe(
       () => {
-        console.log('Ingrédient supprimé avec succès.');
+        console.log('Ingrédient supprimé avec succès.',ingredientId);
         // Rafraîchir la liste après la suppression
+        this.chargerListeDeCourses(5);
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de l\'ingrédient :', error);
+      }
+    );
+  }
+
+  acheterIngredient(ingredientId: number): void {
+    this.koolitService.acheterIngredient(ingredientId).subscribe(
+      (ingredientData:any) => {
+        this.ingredientAchete = ingredientData;
+        this.ingredientAchete.ingredientsList=JSON.parse(this.ingredientAchete.ingredients);
+        console.log('Données de l\'/ingredient de courses reçues du backend :',  this.ingredientAchete);
+        this.listesCoursesOk.push(this.ingredientAchete);
+        console.log('Ingrédient acheté avec succès.');
+        // Rafraîchir la liste après l'achat
         this.chargerListeDeCourses(5);
       },
       (error) => {

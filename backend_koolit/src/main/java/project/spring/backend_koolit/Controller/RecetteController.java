@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.Commentaire;
 import project.spring.backend_koolit.model.Recette;
+import project.spring.backend_koolit.service.CommentaireService;
 import project.spring.backend_koolit.service.RecetteService;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class RecetteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @GetMapping("/{recetteId}/{id}")
     public Recette getCommentaireByRecetteId(@PathVariable Long id) {
         return recetteService.findRecetteByRecetteId(id);
@@ -62,6 +64,23 @@ public class RecetteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/{recetteId}/commentaire") //@RequestParam
+    public ResponseEntity<?> supprimerCommentaire(@PathVariable Long recetteId, @RequestParam Long commentaireId) {
+        try {
+            recetteService.supprimerCommentaire(recetteId, commentaireId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
+
+
+
+
     /*@GetMapping("/recette/{id}")
     public  String afficherRecetteParId(@PathVariable Long id, Model model) {
         Recette recette = RecetteRepository.findRecetteByRecetteId(id);

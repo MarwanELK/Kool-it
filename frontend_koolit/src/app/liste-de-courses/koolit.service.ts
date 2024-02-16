@@ -28,5 +28,9 @@ export class KoolitService {
   supprimerIngredient(ingredientId: number): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}${this.ENDPOINT_LISTE_COURSE}/${ingredientId}`);
   }
+
+  acheterIngredient(ingredientId: number): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}${this.ENDPOINT_LISTE_COURSE}/acheter/${ingredientId}`);
+  }
   
 }

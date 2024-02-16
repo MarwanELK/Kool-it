@@ -4,6 +4,8 @@ import { RecetteService } from './recette.service';
 import { KoolitService } from './koolit.service';
 import { Commentaire } from '../model/recette.model';
 
+
+
 @Component({
   selector: 'app-produits',
   templateUrl: './produits.component.html',
@@ -11,10 +13,14 @@ import { Commentaire } from '../model/recette.model';
 })
 export class ProduitsComponent implements OnInit {
   recettes: any[] = [];
-  nouveauCommentaire: { username: string, contenu: string } = { username: '', contenu: '' };
+  nouveauCommentaire: Commentaire={commentaireId:0, username: '', contenu: '' };
+
   constructor(private recetteService: RecetteService, private koolitService: KoolitService) {}
 
   ngOnInit(): void {
+    const utilisateurId = 5;
+    this.chargerListeDeCourses(utilisateurId);
+
     this.recetteService.getRecettes().subscribe(
       (data: any) => {
         console.log('Données de recettes reçues du backend :', data);
@@ -25,6 +31,64 @@ export class ProduitsComponent implements OnInit {
       }
     );
   }
+
+  envoyerCommentaire(recetteId: number): void {
+    const nouveauCommentaireAEnvoyer = this.nouveauCommentaire;
+    this.recetteService.enregistrerCommentaire(nouveauCommentaireAEnvoyer).subscribe(
+      (response: any) => {
+        console.log('Commentaire ajouté avec succès dans la base de données:', response);
+        
+        const recetteIndex = this.recettes.findIndex((recette) => recette.recetteId === recetteId);
+        if (recetteIndex !== -1) {
+          this.recettes[recetteIndex].commentaires.push(nouveauCommentaireAEnvoyer);
+        }
+        
+        // Rafraîchir la liste après l'ajout
+        this.chargerListeDeCourses(5); // Fournir l'ID de l'utilisateur ici
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du commentaire dans la base de données :', error);
+      }
+    );
+    this.recetteService.envoyerCommentaire(recetteId,nouveauCommentaireAEnvoyer).subscribe(
+      (response: any) => {
+        console.log('Commentaire ajouté avec succès dans la base de données:', response);
+        // Rafraîchir la liste après l'ajout
+        this.chargerListeDeCourses(5); // Fournir l'ID de l'utilisateur ici
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du commentaire dans la base de données :', error);
+      }
+    );
+        
+    this.nouveauCommentaire = {commentaireId:0, username: '', contenu: '' };
+  }
+
+  supprimerCommentaire(recetteId:number, commentaireId: number): void {
+    this.recetteService.supprimerCommentaire(recetteId, commentaireId).subscribe(
+      () => {
+        console.log('Commentaire supprimé avec succès.');
+        // Rafraîchir la liste après la suppression
+        this.chargerListeDeCourses(5);
+        const recetteIndex = this.recettes.findIndex((recette) => recette.recetteId === recetteId);
+      if (recetteIndex !== -1) {
+        const commentaireIndex = this.recettes[recetteIndex].commentaires.findIndex(
+          (commentaire:any) => commentaire.commentaireId === commentaireId
+        );
+
+        if (commentaireIndex !== -1) {
+          this.recettes[recetteIndex].commentaires.splice(commentaireIndex, 1);
+        }
+      }
+
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du commentaire :', error);
+      }
+    );
+  }
+
+
 
   ajouterALaListeDeCourses(ingredient: any): void {
    
@@ -62,11 +126,11 @@ export class ProduitsComponent implements OnInit {
   private chargerListeDeCourses(utilisateurId: number): void {
     this.koolitService.getListeDeCourses(utilisateurId).subscribe(
       (listeCoursesData: any[]) => {
-        console.log('Données de la liste de courses reçues du backend :', listeCoursesData);
+        console.log('[Produit] Données de la liste de courses reçues du backend :', listeCoursesData);
         
       },
       (error) => {
-        console.error('Erreur lors de la récupération de la liste de courses :', error);
+        console.error('[Produit] Erreur lors de la récupération de la liste de courses :', error);
       }
     );
   }
@@ -82,37 +146,7 @@ export class ProduitsComponent implements OnInit {
       }
     );
 }
-envoyerCommentaire(recette: any): void {
-  if (this.nouveauCommentaire.username.trim() !== '' && this.nouveauCommentaire.contenu.trim() !== '') {
-    // Créez un objet Commentaire
-    const commentaire: Commentaire = {
-      username: this.nouveauCommentaire.username,
-      contenu: this.nouveauCommentaire.contenu
-    };
 
-    // Ajoutez le commentaire à la liste de commentaires de la recette
-    recette.commentaires.push(commentaire);
-
-    // Appelez le service pour envoyer le commentaire au backend
-    this.recetteService.envoyerCommentaire(recette.recetteId, commentaire).subscribe(
-      (recetteMiseAJour: any) => {
-        // Mise à jour de la recette dans la liste
-        const index = this.recettes.findIndex(r => r.recetteId === recetteMiseAJour.recetteId);
-        if (index !== -1) {
-          this.recettes[index] = recetteMiseAJour;
-        }
-      },
-      (error) => {
-        console.error('Erreur lors de l\'envoi du commentaire à la recette :', error);
-      }
-    );
-
-    // Réinitialisez le formulaire de commentaire
-    this.nouveauCommentaire = { username: '', contenu: '' };
-  } else {
-    console.warn('Le commentaire ou le nom d\'utilisateur est vide. Veuillez saisir les deux.');
-  }
-}
 augmenterPart(recette : any, personnesEnPlus:any):void{
   this.recetteService.augmenterPart(recette.recetteId, recette.personnesEnPlus).subscribe(
     (recetteNotee: any) => {
@@ -125,5 +159,6 @@ augmenterPart(recette : any, personnesEnPlus:any):void{
     }
   );
 }
+
 
 }

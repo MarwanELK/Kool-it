@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.ListeCourse;
+import project.spring.backend_koolit.model.ListeCourseAchete;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.repository.ListeCourseRepository;
+import project.spring.backend_koolit.service.ListeCourseAcheteService;
 import project.spring.backend_koolit.service.ListeCourseService;
 
 import java.util.Arrays;
@@ -16,31 +18,31 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/liste-course")
-public class ListeCourseController {
+@RequestMapping("/liste-courseAchete")
+public class ListeCourseAcheteController {
 
-    private final ListeCourseService listeCourseService;
+    private final ListeCourseAcheteService listeCourseAcheteService;
 
     @Autowired
-    public ListeCourseController(ListeCourseService listeCourseService) {
-        this.listeCourseService = listeCourseService;
+    public ListeCourseAcheteController(ListeCourseAcheteService listeCourseAcheteService) {
+        this.listeCourseAcheteService = listeCourseAcheteService;
     }
 
     @GetMapping
-    public List<ListeCourse> getAllListesCourses() {
-        return listeCourseService.getAllListesCourse();
+    public List<ListeCourseAchete> getAllListesCourses() {
+        return listeCourseAcheteService.getAllListesCourse();
     }
 
     @GetMapping("/{idUtilisateur}")
-    public List<ListeCourse> getListesCourseByUtilisateur(@PathVariable Long idUtilisateur) {
-        return listeCourseService.getListesCourseByUtilisateur(idUtilisateur);
+    public List<ListeCourseAchete> getListesCourseByUtilisateur(@PathVariable Long idUtilisateur) {
+        return listeCourseAcheteService.getListesCourseByUtilisateur(idUtilisateur);
     }
 
     @PostMapping("/{idUtilisateur}")
-    public ResponseEntity<ListeCourse> ajouterListeCourse(@RequestBody ListeCourse nouvelleListeCourse) {
+    public ResponseEntity<ListeCourseAchete> ajouterListeCourse(@RequestBody ListeCourseAchete nouvelleListeCourse) {
         try {
-            ListeCourse listeCourse = listeCourseService.ajouterListeCourse(nouvelleListeCourse);
-            return ResponseEntity.ok(listeCourse);
+            ListeCourseAchete listeCourseAchete = listeCourseAcheteService.ajouterListeCourse(nouvelleListeCourse);
+            return ResponseEntity.ok(listeCourseAchete);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -51,7 +53,7 @@ public class ListeCourseController {
     public ResponseEntity<?> supprimerIngredient(@PathVariable Long id) {
         try {
             // Logique pour supprimer l'ingrédient avec l'ID spécifié
-            listeCourseService.supprimerIngredient(id);
+            listeCourseAcheteService.supprimerIngredient(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,8 +61,8 @@ public class ListeCourseController {
         }
     }
     @GetMapping("/acheter/{id}")
-    public ResponseEntity<Optional<ListeCourse>> acheterIngredient(@PathVariable Long id) {
-        Optional<ListeCourse> listeCourse = listeCourseService.acheterIngredient(id);
+    public ResponseEntity<Optional<ListeCourseAchete>> acheterIngredient(@PathVariable Long id) {
+        Optional<ListeCourseAchete> listeCourse = listeCourseAcheteService.acheterIngredient(id);
         return ResponseEntity.ok(listeCourse);
     }
 

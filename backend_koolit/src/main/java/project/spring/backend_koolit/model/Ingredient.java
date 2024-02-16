@@ -1,4 +1,3 @@
-
 package project.spring.backend_koolit.model;
 
 import jakarta.persistence.*;
@@ -12,40 +11,52 @@ public class Ingredient {
     @Id
     @Column(name = "ingredient_id")
     private Long ingredientId;
-    @Column(name = "quantite")
-    private int quantite;
 
     @Column(name = "nom")
     private String nom;
 
+    @Column(name = "quantite")
+    private int quantite;
+
+
     @Enumerated(EnumType.STRING)
     private TypeIngredient type;
 
-    public Ingredient(long ingredientId, String carotte, String legume) {
-    }
-
-    public Integer getQuantite() {
-        return quantite;
-    }
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
     public enum TypeIngredient {
-        Extrait, Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré,Tablette, Sec, Frais, Doux, Fruits, Épice, Poudre, Tablettes, Liquide;
+        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré, Viennoiserie, Pain, Pâtisserie
     }
 
 
     public Ingredient() {
     }
 
-    public Ingredient(Long ingredientId, String nom, TypeIngredient type) {
+    public Ingredient(Long ingredientId, String nom, int quantite, TypeIngredient type) {
         this.ingredientId = ingredientId;
         this.nom = nom;
+        this.quantite = quantite;
         this.type = type;
     }
 
-    // Méthodes Getter et Setter pour 'ingredientId'
+
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "ingredientId=" + ingredientId +
+                ", nom='" + nom + '\'' +
+                ", quantite=" + quantite +
+                ", type=" + type +
+                '}';
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+// Méthodes Getter et Setter pour 'ingredientId'
 
     public Long getIngredientId() {
         return ingredientId;
@@ -77,7 +88,4 @@ public class Ingredient {
 
     // Méthode toString
 
-    public String toString() {
-        return ingredientId + " " + nom + " " + type;
-    }
 }

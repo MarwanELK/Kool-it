@@ -14,7 +14,9 @@ interface RecetteData {
 export class AppComponent implements OnInit {
   recetteData: RecetteData | undefined;
   title = 'KoolIt';
-
+  isSelected(path: string): boolean {
+    return window.location.pathname === path;
+  }
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
