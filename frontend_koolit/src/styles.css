@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Leaflet styles */
+@import "~leaflet/dist/leaflet.css";
+
+/* Define a wrapper for the map with flexbox */
+.map-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 100% of the viewport height */
+    width: 80%;
+    float: right;
+}
+
+/* Add a border around the map wrapper (optional) */
+.map-border {
+  border: 5px solid orange;
+  height: 90%;
+  width: 75%;
+}
+
+/* Set the height of the map (adjust as needed) */
+#map {
+    width: 100%; /* La carte prend toute la largeur disponible */
+    height: 100%; 
+}
+
+.map-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+  }
+  
+  
+  
+  
