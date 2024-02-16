@@ -7,8 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
-import { BoutiqueComponent } from './boutique/boutique.component';
-
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -18,8 +17,7 @@ const routes: Routes = [
   { path: 'produits-list', component: ProduitsListComponent }, 
   { path: 'liste-de-courses', component: ListeDeCoursesComponent },
   { path: 'Magasins', component: MagasinsComponent },
-  { path: 'boutique', component: BoutiqueComponent },
-  { path: '', redirectTo: '/boutiques', pathMatch: 'full' },
+  { path: 'map', component: MapComponent},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: '**', redirectTo: '/accueil' }
 ];

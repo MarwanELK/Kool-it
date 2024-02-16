@@ -1,174 +1,164 @@
 // produits.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { RecetteService } from './recette.service';
 import { KoolitService } from './koolit.service';
 import { Commentaire } from '../model/recette.model';
 
+
+
 @Component({
   selector: 'app-produits',
   templateUrl: './produits.component.html',
-  styleUrls: ['./produits.component.css'],
-  
+  styleUrls: ['./produits.component.css']
 })
 export class ProduitsComponent implements OnInit {
   recettes: any[] = [];
-  nouveauCommentaire: { username: string, contenu: string } = { username: '', contenu: '' };
+  nouveauCommentaire: Commentaire={commentaireId:0, username: '', contenu: '' };
 
   constructor(private recetteService: RecetteService, private koolitService: KoolitService) {}
 
   ngOnInit(): void {
+    const utilisateurId = 5;
+    this.chargerListeDeCourses(utilisateurId);
+
     this.recetteService.getRecettes().subscribe(
       (data: any) => {
         console.log('Données de recettes reçues du backend :', data);
-        // Ajoutez la propriété isSelected à chaque recette
-        this.recettes = data.map((recette: any) => ({ ...recette, isSelected: false }));
+        this.recettes = data;
       },
       (error) => {
         console.error('Erreur lors de la récupération des recettes :', error);
       }
     );
   }
-  
+
+  envoyerCommentaire(recetteId: number): void {
+    const nouveauCommentaireAEnvoyer = this.nouveauCommentaire;
+    this.recetteService.enregistrerCommentaire(nouveauCommentaireAEnvoyer).subscribe(
+      (response: any) => {
+        console.log('Commentaire ajouté avec succès dans la base de données:', response);
+        
+        const recetteIndex = this.recettes.findIndex((recette) => recette.recetteId === recetteId);
+        if (recetteIndex !== -1) {
+          this.recettes[recetteIndex].commentaires.push(nouveauCommentaireAEnvoyer);
+        }
+        
+        // Rafraîchir la liste après l'ajout
+        this.chargerListeDeCourses(5); // Fournir l'ID de l'utilisateur ici
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du commentaire dans la base de données :', error);
+      }
+    );
+    this.recetteService.envoyerCommentaire(recetteId,nouveauCommentaireAEnvoyer).subscribe(
+      (response: any) => {
+        console.log('Commentaire ajouté avec succès dans la base de données:', response);
+        // Rafraîchir la liste après l'ajout
+        this.chargerListeDeCourses(5); // Fournir l'ID de l'utilisateur ici
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du commentaire dans la base de données :', error);
+      }
+    );
+        
+    this.nouveauCommentaire = {commentaireId:0, username: '', contenu: '' };
+  }
+
+  supprimerCommentaire(recetteId:number, commentaireId: number): void {
+    this.recetteService.supprimerCommentaire(recetteId, commentaireId).subscribe(
+      () => {
+        console.log('Commentaire supprimé avec succès.');
+        // Rafraîchir la liste après la suppression
+        this.chargerListeDeCourses(5);
+        const recetteIndex = this.recettes.findIndex((recette) => recette.recetteId === recetteId);
+      if (recetteIndex !== -1) {
+        const commentaireIndex = this.recettes[recetteIndex].commentaires.findIndex(
+          (commentaire:any) => commentaire.commentaireId === commentaireId
+        );
+
+        if (commentaireIndex !== -1) {
+          this.recettes[recetteIndex].commentaires.splice(commentaireIndex, 1);
+        }
+      }
+
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du commentaire :', error);
+      }
+    );
+  }
+
+
+
   ajouterALaListeDeCourses(ingredient: any): void {
+   
     const ingredientAEnvoyer = {
       nom: ingredient.nom,
       quantite: ingredient.quantite,
       type: ingredient.type,
     };
-
+  
     const nouvelleListe = {
-      utilisateurId: 5,
+      utilisateurId: 5,  
       ingredients: JSON.stringify([ingredientAEnvoyer]),
     };
-
+  
     this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
       (response: any) => {
         console.log('Ingrédient ajouté avec succès dans la base de données :', response);
-        this.chargerListeDeCourses(5);
+       
+        this.chargerListeDeCourses(5); 
       },
       (error) => {
         console.error('Erreur lors de l\'ajout de l\'ingrédient dans la base de données :', error);
       }
     );
   }
-
   ajouterTousALaListeDeCourses(recette: any): void {
     for (const ingredient of recette.ingredients) {
       this.ajouterALaListeDeCourses(ingredient);
     }
   }
-
-  ajouterTousALaListeDeCourses1(): void {
-    const ingredientsListe: any[] = [];
-  
-    // Vérifier si au moins une recette est sélectionnée
-    const auMoinsUneRecetteSelectionnee = this.recettes.some(recette => recette.isSelected);
-  
-    if (!auMoinsUneRecetteSelectionnee) {
-      console.log('Aucune recette sélectionnée pour ajouter à la liste de courses.');
-      return;
-    }
-  
-    this.recettes
-      .filter(recette => recette.isSelected)
-      .forEach(recette => {
-        ingredientsListe.push(
-          ...recette.ingredients.map((ingredient: any) => ({
-            nom: ingredient.nom,
-            quantite: ingredient.quantite,
-            type: ingredient.type,
-          }))
-        );
-      });
-  
-    this.koolitService.ajouterIngredient(5, { ingredients: JSON.stringify(ingredientsListe) }).subscribe(
-      (response) => {
-        console.log('Ingrédients ajoutés avec succès dans la base de données.');
-        this.chargerListeDeCourses(5);
-      },
-      (error: any) => {
-        console.error('Erreur lors de l\'ajout des ingrédients dans la base de données :', error);
-      }
-    );
-  }
-
-  toggleSelection(recette: any): void {
-    recette.isSelected = !recette.isSelected;
-    console.log('Recette sélectionnée:', recette.isSelected);
-  }
-
   trierParNote(): void {
     this.recettes.sort((a, b) => b.note - a.note);
   }
-
+ 
   private chargerListeDeCourses(utilisateurId: number): void {
     this.koolitService.getListeDeCourses(utilisateurId).subscribe(
       (listeCoursesData: any[]) => {
-        console.log('Données de la liste de courses reçues du backend :', listeCoursesData);
-        // Ajoutez du code pour mettre à jour votre interface utilisateur avec les données reçues
+        console.log('[Produit] Données de la liste de courses reçues du backend :', listeCoursesData);
+        
       },
       (error) => {
-        console.error('Erreur lors de la récupération de la liste de courses :', error);
+        console.error('[Produit] Erreur lors de la récupération de la liste de courses :', error);
       }
     );
   }
-
   noterRecette(recette: any, note: number): void {
     this.recetteService.noterRecette(recette.recetteId, note).subscribe(
       (recetteNotee: any) => {
         console.log('Recette notée avec succès :', recetteNotee);
         // Rafraîchissez les données si nécessaire
-        this.chargerListeDeCourses(5);
+        this.chargerListeDeCourses(5); // Assurez-vous d'ajuster cela en fonction de votre logique
       },
-      (error: any) => {
+      (error: any) => { // Ajouter un type pour 'error'
         console.error('Erreur lors de la notation de la recette :', error);
       }
     );
-  }
+}
 
-  envoyerCommentaire(recette: any): void {
-    if (this.nouveauCommentaire.username.trim() !== '' && this.nouveauCommentaire.contenu.trim() !== '') {
-      // Créez un objet Commentaire
-      const commentaire: Commentaire = {
-        username: this.nouveauCommentaire.username,
-        contenu: this.nouveauCommentaire.contenu
-      };
-
-      // Ajoutez le commentaire à la liste de commentaires de la recette
-      recette.commentaires.push(commentaire);
-
-      // Appelez le service pour envoyer le commentaire au backend
-      this.recetteService.envoyerCommentaire(recette.recetteId, commentaire).subscribe(
-        (recetteMiseAJour: any) => {
-          // Mise à jour de la recette dans la liste
-          const index = this.recettes.findIndex(r => r.recetteId === recetteMiseAJour.recetteId);
-          if (index !== -1) {
-            this.recettes[index] = recetteMiseAJour;
-          }
-        },
-        (error) => {
-          console.error('Erreur lors de l\'envoi du commentaire à la recette :', error);
-        }
-      );
-
-      // Réinitialisez le formulaire de commentaire
-      this.nouveauCommentaire = { username: '', contenu: '' };
-    } else {
-      console.warn('Le commentaire ou le nom d\'utilisateur est vide. Veuillez saisir les deux.');
+augmenterPart(recette : any, personnesEnPlus:any):void{
+  this.recetteService.augmenterPart(recette.recetteId, recette.personnesEnPlus).subscribe(
+    (recetteNotee: any) => {
+      console.log('Nombre de personnes augmenté avec succès :', recetteNotee);
+      // Rafraîchissez les données si nécessaire
+      this.chargerListeDeCourses(5); // Assurez-vous d'ajuster cela en fonction de votre logique
+    },
+    (error: any) => { // Ajouter un type pour 'error'
+      console.error('Erreur lors de l augmentation du nombre de personne :', error);
     }
-  }
+  );
+}
 
-  augmenterPart(recette: any, personnesEnPlus: any): void {
-    this.recetteService.augmenterPart(recette.recetteId, recette.personnesEnPlus).subscribe(
-      (recetteNotee: any) => {
-        console.log('Nombre de personnes augmenté avec succès :', recetteNotee);
-        // Rafraîchissez les données si nécessaire
-        this.chargerListeDeCourses(5);
-      },
-      (error: any) => {
-        console.error('Erreur lors de l augmentation du nombre de personne :', error);
-      }
-    );
-  }
+
 }

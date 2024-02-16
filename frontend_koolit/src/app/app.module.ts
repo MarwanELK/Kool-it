@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,10 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
-import { BoutiqueComponent } from './boutique/boutique.component';
-
-import { ArticleListComponent } from './boutique/article-list/article-list.component';
-
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +23,9 @@ import { ArticleListComponent } from './boutique/article-list/article-list.compo
     ProduitsListComponent,
     ListeDeCoursesComponent,
     MagasinsComponent,
-    BoutiqueComponent,
-    ArticleListComponent,
+    MapComponent,
   ],
   imports: [
-    CommonModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,
