@@ -6,4 +6,5 @@ import project.spring.backend_koolit.model.Ingredient;
 
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     Ingredient findByNom(String nom);
+    Ingredient findByIngredientId(Long id);
 }

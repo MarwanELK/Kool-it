@@ -1,0 +1,68 @@
+<!-- Debut ma carte -->
+<div class="map-wrapper">
+    <div class="map-border">
+        <div id="map"></div>
+    </div>
+</div>
+<!-- Fin ma carte -->
+<div id="sidebar">
+    <h2><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_MAGASIN_Blanc_4.jpg" alt="Logo" class="logo-img"></h2>
+    <form id="searchForm">
+        <label for="cityInput">Ville :</label>
+        <input type="text" id="cityInput" name="city" required [(ngModel)]="ville.nom">
+        <button type="button" id="searchButton" (click)="rechercheParVille(ville.nom)">Rechercher</button>
+        <br>
+        <br>
+        <label for="coordsInput">Latitude :</label>
+        <input type="number" id="latInput" name="latitude" min="1"  required [(ngModel)]="ville.lat">
+        <label for="radiusInput">Longitude :</label>
+        <input type="number" id="lngInput" name="longitude" min="1" required [(ngModel)]="ville.lng">
+        <button type="button" id="searchButton" (click)="rechercheParCoords(ville.lat, ville.lng)" >Rechercher</button>
+        
+        <!--bouton recherche magasin-->
+    </form>
+</div>
+
+<div class="modal fade" id="magasinDetailsModal" tabindex="-1" aria-labelledby="magasinDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="magasinDetailsModalLabel">Détails du Magasin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Selectionner</button>
+            </div>
+            <div class="modal-body" id="magasinDetailsBody">
+                <!-- Les détails du magasin seront affichés ici -->
+                <div>
+                    <label for="searchMagasin">Rechercher un magasin:</label>
+                    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+                    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
+                </div>
+                
+                <div class="magasins-container">
+                    <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
+                        <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
+                        <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
+                        <p>Type: {{ magasin.typeMagasin }}</p>
+                        <p>Ville: {{ magasin.ville }}</p>
+                        <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
+                        <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
+                        <p>Vous y trouverez :</p>
+                        <li *ngFor="let ingredient of magasin.listesCourses">
+                            {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }}
+                            <button (click)=" acheterIngredient(ingredient)">Produit acheté</button>
+                        </li>
+                        <br>
+                        <button (click)="ajouterTousALaListeDeCourses(magasin)">Tous les produits achetés</button>
+                        <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
+                        
+                    </div>
+                </div>
+                
+                
+                <footer>
+                    <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

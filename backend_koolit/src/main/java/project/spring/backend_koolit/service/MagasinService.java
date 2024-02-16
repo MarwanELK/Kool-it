@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.repository.MagasinRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,11 +52,23 @@ public class MagasinService {
         magasinRepository.deleteById(id);
     }
 
-    public List<Magasin> rechercherMagasinParNom(String nom) {
-        return magasinRepository.findByNomContainingIgnoreCase(nom);
+    public List<Magasin> rechercherMagasinParNom(String nom, String ville) {
+        List<Magasin> magasins = magasinRepository.findMagasinsByNomAndVille(nom,ville);
+        if(magasins.isEmpty()){
+            System.out.println("la liste magasin est vide");
+        }else{
+            System.out.println("la liste magasin est PAS vide");
+        }
+        return (List<Magasin>) magasinRepository.findMagasinsByNomAndVille(nom,ville);
     }
 
     public Magasin getMagasinByNom(String nom) {
         return magasinRepository.findByNom(nom).orElse(null);
     }
+
+    public List<Magasin> rechercherMagasinsParVille(String ville){
+        return magasinRepository.findMagasinsByVille(ville);
+    }
+
+
 }

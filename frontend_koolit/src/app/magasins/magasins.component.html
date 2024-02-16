@@ -12,8 +12,8 @@
 
 <div>
     <label for="searchMagasin">Rechercher un magasin:</label>
-    <input type="text" id="searchMagasin" [(ngModel)]="nomMagasinRecherche" />
-    <button (click)="rechercherMagasin()">Rechercher</button>
+    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
 </div>
 
 <div class="magasins-container">

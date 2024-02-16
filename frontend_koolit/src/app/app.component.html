@@ -10,18 +10,20 @@
 </head>
 <body>
     <header>
-        <img src="https://www.canva.com/design/DAF2IbubsKc/cmkm8JW408DG3dkxhKpKZg/edit?utm_content=DAF2IbubsKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"  >
+        <img src="https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/41a5c853f21587a6b2d82ad5279af976.png" style="width: 150px; height: 150px;" >
     </header>
 
     <nav>
         <a routerLink="/accueil">Accueil</a>
         <a routerLink="/produits">Produits</a>
         <a routerLink="/liste-de-courses">Liste de courses</a>
-        <a routerLink="/Magasins">Magasins</a>
+        <a routerLink="/magasins">Magasins</a>
+        <a routerLink="/map">Carte (recherche magasin)</a>
         <a routerLink="/apropos">À Propos</a>
         <a routerLink="/contact">Contact</a>
+        
     </nav>
-
+    <h1>{{ title }}</h1>
     <ul class="recettes-list" id="recettesList"></ul>
 
     <router-outlet></router-outlet>

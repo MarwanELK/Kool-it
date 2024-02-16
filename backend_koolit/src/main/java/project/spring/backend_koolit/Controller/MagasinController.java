@@ -89,8 +89,9 @@ public class MagasinController {
     }
 
     @GetMapping("/rechercher")
-    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(@RequestParam String nom) {
-        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nom);
+    public ResponseEntity<List<Magasin>> rechercherMagasinParNom(String nomMagasin, String ville) {
+        System.out.println("Le param transmis est "+ville);
+        List<Magasin> magasins = magasinService.rechercherMagasinParNom(nomMagasin, ville);
         return ResponseEntity.ok(magasins);
     }
 
@@ -144,6 +145,18 @@ public class MagasinController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/coccinelle")
+    public ResponseEntity<Magasin> getCoccinelle() {
+        Magasin magasin = magasinService.getMagasinByNom("Coccinelle Supermarché");
+        return ResponseEntity.ok(magasin);
+    }
+
+    @GetMapping("/ville")
+    public ResponseEntity<List<Magasin>> getMagasinsParVille(String ville) {
+        List<Magasin> magasins = magasinService.rechercherMagasinsParVille(ville);
+        return ResponseEntity.ok(magasins);
     }
 
 }

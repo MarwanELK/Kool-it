@@ -6,11 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import project.spring.backend_koolit.model.ListeCourse;
+import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.repository.ListeCourseRepository;
 import project.spring.backend_koolit.service.ListeCourseService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/liste-course")
@@ -54,6 +57,11 @@ public class ListeCourseController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+    @GetMapping("/acheter/{id}")
+    public ResponseEntity<Optional<ListeCourse>> acheterIngredient(@PathVariable Long id) {
+        Optional<ListeCourse> listeCourse = listeCourseService.acheterIngredient(id);
+        return ResponseEntity.ok(listeCourse);
     }
 
     // Ajoutez cette méthode pour gérer les requêtes OPTIONS

@@ -12,6 +12,7 @@ interface RecetteData {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title = 'frontend_koolit';
   recetteData: RecetteData | undefined;
 
   constructor(private http: HttpClient) {}

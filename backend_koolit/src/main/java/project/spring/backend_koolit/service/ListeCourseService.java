@@ -2,12 +2,14 @@ package project.spring.backend_koolit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.spring.backend_koolit.model.Ingredient;
 import project.spring.backend_koolit.model.ListeCourse;
 import project.spring.backend_koolit.repository.ListeCourseRepository;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ListeCourseService {
@@ -26,6 +28,9 @@ public class ListeCourseService {
 
     public List<ListeCourse> getListesCourseByUtilisateur(Long idUtilisateur) {
         List<ListeCourse> listesCourses = listeCourseRepository.findByUtilisateurId(idUtilisateur);
+        for(ListeCourse lc : listesCourses){
+            System.out.println(lc.getIngredients());
+        }
         return convertStringIngredientsToList(listesCourses);
     }
 
@@ -56,6 +61,9 @@ public class ListeCourseService {
     public void supprimerIngredient(Long id) {
         listeCourseRepository.deleteById(id);
     }
+
+    public Optional<ListeCourse> acheterIngredient(Long id){return listeCourseRepository.findById(id);}
+
 }
 
 

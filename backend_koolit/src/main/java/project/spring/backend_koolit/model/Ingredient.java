@@ -18,23 +18,26 @@ public class Ingredient {
     @Column(name = "quantite")
     private int quantite;
 
+
     @Enumerated(EnumType.STRING)
     private TypeIngredient type;
 
     public enum TypeIngredient {
-        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré
+        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré, Viennoiserie, Pain, Pâtisserie
     }
 
 
     public Ingredient() {
     }
 
-    public Ingredient(Long ingredientId, String nom, TypeIngredient type, int quantite) {
+    public Ingredient(Long ingredientId, String nom, int quantite, TypeIngredient type) {
         this.ingredientId = ingredientId;
         this.nom = nom;
+        this.quantite = quantite;
         this.type = type;
-        this.quantite=quantite;
     }
+
+
 
     public int getQuantite() {
         return quantite;

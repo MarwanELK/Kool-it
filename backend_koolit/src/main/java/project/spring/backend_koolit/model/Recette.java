@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "recettetest")
+@Table(name = "recette")
 public class Recette {
 
     @Id
@@ -43,8 +43,9 @@ public class Recette {
 
 
 
-    @ElementCollection
-    private List<String> etapesPreparation;
+
+    @Column(name = "etapePrepa")
+    private String etapesPreparation;
 
     @JsonIgnoreProperties("recettes")
     public List<Ingredient> getIngredients() {
@@ -71,11 +72,11 @@ public class Recette {
         this.nom = nom;
     }
 
-    public List<String> getEtapesPreparation() {
+    public String getEtapesPreparation() {
         return etapesPreparation;
     }
 
-    public void setEtapesPreparation(List<String> etapesPreparation) {
+    public void setEtapesPreparation(String etapesPreparation) {
         this.etapesPreparation = etapesPreparation;
     }
     public double getNote() {
