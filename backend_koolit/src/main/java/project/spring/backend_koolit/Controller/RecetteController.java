@@ -24,10 +24,10 @@ public class RecetteController {
     public List<Recette> getAllRecettes() {
         return recetteService.getAllRecettes();
     }
-    @GetMapping("{id}")
-    public Recette findIngredientByRecetteId(@PathVariable Long id) {
-        return recetteService.findRecetteByRecetteId(id);
-    }
+@GetMapping("{id}")
+public Recette findIngredientByRecetteId(@PathVariable Long id) {
+    return recetteService.findRecetteByRecetteId(id);
+}
 
     @PostMapping("/{recetteId}/noter")
     public ResponseEntity<Recette> noterRecette(@PathVariable Long recetteId, @RequestParam Double note) {

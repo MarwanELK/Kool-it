@@ -13,3 +13,4 @@ public interface RecetteRepository extends JpaRepository<Recette, Long> {
     List<Commentaire> findCommentaireByRecetteId(Long id);
 
 }
+

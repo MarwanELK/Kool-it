@@ -16,19 +16,18 @@
           <ul>
             <li *ngFor="let ingredient of listesCourses">
                 {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                <button (click)="acheterIngredient(ingredient)">Produit acheté</button>
                 <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
-                <button (click)="acheterIngredient(ingredient.id)">Acheter</button>
-            </li>
           </ul>
         </section>
       
-        <section class="shopping-list-ok">
-          <h2>Liste de courses (avec le lieu d'achat sélectionné)</h2>
+        <section class="shopping-list-Achete">
+          <h2>Produits achetés</h2>
           <ul>
-            <li *ngFor="let ingredient of listesCoursesOk">
+            <li *ngFor="let ingredient of listesCoursesAchetes">
                 {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
-                <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
             </li>
+            <button (click)="supprimerListeIngredientAchete()">Supprimer historique des achats</button>
           </ul>
         </section>
       </div>
@@ -41,9 +40,11 @@
     <h2>Ajouter à la Liste</h2>
     <form>
         <label for="nom">Nouvel ingrédient :</label>
-        <input type="text" id="nom" name="nom" required [(ngModel)]="nouvelIngredient.nom">
+        <input type="text" id="nom" name="nom" required [(ngModel)]="nouvelIngredientEcrit.nom">
         <label for="type">Type :</label>
-        <input type="text" id="type" name="type" required [(ngModel)]="nouvelIngredient.type">
+        <input type="text" id="type" name="type" required [(ngModel)]="nouvelIngredientEcrit.type">
+        <label for="qte">Quantite :</label>
+        <input type="number" id="qte" name="qte" [(ngModel)]="nouvelIngredientEcrit.quantite" min="0" max="20" />
         <button type="button" (click)="ajouterALaListeDeCourses()">Ajouter</button>
     </form>
 </section>

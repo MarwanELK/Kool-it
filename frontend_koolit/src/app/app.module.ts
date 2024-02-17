@@ -13,6 +13,7 @@ import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.com
 import { MagasinsComponent } from './magasins/magasins.component';
 import { MapComponent } from './map/map.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -8,14 +8,14 @@
 </head>
 <body>
 
+<!-- magasins.component.html -->
 
+<div>
+    <label for="searchMagasin">Rechercher un magasin:</label>
+    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
+</div>
 
-  <div>
-    <label for="filterTypeAliment">Filtrer par Type d'Aliment:</label>
-    <input type="text" id="filterTypeAliment" [(ngModel)]="typeAlimentFiltre" />
-    <button (click)="filtrerMagasinsParTypeAliment(typeAlimentFiltre)">Filtrer</button>
-  </div>
-  
 <div class="magasins-container">
     <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
         <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
@@ -25,8 +25,8 @@
         <p>Type d'aliment: {{ magasin.typeAliment }}</p>
         <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
         <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
-    <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
-</div>
+        <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
+    </div>
 </div>
 
 

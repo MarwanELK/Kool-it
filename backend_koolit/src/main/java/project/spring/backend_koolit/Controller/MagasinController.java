@@ -128,7 +128,7 @@ public class MagasinController {
                     typeAlimentActuel = "[]"; // Initialisez avec une liste vide si elle est nulle
                 }
 
-                Set<String> typesAlimentsSet = new ObjectMapper().readValue(typeAlimentActuel, Set.class);
+               Set<String> typesAlimentsSet = new ObjectMapper().readValue(typeAlimentActuel, Set.class);
 
                 typesAlimentsSet.add(typeAliment.replace("\"", ""));
 
