@@ -1,15 +1,82 @@
+/* Reset CSS */
+body {
+  font-family: "Arial", sans-serif; /* Changement de police */
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
 
-button {
-    font-size: 8px; 
-    padding: 0.1px 0.2px; }
+/* Container */
 .shopping-container {
   display: flex;
+  justify-content: space-between; /* Alignement des deux sections côte à côte */
+  margin-top: 20px;
 }
 
+/* Shopping list containers */
 .shopping-list,
-.shopping-list-ok {
-  flex: 1;
-  margin-right: 20px; /* Espace entre les deux sections, ajustez selon vos besoins */
+.shopping-list-Achete,
+.add-to-list form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 48%; /* Ajustement de la largeur pour tenir deux côtés à côte */
 }
 
-/* Ajoutez d'autres styles selon vos besoins */
+/* Headings */
+h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.8rem; /* Taille de police */
+  font-weight: bold;
+}
+
+/* Lists */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Buttons */
+button {
+  font-size: 12px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-button {
+  background-color: #ff4d4f;
+  color: #fff;
+}
+
+.buy-button,
+.add-button {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+/* Form labels */
+label {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Form inputs */
+input {
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-top: 20px;
+}

@@ -9,6 +9,7 @@
     height: 100vh; /* 100% of the viewport height */
     width: 80%;
     float: right;
+    overflow: hidden; /* Empêcher le débordement du contenu */
 }
 
 /* Add a border around the map wrapper (optional) */
