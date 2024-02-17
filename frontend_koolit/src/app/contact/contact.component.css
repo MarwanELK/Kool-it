@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1; /* Couleur de fond claire */
+    color: #333; /* Couleur du texte */
+}
+
+header.banner {
+    background-color: #333; /* Couleur de fond sombre */
+    padding: 20px;
+    text-align: center;
+    border-radius: 0 0 20px 20px; /* Coins arrondis en bas */
+    margin-bottom: 20px; /* Marge inférieure */
+}
+
+header.banner h1 {
+    margin-bottom: 10px; /* Marge inférieure pour le titre */
+    color: #fff; /* Texte en blanc */
+}
+
+section.contact {
+    padding: 20px;
+    max-width: 600px; /* Largeur maximale du formulaire */
+    margin: 0 auto; /* Centrer le formulaire */
+    background-color: #fff; /* Fond blanc pour le formulaire */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+section.contact h2 {
+    color: #333; /* Couleur du texte */
+}
+
+section.contact form {
+    margin-top: 20px; /* Marge supérieure pour le formulaire */
+}
+
+section.contact form label {
+    display: block; /* Afficher chaque label sur une ligne séparée */
+    margin-bottom: 5px; /* Marge inférieure pour chaque label */
+    font-weight: bold; /* Texte en gras */
+}
+
+section.contact form input[type="text"],
+section.contact form input[type="email"],
+section.contact form textarea {
+    width: 100%; /* Largeur à 100% du formulaire */
+    padding: 10px; /* Remplissage du champ de texte */
+    margin-bottom: 10px; /* Marge inférieure pour chaque champ */
+    border: 1px solid #ccc; /* Bordure grise */
+    border-radius: 5px; /* Coins arrondis */
+    box-sizing: border-box; /* Inclure la bordure et le rembourrage dans la largeur totale */
+}
+
+section.contact form textarea {
+    height: 100px; /* Hauteur du champ de texte */
+}
+
+section.contact form button {
+    background-color: #ff6f61; /* Rouge vif */
+    color: #fff; /* Texte en blanc */
+    padding: 10px 20px; /* Remplissage du bouton */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur de type pointer */
+}
+
+section.contact form button:hover {
+    background-color: #e9604e; /* Rouge vif légèrement plus foncé au survol */
+}

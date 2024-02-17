@@ -65,9 +65,3 @@ public class ListeCourseService {
     public Optional<ListeCourse> acheterIngredient(Long id){return listeCourseRepository.findById(id);}
 
 }
-
-
-
-
-
-

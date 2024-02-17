@@ -231,6 +231,7 @@ export class MapComponent implements AfterViewInit{
     this.koolitService.getListeDeCourses(utilisateurId).subscribe(
       (listeCoursesData: any[]) => {
         this.ListeDeLC=[];
+        console.log('listeCourseData :', listeCoursesData);
         for (let i = 0; i < this.magasins.length; i++) {
           this.magasin=this.magasins[i];
           const listeDeChaines: string[] = this.magasin.typeAliment.split(','); 
@@ -293,9 +294,9 @@ export class MapComponent implements AfterViewInit{
   
     const nouvelleListe = {
       utilisateurId: 5,  
-      ingredients: ingredient.ingredients,
+      ingredients: JSON.stringify([ingredientAEnvoyer]),
     };
-    console.log('Ingrédient on va voir :',ingredient.ingredients);
+  
     this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
       (response: any) => {
         console.log('Ingrédient ajouté avec succès dans la base de données :', response);
@@ -308,17 +309,10 @@ export class MapComponent implements AfterViewInit{
     );
   }
 
-  ajouterTousALaListeDeCourses(magasin: any): void {
-    console.log('le magasin:', magasin.listesCourses);
-    for (const ingredient of magasin.listesCourses) {
+  ajouterTousALaListeDeCourses(recette: any): void {
+    for (const ingredient of recette.ingredients) {
       this.ajouterALaListeDeCourses(ingredient);
-      this.supprimerIngredient(ingredient.id);
     }
-  }
-
-  acheterIngredient(ingredient:any):void{
-    this.ajouterALaListeDeCourses(ingredient);
-    this.supprimerIngredient(ingredient.id);
   }
 
   /*FicheMagasin(nom:string): void {

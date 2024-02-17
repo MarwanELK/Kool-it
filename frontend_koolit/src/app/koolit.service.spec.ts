@@ -1,18 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importez HttpClientTestingModule
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importez FormsModule
+import { TestBed } from '@angular/core/testing';
+
 import { KoolitService } from './koolit.service';
 
 describe('KoolitService', () => {
   let service: KoolitService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({      imports: [HttpClientTestingModule, CommonModule,FormsModule]
-    });
+    TestBed.configureTestingModule({});
     service = TestBed.inject(KoolitService);
-    
   });
 
   it('should be created', () => {

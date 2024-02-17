@@ -1,20 +1,20 @@
 package project.spring.backend_koolit.Controller;
 
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.stereotype.Service;
-        import org.springframework.web.bind.annotation.*;
-        import project.spring.backend_koolit.model.ListeCourse;
-        import project.spring.backend_koolit.model.ListeCourseAchete;
-        import project.spring.backend_koolit.model.Magasin;
-        import project.spring.backend_koolit.repository.ListeCourseRepository;
-        import project.spring.backend_koolit.service.ListeCourseAcheteService;
-        import project.spring.backend_koolit.service.ListeCourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
+import project.spring.backend_koolit.model.ListeCourse;
+import project.spring.backend_koolit.model.ListeCourseAchete;
+import project.spring.backend_koolit.model.Magasin;
+import project.spring.backend_koolit.repository.ListeCourseRepository;
+import project.spring.backend_koolit.service.ListeCourseAcheteService;
+import project.spring.backend_koolit.service.ListeCourseService;
 
-        import java.util.Arrays;
-        import java.util.List;
-        import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -72,5 +72,3 @@ public class ListeCourseAcheteController {
         return ResponseEntity.ok().build();
     }
 }
-
-

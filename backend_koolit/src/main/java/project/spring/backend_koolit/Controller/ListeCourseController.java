@@ -70,5 +70,3 @@ public class ListeCourseController {
         return ResponseEntity.ok().build();
     }
 }
-
-
