@@ -54,7 +54,7 @@ export class KoolitService {
   }
   // koolit.service.ts
 
-rechercherMagasinParNom(nomMagasin:string): Observable<any> {
+rechercherMagasinParNom(nomMagasin:string): Observable<any[]> {
   const params = new HttpParams().set('nomMagasin', nomMagasin);
   return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercher`, { params }).pipe(
     catchError((error: any) => {

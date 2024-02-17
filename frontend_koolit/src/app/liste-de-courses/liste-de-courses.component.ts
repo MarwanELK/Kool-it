@@ -32,12 +32,12 @@ export class ListeDeCoursesComponent implements OnInit {
     const utilisateurId = 5;
     this.chargerListeDeCourses(utilisateurId);
   }
-
   ajouterALaListeDeCourses(): void {
     const nouvelIngredientAEnvoyer = {
-      nom: this.nouvelIngredient.nom,
-      quantite: this.nouvelIngredient.quantite,
-      type: this.nouvelIngredient.type,
+      id: this.nouvelIngredientEcrit.id,
+      nom: this.nouvelIngredientEcrit.nom,
+      quantite: this.nouvelIngredientEcrit.quantite,
+      type: this.nouvelIngredientEcrit.type,
     };
   
     const nouvelleListe = {
@@ -45,7 +45,7 @@ export class ListeDeCoursesComponent implements OnInit {
       ingredients: JSON.stringify([nouvelIngredientAEnvoyer]),
     };
   
-    this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
+    this.koolitService.ajouterIngredientEcris(5, nouvelleListe).subscribe(
       (response: any) => {
         console.log('Ingrédient ajouté avec succès dans la base de données:', response);
         // Rafraîchir la liste après l'ajout
@@ -57,7 +57,7 @@ export class ListeDeCoursesComponent implements OnInit {
     );
   
     // Réinitialisez nouvelIngredient
-    this.nouvelIngredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] };
+    this.nouvelIngredientEcrit = { id: 0, nom: '', quantite:0, type: '', ingredients: [] };
   }
 
   // Méthode pour charger la liste de courses
