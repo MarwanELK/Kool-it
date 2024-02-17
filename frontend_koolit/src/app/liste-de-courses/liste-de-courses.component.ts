@@ -35,10 +35,9 @@ export class ListeDeCoursesComponent implements OnInit {
 
   ajouterALaListeDeCourses(): void {
     const nouvelIngredientAEnvoyer = {
-      id: this.nouvelIngredientEcrit.id,
-      nom: this.nouvelIngredientEcrit.nom,
-      quantite: this.nouvelIngredientEcrit.quantite,
-      type: this.nouvelIngredientEcrit.type,
+      nom: this.nouvelIngredient.nom,
+      quantite: this.nouvelIngredient.quantite,
+      type: this.nouvelIngredient.type,
     };
   
     const nouvelleListe = {
@@ -46,7 +45,7 @@ export class ListeDeCoursesComponent implements OnInit {
       ingredients: JSON.stringify([nouvelIngredientAEnvoyer]),
     };
   
-    this.koolitService.ajouterIngredientEcris(5, nouvelleListe).subscribe(
+    this.koolitService.ajouterIngredient(5, nouvelleListe).subscribe(
       (response: any) => {
         console.log('Ingrédient ajouté avec succès dans la base de données:', response);
         // Rafraîchir la liste après l'ajout
@@ -58,7 +57,7 @@ export class ListeDeCoursesComponent implements OnInit {
     );
   
     // Réinitialisez nouvelIngredient
-    this.nouvelIngredientEcrit = { id: 0, nom: '', quantite:0, type: '', ingredients: [] };
+    this.nouvelIngredient = { id: 0, nom: '', quantite:0, type: '', ingredients: [] };
   }
 
   // Méthode pour charger la liste de courses
@@ -152,6 +151,8 @@ export class ListeDeCoursesComponent implements OnInit {
       }
     );
   }
+
+
   telechargerListeCSV(): void {
     const csvData = this.convertToCSV(this.listesCourses);
     const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });

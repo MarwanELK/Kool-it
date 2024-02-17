@@ -1,29 +1,34 @@
-
-/* Style pour le conteneur des commentaires */
+/* Conteneur des commentaires */
 .commentaires-container {
-    margin-top: 20px;
-  }
-  
-  /* Style pour chaque commentaire */
-  .commentaire {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  /* Style pour le nom d'utilisateur dans le commentaire */
-  .commentaire-username {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Style pour le contenu du commentaire */
-  .commentaire-contenu {
-    margin-top: 5px;
-    color: #555;
-  }
+  margin-top: 20px;
+}
 
-  
-  
-  
+/* Style de chaque commentaire */
+.commentaire {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du nom d'utilisateur */
+.commentaire-username {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Style du contenu du commentaire */
+.commentaire-contenu {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Style de l'image de recette */
+.recette-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
