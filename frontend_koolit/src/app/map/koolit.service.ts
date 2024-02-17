@@ -106,6 +106,6 @@ export class KoolitService {
   }
 
   ajouterIngredient(utilisateurId: number, nouvelIngredient: any): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/liste-courseAchete/${utilisateurId}`, nouvelIngredient);
+    return this.httpClient.post(`${this.apiUrl}/liste-course/${utilisateurId}`, nouvelIngredient);
   }
 }

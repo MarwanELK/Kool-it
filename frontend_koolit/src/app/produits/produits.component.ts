@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecetteService } from './recette.service';
 import { KoolitService } from './koolit.service';
 import { Commentaire } from '../model/recette.model';
-import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -15,7 +15,7 @@ export class ProduitsComponent implements OnInit {
   recettes: any[] = [];
   nouveauCommentaire: Commentaire={commentaireId:0, username: '', contenu: '' };
 
-  constructor(private recetteService: RecetteService, private koolitService: KoolitService, private location: Location) {}
+  constructor(private recetteService: RecetteService, private koolitService: KoolitService) {}
 
   ngOnInit(): void {
     const utilisateurId = 5;
@@ -153,7 +153,6 @@ augmenterPart(recette : any, personnesEnPlus:any):void{
       console.log('Nombre de personnes augmenté avec succès :', recetteNotee);
       // Rafraîchissez les données si nécessaire
       this.chargerListeDeCourses(5); // Assurez-vous d'ajuster cela en fonction de votre logique
-      window.location.reload();// recharger page
     },
     (error: any) => { // Ajouter un type pour 'error'
       console.error('Erreur lors de l augmentation du nombre de personne :', error);

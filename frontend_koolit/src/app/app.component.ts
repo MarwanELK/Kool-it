@@ -12,9 +12,11 @@ interface RecetteData {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'frontend_koolit';
   recetteData: RecetteData | undefined;
-
+  title = 'KoolIt';
+  isSelected(path: string): boolean {
+    return window.location.pathname === path;
+  }
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {

@@ -1,8 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importez HttpClientTestingModule
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importez FormsModule
+
 import { ProduitsListComponent } from './produits-list.component';
 
 describe('ProduitsListComponent', () => {
@@ -11,8 +8,7 @@ describe('ProduitsListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProduitsListComponent],
-      imports: [HttpClientTestingModule, CommonModule,FormsModule]
+      declarations: [ProduitsListComponent]
     });
     fixture = TestBed.createComponent(ProduitsListComponent);
     component = fixture.componentInstance;

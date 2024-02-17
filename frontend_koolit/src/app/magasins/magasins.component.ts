@@ -8,16 +8,12 @@ import { Observable } from 'rxjs';  // Importez Observable depuis rxjs
   styleUrls: ['./styles.css']
 })
 export class MagasinsComponent implements OnInit {
+  typeAlimentFiltre: string = '';
   nomMagasinRecherche: string = '';
   magasins: any[] = [];
-  magasin : any = {
-    nom:'',
-    typeMagasin:'',
-    urlMagasin:'',
-    typeAliment:''
-  };
   magasinSelectionne: any = {};
   nouveauTypeAliment: string = '';
+  typesAliment: string[] = [];
 
   constructor(private koolitService: KoolitService) { }
 
@@ -42,62 +38,55 @@ export class MagasinsComponent implements OnInit {
     );
   }
 
-  rechercherMagasin(nom: string){
-    this.koolitService.rechercherMagasinParNom2(this.nomMagasinRecherche).subscribe(
-      (data)=> {
-        this.magasin=data;
-        this.magasins=data;
-        console.log('Données du nom de magasin :', this.magasin);
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des données du nom de magasin:', error);
-      }
-    );
-  }
-
-  
-
-  /*rechercherMagasin(nom): void {
+  rechercherTypesAliment(): void {
     if (this.nomMagasinRecherche.trim() !== '') {
-      this.koolitService.rechercherMagasinParNom(this.nomMagasinRecherche).subscribe(
-        (magasinsData: any[]) => {
-          console.log('Résultats de la recherche :', magasinsData);
-          this.magasins = magasinsData.map((magasin) => ({
-            nom: magasin.nom,
-            type: magasin.typeMagasin,
-            url: magasin.urlMagasin,
-            typeAliment: magasin.typeAliment
-          }));
+      this.koolitService.rechercherTypesAliment(this.nomMagasinRecherche).subscribe(
+        (typesAliment: string[]) => {
+          console.log('Résultats de la recherche de types d\'aliment :', typesAliment);
+          // Mettez à jour la liste de types d'aliment dans votre composant
+          this.typesAliment = typesAliment;
         },
         (error) => {
-          console.error('Erreur lors de la recherche de magasin :', error);
+          console.error('Erreur lors de la recherche de types d\'aliment :', error);
         }
       );
     } else {
-      // Si la barre de recherche est vide, rechargez tous les magasins
       this.chargerMagasins();
     }
-  }*/
+  }
   selectionnerMagasin(magasin: any): void {
     // Affectez la valeur du magasin sélectionné
     this.magasinSelectionne = magasin;
   }
-  ajouterTypeAliment(): void {
-    if (this.magasinSelectionne && this.magasinSelectionne.nom && this.nouveauTypeAliment.trim() !== '') {
-      this.koolitService.ajouterTypeAliment(this.magasinSelectionne.nom, this.nouveauTypeAliment).subscribe(
-        (response: any) => {
-          console.log('Type d\'aliment ajouté avec succès dans la base de données :', response);
-          // Rafraîchir la liste après l'ajout
-          this.chargerMagasins();
-        },
-        (error) => {
-          console.error('Erreur lors de l\'ajout du type d\'aliment dans la base de données :', error);
-        }
-      );
+  filtrerMagasinsParTypeAliment(typeAliment: string): void {
+    console.log('Filtrage par type d\'aliment :', typeAliment);
+    if (typeAliment.trim() !== '') {
+      this.magasins = this.magasins.filter(magasin => magasin.typeAliment.includes(typeAliment));
     } else {
-      console.error('Magasin sélectionné non valide ou type d\'aliment vide.');
+      // Si le champ de recherche est vide, rechargez tous les magasins
+      this.chargerMagasins();
     }
+    console.log('Nouveaux magasins après filtrage :', this.magasins);
   }
+
+ajouterTypeAliment(): void {
+  if (this.magasinSelectionne && this.magasinSelectionne.nom && this.nouveauTypeAliment.trim() !== '') {
+      // Utilisez this.magasinSelectionne pour accéder au magasin sélectionné
+      this.koolitService.ajouterTypeAliment(this.magasinSelectionne.nom, this.nouveauTypeAliment).subscribe(
+          (response: any) => {
+              console.log('Type d\'aliment ajouté avec succès dans la base de données :', response);
+              // Rafraîchir la liste après l'ajout
+              this.chargerMagasins();
+          },
+          (error) => {
+              console.error('Erreur lors de l\'ajout du type d\'aliment dans la base de données :', error);
+          }
+      );
+  } else {
+      console.error('Magasin sélectionné non valide ou type d\'aliment vide.');
+  }
+}
+
   
   
 }
