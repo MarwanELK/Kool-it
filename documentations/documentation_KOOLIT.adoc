@@ -1,0 +1,131 @@
+
+= PROJET DEVOPS KOOLIT  
+v1.0 28.11.2023          
+imagesdir::KOOLIT.jpg[LOGO KOOLIT]     
+                                      
+
+
+.Equipe:
+* Amel BOUABDELLAH BOURSALI
+* Ayoub KHAYEF-ALLAH
+* Marwan EL KHADDAR
+ 
+
+== *PRÉSENTATION DU PROJET* ==  
+
+=== Contexte:
+Koolit est un site web dédié à simplifier la cuisine quotidienne. Il propose une variété de recettes adaptées aux préférences et aux ingrédients disponibles chez l'utilisateur.
+Chez KOOLIT, notre motivation est de simplifier votre expérience culinaire en vous offrant un outil complet pour planifier vos repas, découvrir de délicieuses recettes, et faciliter votre liste de courses. Notre objectif est de rendre la cuisine accessible à tous, que vous soyez un novice enthousiaste ou un chef chevronné.
+
+=== Problématique et Gain Attendu:
+Comment simplifier la préparation des repas tout en minimisant le gaspillage alimentaire ? Koolit vise à faciliter la vie quotidienne en proposant des recettes personnalisées et une gestion optimale des achats alimentaires.
+
+=== Motivation de l'Équipe:
+L'équipe de Koolit est motivée par la volonté de rendre la cuisine accessible à tous, en offrant une expérience simple et agréable pour la préparation des repas quotidiens.
+
+=== Concurrence / État de l'Art:
+Bien que plusieurs plateformes proposent des recettes en ligne comme Marmiton ou alors FrigoMagic, Koolit se distingue par son approche personnalisée basée sur les préférences et les ingrédients disponibles chez l'utilisateur.
+
+=== Personas et Fonctionnalités (Haut Niveau):
+* Utilisateur Lambda : Recherche de recettes en fonction des ingrédients disponibles.
+* Épicurien Pressé : Accès à des recettes rapides et simples.
+* Chef en Herbe : Exploration de nouvelles idées culinaires.
+* Gestionnaire de Cuisine : Liste de courses, suivi des achats, gestion des stocks.
+
+=== User Story :
+* Explorer des Recettes - Découvrez une variété de recettes allant des plats simples aux créations gastronomiques.
+* Gestion de Liste de Courses - Ajoutez facilement les ingrédients d'une recette à votre liste de courses personnalisée.
+* Localisation des Magasins - Trouvez des magasins à proximité en fonction des types d'aliments qu'ils proposent.
+
+=== Personas : 
+* Persona 1 - Amélie, Chef Amateur :
+Amélie, 28 ans, adore cuisiner et expérimenter de nouvelles recettes le week-end. Elle recherche une plateforme conviviale pour découvrir des plats variés et ajouter facilement les ingrédients à sa liste de courses.
+* Persona 2 - Sofiane, Étudiant Pressé :
+Sofiane, 22 ans, étudiant occupé, cherche des recettes simples et rapides à préparer. Il a besoin d'une application pratique qui lui permette de gérer sa liste de courses sans perdre de temps.
+* Persona 3 - Inès, Maman Organisée :
+Inès, 35 ans, maman de deux enfants, souhaite simplifier la planification des repas familiaux. Elle recherche une solution tout-en-un pour explorer des recettes, gérer sa liste de courses, et localiser les magasins à proximité.
+
+=== Gestion de Projet Collaborative :
+* Méthodologie Agile - Nous adoptons une approche agile pour nous adapter rapidement aux changements et livrer des fonctionnalités de manière itérative.
+* Communication Transparente - Une communication ouverte avec notre communauté d'utilisateurs est essentielle pour comprendre vos besoins et améliorer constamment notre service.
+
+=== Prévisions Marketing:
+Les stratégies de marketing incluront une présence active sur les réseaux sociaux, des enquêtes pour comprendre les besoins des utilisateurs, et un site Web convivial présentant les fonctionnalités uniques de Koolit.
+
+== *ASPECTS TECHNIQUES* ==         
+
+=== Type d'Application:
+Koolit est une application web.
+
+=== Schéma Architectural:
+Frontend, API, Backend, Persistance.
+
+=== Plateforme Technologique:
+Utilisation de Java Spring Boot pour le backend, React pour le frontend, base de données Mysql.
+
+=== Plateforme Opérationnelle:
+Gestion de versions avec Git, intégration continue.
+
+=== Interconnection avec Systèmes/ API Distantes (En prévision M1 Semestre 2 et M2):
+En prévision pour améliorer les fonctionnalités et intégrer des partenariats avec des commerces locaux.
+
+=== Acquisition de Données, Usage Intelligent des Données (En prévision M2):
+En prévision pour optimiser les recommandations de recettes et les suggestions d'achats.
+
+
+== *MODÉLISATION* ==          
+
+=== Schéma architectural:
+@startuml
+
+!define RECTANGLE class
+!define INTERFACE interface
+!define END end
+
+RECTANGLEFrontend {
+PageAccueil
+PageRecette
+PageListeDeCourses
+PageMagasin
+PageAPropos
+PageContact
+}
+
+Rectangle Backend {
+API_REST
+Ingredient
+ListeDeCourse
+Magasin
+Recette
+}
+
+RECTANGLE BaseDeDonnees {
+ingredients
+liste_course
+magasin
+recette_ingredient
+recette_test
+utilisateur
+}
+
+=== Diagramme de Classes Global (Partie Métier):
+[#diagram,link=http://www.plantuml.com/plantuml/uml/nLZRRjiu47ttL-ZHGPKVC0el4ZTT6CZ5SBfzPsN6uK8Y1P8ArYZwGVsE_jXI52_3YsGvMs0VOaHpEHpE3CzGgceaHB6bHuuF15DPV5yKnNL1d61xM1NtZ1wrcB9cLJnBJiopFBLuLNnHlnvXeJGV0EBoAXQau2L4BhEm0yeHootmNbwvu3uK8jAbooZhDqOE5kcHDJs0su-6w8KWcCYbZwdtYRPiVBKs6xn1-R5OODeraLRd_1uVkmQNnMVU4LaMNmcY1_LuouWGZ9R5vjTF_kidgh4eYtj49C6yB7PM-uIxbxBuaoEbVUugPTclLUdYtXCXyOPrN61RNLZJJfAQ22HnnuDQ-_I9eEP0tYElDFx7mM0z51-iQAeF9Pa5oznglk9fdLLrypNz2uB7Rg4o4qS4vaiaqaQ1obpqer1zBdHaC6yfg3QRJ3Regg7I3-Y81A6vAkTEhZ4Fv1slS-BU_AOcZGh4oNNCnjYKsJubfpd2B3FhbBb5tjK3xppNRYknArHcDXDteDjPYWHqQG8o8Pbiv4EoobpQuixOumfBQSy_7vucgPqogMZimBflDNO2OHhmanQlKvxGMj_4WqNxoYJR8VaQB80bQh7OSTmYZYHXDCSa9kwbwuEz3Jrk1w-8TlVVc-EHIKtwBXd6HqbXbZ9Umfrpdp7dB9QPb4upK2QzqrmKEqJmErkPD2LUbPGl0hcB2pb6RgdXcHv8sXYCaGsZahEwnjmqTUrrpvY_aGgleBsH9GFAuopd8RXMlAbhhHM3sXS8-AojCRIyFO51f4WCFBcMpGEXlradCOVJbBBk3QlmWIo8Mc7jiMWP5VYEIY9FAQhesfOh_k3mZkPFJ-J-npePE4ajca7kilWGF0UJ0-H_sWlctMXqoZEx-sZqQvT-8xWzXLCZyhLkCDUMhnjBraPmnhjX1_92l3jnDvqBWLnnOgJKxwiwAuEJei1NpFi_uxL3FEMuMPc3a-QykpcuGGP74FBpVcHJyI1BEiwGlkkTVV0S31FGSTDUiEECnXzo8nXs-aBemH-UsvCVHa6rj50xzCpFxN2B1bPfPkydErMYZ0Ghe-xOvmzpLM6PGVgsmroz8T1-pcoLtH7p2SGSqPfaf2oxnoqJH39-2WZ7YnEkDL3BIq36wFR_OTkCUrykHS6e-sURJ5u_nm28nguOVSDS3WR0yGlJz_uQ3fPCVBzvGiJHdPa8sRUEi4yCoy7oFiIYO0xOtfZZE3OA0WOxG_r6F9FgeVL5r0uTfwZSNQZcKVVqJbDx6qRCes7HE4YwCOYh5Vej9psk73SQrGnYxAr_3zrcxyfpoFn2RlQnlvUBFKA5wgfJW-c1dR2octfB6Fxp1VKxzGNGPHtIbMiAy04hH_mZEE57bBby6hF5U93zU4Q4zhHuf8pZ3T8SrgHlo-aX6DlfKzk_NA3QMyS78HlFPMqxhoEJHbRzcFQX2Y__hdDzdNkfIU_XoYwwTASt9sKJNvCoSpzS4V11nFj-HM0JqOnV4VAA_JYXjE2ZwAhOi4ORgT916_kLQrNS2C4gebyS5_y2
+image::diagram.jpg[Diagram,200,100]
+
+
+=== Description API Backend (ex REST):
+.Endpoints :
+* GET /api/recettes
+** Récupérer la liste des recettes disponibles.
+* GET /api/recettes/{id}
+** Récupérer une recette spécifique par ID.
+* POST /api/recettes
+** Ajouter une nouvelle recette.
+* PUT /api/recettes/{id}
+** Mettre à jour une recette existante par ID.
+* DELETE /api/recettes/{id}
+** Supprimer une recette par ID.
+
+
+
+

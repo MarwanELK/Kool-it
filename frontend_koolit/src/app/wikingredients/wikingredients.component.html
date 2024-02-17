@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Ajoutez vos styles CSS ici */
+
+        /* Style pour les conteneurs de recettes */
+        .recipe-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: 200px; /* Ajustez la largeur selon vos besoins */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        /* Effet de transition lorsque survolé */
+        .recipe-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Style pour les boutons */
+        .custom-button {
+            padding: 10px;
+            background-color: #4c78af; /* Couleur du bouton */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style pour les étoiles */
+        .star {
+            color: #FFD700; /* Couleur de l'étoile (jaune) */
+        }
+    </style>
+    <title>Wikingrediens</title>
+</head>
+<body>
+
+<div>
+
+
+<div>
+  <label for="rechercheAliment">Rechercher un aliment par composant :</label>
+  <input type="text" id="rechercheAliment" [(ngModel)]="rechercheComposant" (input)="rechercherAliments()" />
+  <button (click)="rechercherAliments()">Rechercher</button>
+</div>
+
+    <!-- Afficher les noms d'aliments -->
+    <h2>Aliments</h2>
+
+    <!-- Afficher les boutons d'aliments côte à côte -->
+<div class="wikingredients-container">
+  <div *ngFor="let wikingredient of wikingredients; let i = index">
+    <div *ngIf="correspondRecherche(wikingredient)" class="recipe-container">
+      <div class="custom-button" (click)="afficherInfoWikingredient(i)">
+        {{ wikingredient.nomAliment }}
+      </div>
+
+      <!-- Afficher les détails de l'aliment sélectionné -->
+      <div *ngIf="wikingredientSelectionne !== null && wikingredientSelectionneIndex === i" class="wikingredient-details">
+        <h3>{{ wikingredientSelectionne.nomAliment }}</h3>
+        <p *ngIf="wikingredientSelectionne.composant && wikingredientSelectionne.composant.length > 0">Composant :</p>
+        <ul *ngIf="wikingredientSelectionne.composant && wikingredientSelectionne.composant instanceof Array">
+          <li *ngFor="let composant of wikingredientSelectionne.composant">
+            {{ composant.nom }}
+          </li>
+        </ul>
+            
+    
+            <p>Note :
+              <span *ngFor="let star of getStars(wikingredientSelectionne.note)" class="star">
+                ★
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div></div>
+</body>
+</html>

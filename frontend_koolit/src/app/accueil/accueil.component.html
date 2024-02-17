@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="accueil.component.css">
+    <title>KOOL'IT - Découvrez des recettes innovantes</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <header class="banner">
+        <h1>Bienvenue chez KOOL'IT</h1>
+        <p>Découvrez nos recettes innovantes et créez votre liste de courses facilement.</p>
+        
+    </header>
+
+  
+    <section class="recettes">
+        <h2>Recettes en Vedette</h2>
+      
+        <div class="recettes-container">
+            <div *ngFor="let recette of recettes" class="recette-card">
+                <img src="{{recette.photoPath}}" alt="Photo de la recette">
+                <h3>{{ recette.nom }} </h3>
+                
+               
+               
+            <p>Note: {{ recette.note }}</p>
+            
+                    
+        </div> </div> 
+    </section>
+  
+  
+
+    <section class="testimonials">
+        <h2>Témoignages</h2>
+        <!-- Add customer testimonials here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2023 KOOL'IT - Tous droits réservés</p>
+    </footer>
+
+</body>
+</html>

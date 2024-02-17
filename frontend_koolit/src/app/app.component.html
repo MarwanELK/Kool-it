@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.component.css">
+    <title>KOOL'IT</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2d3436;
+            padding: 5px;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 1%;
+            height: auto;
+        }
+
+        nav {
+            background-color: #dfe6e9;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #2d3436;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #0984e3;
+        }
+
+        .recettes-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        footer {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://www.canva.com/design/DAF2IbubsKc/cmkm8JW408DG3dkxhKpKZg/edit?utm_content=DAF2IbubsKc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" alt="Logo KOOL'IT">
+    </header>
+
+    <nav>
+        <a routerLink="/accueil">Accueil</a>
+        <a routerLink="/produits">Produits</a>
+        <a routerLink="/liste-de-courses">Liste de courses</a>
+        <a routerLink="/Magasins">Magasins</a>
+        <a routerLink="/Wikingredients">Wikingredient</a>
+        <a routerLink="/apropos">À Propos</a>
+        <a routerLink="/contact">Contact</a>
+    </nav>
+
+    <ul class="recettes-list" id="recettesList"></ul>
+
+    <router-outlet></router-outlet>
+    
+    <footer>
+        <p>&copy; 2023 KOOL'IT. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
