@@ -8,6 +8,7 @@ import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
 import { MapComponent } from './map/map.component';
+import { WikingredientsComponent } from './wikingredients/wikingredients.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'produits-list', component: ProduitsListComponent }, 
   { path: 'liste-de-courses', component: ListeDeCoursesComponent },
-  { path: 'Magasins', component: MagasinsComponent },
+  { path: 'magasins', component: MagasinsComponent },
   { path: 'map', component: MapComponent},
+  { path: 'Wikingredients', component: WikingredientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: '**', redirectTo: '/accueil' }
 ];
