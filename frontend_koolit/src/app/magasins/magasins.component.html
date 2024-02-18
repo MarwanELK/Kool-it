@@ -10,11 +10,19 @@
 
 <!-- magasins.component.html -->
 
-<div>
-    <label for="searchMagasin">Rechercher un magasin:</label>
-    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
-    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
-</div>
+<section class="recherche">
+    <div style="display: inline-block; margin-right: 10px;">
+        <label for="searchMagasin">Rechercher un magasin :</label>
+        <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+        <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
+    </div>
+    <div style="display: inline-block; margin-left: 10px;">
+        <label for="searchMagasin">Rechercher magasins par type d'aliment :</label>
+        <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+        <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
+    </div>    
+</section>
+
 
 <div class="magasins-container">
     <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
@@ -22,7 +30,7 @@
         <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
         <p>Type: {{ magasin.type }}</p>
         <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
-        <p>Type d'aliment: {{ magasin.typeAliment }}</p>
+        <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
         <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
         <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
         <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
