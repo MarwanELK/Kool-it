@@ -15,17 +15,23 @@
           <h2>Votre Liste de Courses</h2>
           <ul>
             <li *ngFor="let ingredient of listesCourses">
-                {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }}
                 <button (click)="acheterIngredient(ingredient)">Produit acheté</button>
                 <button (click)="supprimerIngredient(ingredient.id)">Supprimer</button>
           </ul>
+          <label for="formatSelection">Choisir le format :</label>
+        <select id="formatSelection" [(ngModel)]="selectedFormat">
+            <option value="csv">CSV</option>
+            <option value="note">Note</option>
+        </select>
+        <button (click)="telechargerListe()">Télécharger</button>
         </section>
       
         <section class="shopping-list-Achete">
           <h2>Produits achetés</h2>
           <ul>
             <li *ngFor="let ingredient of listesCoursesAchetes">
-                {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} - {{ ingredient.ingredientsList?.[0]?.type }}
+                {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }} 
             </li>
             <button (click)="supprimerListeIngredientAchete()">Supprimer historique des achats</button>
           </ul>
