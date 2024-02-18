@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'produits-list', component: ProduitsListComponent }, 
   { path: 'liste-de-courses', component: ListeDeCoursesComponent },
-  { path: 'magasins', component: MagasinsComponent },
+  { path: 'Magasins', component: MagasinsComponent },
   { path: 'map', component: MapComponent},
   { path: 'Wikingredients', component: WikingredientsComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },

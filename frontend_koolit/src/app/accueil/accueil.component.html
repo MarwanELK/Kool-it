@@ -3,53 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app.component.css">
-    <title>KOOL'IT</title>
+    <link rel="stylesheet" href="accueil.component.css">
+    <title>KOOL'IT - Découvrez des recettes innovantes</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1; /* Couleur de fond claire */
+    color: #333; /* Couleur du texte */
+}
 
+header {
+    background-color: #fa796d; /* Rouge vif */
+    padding: 20px;
+    text-align: center;
+    border-radius: 0 0 20px 20px; /* Coins arrondis en bas */
+    margin-bottom: 20px; /* Marge inférieure */
+}
+
+header h1 {
+    margin-bottom: 10px; /* Marge inférieure pour le titre */
+    color: #fff; /* Texte en blanc */
+}
+
+section.recettes {
+    padding: 20px;
+}
+
+section.recettes h2 {
+    color: #333; /* Couleur du texte */
+}
+
+
+.recettes-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.recette-card {
+    width: 30%; /* Ajustez la largeur selon vos besoins */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.recette-image {
+    max-width: 100%; /* Redimensionnez l'image pour s'adapter à la carte */
+    height: auto;
+}
+
+.recette-card:hover {
+    transform: translateY(-5px); /* Légère translation vers le haut au survol */
+}
+
+.recette-card img {
+    max-width: 100%;
+    border-radius: 8px; /* Coins arrondis pour les images */
+}
+
+.testimonials {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px; /* Marge inférieure */
+}
+
+.testimonials h2 {
+    color: #333; /* Couleur du texte */
+}
+
+.testimonial-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto; /* Défilement horizontal */
+    white-space: nowrap; /* Empêcher le passage à la ligne des éléments */
+}
+
+.testimonial-item {
+    display: inline-block;
+    margin-right: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px; /* Coins arrondis */
+    padding: 20px;
+    min-width: 300px; /* Largeur minimale */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    vertical-align: top;
+}
+
+.testimonial-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333; /* Couleur du texte */
+    font-size: 18px; /* Taille de la police augmentée */
+}
+
+.testimonial-item p {
+    margin: 0;
+    color: #666; /* Couleur du texte légèrement plus claire */
+    font-size: 16px; /* Taille de la police augmentée */
+}
+
+    </style>
 </head>
 <body>
 
-    <section class="banner">
+    <header class="banner">
         <h1>Bienvenue chez KOOL'IT</h1>
-        <p>Découvrez nos recettes innovantes.</p>
-        <a routerLink="/Recettes" class="cta-button">Voir les produits</a>
+        <p>Découvrez nos recettes innovantes et créez votre liste de courses facilement.</p>
+    </header>
+
+    <section class="recettes">
+        <h2>Recettes en Vedette</h2>
+        <div class="recettes-container">
+            <div *ngFor="let recette of recettes.slice(0, 3)" class="recette-card">
+                <h3>{{ recette.nom }} (pour {{ recette.nbPersonnes }} personnes)</h3>
+                <img src="{{recette.photoPath}}" alt="Photo de la recette" class="recette-image">
+                <p>Ingrédients:</p>
+                <ul>
+                    <li *ngFor="let ingredient of recette.ingredients">
+                        {{ ingredient.quantite }} {{ ingredient.nom }}
+                    </li>
+                </ul>
+                <p>Etapes de préparation:</p>
+                <ul>
+                    <li>{{recette.etapesPreparation}}</li>
+                </ul>
+                <p>Note: {{ recette.note }}/20</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>Témoignages</h2>
+        <ul class="testimonial-list">
+            <li class="testimonial-item">
+                <h3>POIZAT Pascal</h3>
+                <p>Excellent service et plats délicieux. Je recommande vivement KOOL'IT!</p>
+                <p>Leur équipe est très professionnelle et leurs recettes sont uniques. Chaque fois que je cuisine avec leurs instructions, je suis impressionné par les saveurs et la qualité des plats. Merci KOOL'IT pour cette expérience culinaire exceptionnelle!</p>
+                <p>Je suis tellement reconnaissant d'avoir découvert KOOL'IT. Cela a vraiment amélioré ma vie en cuisine et m'a permis d'explorer de nouvelles saveurs et techniques. Je suis maintenant un cuisinier plus confiant et compétent grâce à eux!</p>
+            </li>
+            <li class="testimonial-item">
+                <h3>LEGOND Fabrice</h3>
+                <p>Je suis un grand fan de KOOL'IT! Leurs recettes sont non seulement délicieuses, mais aussi faciles à suivre.</p>
+                <p>Même les débutants en cuisine peuvent réussir avec leurs instructions claires et précises. J'ai essayé plusieurs recettes jusqu'à présent et je n'ai jamais été déçu. Merci KOOL'IT pour rendre la cuisine si agréable et accessible!</p>
+                <p>Chaque plat que j'ai préparé avec les recettes de KOOL'IT est devenu un succès instantané auprès de ma famille et de mes amis. Leur site est une ressource inestimable pour tous ceux qui veulent cuisiner avec confiance et créativité!</p>
+            </li>
+            <li class="testimonial-item">
+                <h3>HANEN Claire</h3>
+                <p>KOOL'IT a vraiment changé ma vie en cuisine! Avant, je n'étais pas très douée en cuisine, mais grâce à leurs recettes détaillées et leurs conseils utiles, je me sens maintenant beaucoup plus confiante.</p>
+                <p>Leurs ingrédients sont toujours frais et de haute qualité, ce qui se traduit par des plats délicieux à chaque fois. Je recommande fortement KOOL'IT à tous les amateurs de cuisine!</p>
+                <p>Je suis tellement reconnaissante d'avoir découvert KOOL'IT. Leurs recettes m'ont permis d'explorer de nouveaux horizons culinaires et d'impressionner ma famille avec des plats délicieux et sophistiqués. Merci KOOL'IT pour cette opportunité!</p>
+            </li>
+            <li class="testimonial-item">
+                <h3>COJEAN Bruno</h3>
+                <p>KOOL'IT offre une expérience culinaire incomparable! Leurs recettes créatives et innovantes m'ont permis d'explorer de nouveaux horizons gastronomiques.</p>
+                <p>Chaque plat que j'ai préparé avec leurs instructions est devenu un véritable chef-d'œuvre. Je suis reconnaissant pour leur passion et leur dévouement à fournir des recettes de qualité supérieure. Merci KOOL'IT pour cette expérience incroyable!</p>
+                <p>Je suis un grand fan de KOOL'IT depuis des années et je ne suis jamais déçu. Leurs recettes sont toujours innovantes et délicieuses, et leur équipe est toujours prête à aider en cas de besoin. Merci KOOL'IT pour votre excellence!</p>
+            </li>
+            <li class="testimonial-item">
+                <h3>RUKOZ CASTILLO Marta</h3>
+                <p>Je suis un client fidèle de KOOL'IT depuis des années et je ne suis jamais déçu. Leurs recettes sont toujours créatives, délicieuses et faciles à suivre.</p>
+                <p>Grâce à KOOL'IT, j'ai pu impressionner ma famille et mes amis avec des plats dignes d'un chef étoilé. Leur site est une véritable mine d'or pour tous les passionnés de cuisine. Merci KOOL'IT pour votre excellence et votre engagement envers la satisfaction des clients!</p>
+                <p>Je recommande vivement KOOL'IT à tous ceux qui cherchent à améliorer leurs compétences en cuisine et à découvrir de nouvelles saveurs excitantes. Leurs recettes sont uniques et toujours délicieuses. Merci KOOL'IT pour tout ce que vous faites!</p>
+            </li>
+        </ul>
     </section>
     
-    <p>TEST</p>
-    <div *ngIf="recetteData">
-        <h1>{{ recetteData.nom }}</h1>
-        <h2>Ingrédients Gateau :</h2>
-        <ul>
-          <li *ngFor="let ingredient of recetteData.ingredients">
-            {{ ingredient.nom }} - {{ingredient.type}}</li>
-        </ul>
-      </div>
-      
- 
-        <h2>Nos Magasins</h2>
-        <ul>
-            <li><a href="https://www.e-leclerc.com/">Leclerc</a></li>
-            <li><a href="https://www.carrefour.fr/">Carrefour</a></li>
-            <li><a href="https://www.auchan.fr/">Auchan</a></li>
-            <li><a href="https://www.intermarche.com/">Intermarché</a></li>
-            <!-- Ajoutez d'autres magasins ici -->
-        </ul>
+    
 
-
-       
-      <h2>Nos Magasins</h2>
-      <ul>
-          <li><a href="https://www.e-leclerc.com/">Leclerc</a></li>
-          <li><a href="https://www.carrefour.fr/">Carrefour</a></li>
-          <li><a href="https://www.auchan.fr/">Auchan</a></li>
-          <li><a href="https://www.intermarche.com/">Intermarché</a></li>
-          <!-- Ajoutez d'autres magasins ici -->
-      </ul>
-      <section class="testimonials">
-        <h2>Témoignages</h2>
-        <!-- Ajoutez des témoignages ici -->
-    </section>
-
-    </body>
-    </html>
+  
+</body>
+</html>

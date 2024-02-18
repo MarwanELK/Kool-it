@@ -1,91 +1,58 @@
-body, html {
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
+    height: 100vh;
+}
+
+.map-wrapper {
     height: 100%;
-    margin: 0;
+    border-radius: 20px; /* Coins arrondis */
+    overflow: hidden; /* Cacher le contenu qui dépasse */
 }
 
 #sidebar {
-    width: 150px;
-    height: 100vh;
+    height: 100%;
     padding: 20px;
-    background-color: #333;;
+    background-color: #ff6f61; /* Couleur vive */
     color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    border-radius: 20px; /* Coins arrondis */
+    overflow: hidden; /* Cacher le contenu qui dépasse */
 }
 
-#sidebar h2 {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+.sidebar-title {
+    font-size: 1.8rem; /* Taille du titre */
+    font-weight: bold; /* Texte en gras */
+    margin-bottom: 20px; /* Marge en bas */
+    text-transform: uppercase; /* Mettre en majuscules */
 }
-
-#sidebar form {
-    margin-bottom: 20px;
-}
-
-#sidebar label {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-}
-
-#sidebar input {
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;
-}
-
-#sidebar button {
-    padding: 10px;
-    background-color: #41b6dd;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-
-#sidebar button:hover {
-    background-color: #0056b3;
-}
-
-#sidebar a {
-    text-decoration: none;
-    color: #fff;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-#sidebar a:hover {
-    background-color: #333;;
-}
-
-.logo-img {
-    max-width: 100%;
-    height: auto;
-}
-/* magasins.component.css */
 
 .magasins-container {
-    display: flex;
-    overflow-x: auto; /* Ajoutez cette ligne pour activer la barre de défilement horizontale */
-  }
-  
-  .magasins-item {
-    flex: 0 0 auto;
-    width: 300px; /* Ajustez la largeur des magasins selon vos besoins */
-    border: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.magasins-item {
+    background-color: #555; /* Couleur vive */
+    border-radius: 15px; /* Coins arrondis */
     padding: 10px;
-    margin-right: 10px; /* Ajoutez une marge entre les magasins */
-    border-radius: 5px;
-  }
-  
-  .magasins-item a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  
-  .magasins-item a:hover {
-    text-decoration: underline;
-  }
-  
-  
+    color: #fff;
+}
+
+.magasins-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.magasins-item p {
+    margin: 0;
+}
+
+.selected {
+    border: 2px solid #fff; /* Couleur vive pour les éléments sélectionnés */
+}

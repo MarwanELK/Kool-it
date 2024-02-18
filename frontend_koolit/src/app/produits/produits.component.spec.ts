@@ -3,18 +3,18 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'; // Impor
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importez FormsModule
-import { MapComponent } from './map.component';
+import { ProduitsComponent } from './produits.component';
 
-describe('MapComponent', () => {
-  let component: MapComponent;
-  let fixture: ComponentFixture<MapComponent>;
+describe('ProduitsComponent', () => {
+  let component: ProduitsComponent;
+  let fixture: ComponentFixture<ProduitsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MapComponent],
+      declarations: [ProduitsComponent],
       imports: [HttpClientTestingModule, CommonModule,FormsModule]
     });
-    fixture = TestBed.createComponent(MapComponent);
+    fixture = TestBed.createComponent(ProduitsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
