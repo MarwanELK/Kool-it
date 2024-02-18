@@ -1,9 +1,6 @@
-package project.spring.backend_koolit;
+package project.spring.backend_koolit.model;
 
 import org.junit.jupiter.api.Test;
-import project.spring.backend_koolit.model.Ingredient;
-import project.spring.backend_koolit.model.Magasin;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;

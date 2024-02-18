@@ -1,4 +1,4 @@
-package project.spring.backend_koolit;
+package project.spring.backend_koolit.service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.repository.MagasinRepository;
-import project.spring.backend_koolit.service.MagasinService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,9 @@
-package project.spring.backend_koolit;
+package project.spring.backend_koolit.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import project.spring.backend_koolit.model.Magasin;
-import project.spring.backend_koolit.repository.MagasinRepository;
 
 import java.util.List;
 import java.util.Optional;

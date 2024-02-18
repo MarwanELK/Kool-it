@@ -24,6 +24,10 @@ public class Ingredient {
     @Column(name = "type")
     private TypeIngredient type;
 
+    public Ingredient(long l, String carotte, TypeIngredient typeIngredient) {
+
+    }
+
     public enum TypeIngredient {
         Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré, Viennoiserie, Pain, Pâtisserie
     }
