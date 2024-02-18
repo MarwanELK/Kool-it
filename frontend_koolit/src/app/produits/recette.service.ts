@@ -17,7 +17,7 @@ export class RecetteService {
   }
 
   noterRecette(recetteId: number, note: number): Observable<any> {
-    note = Math.min(Math.max(note, 0), 10);
+    note = Math.min(Math.max(note, 0), 20);
 
     const url = `${this.backendUrl}/recettes/${recetteId}/noter?note=${note}`;
     return this.http.post<any>(url, {});
