@@ -67,9 +67,9 @@ section.recettes h2 {
 .testimonials {
     background-color: #fff;
     padding: 20px;
-    margin-bottom: 20px; /* Marge inférieure */
+    margin-bottom: 20px; /* Ajoutez une marge inférieure pour pousser les témoignages vers le haut */
+    margin-top: 20px; /* Ajoutez une marge supérieure pour espacer les témoignages du contenu précédent */
 }
-
 .testimonials h2 {
     color: #333; /* Couleur du texte */
 }
@@ -78,26 +78,36 @@ section.recettes h2 {
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow-x: auto; /* Défilement horizontal */
+    overflow-x: auto; /* Ajout du défilement horizontal */
     white-space: nowrap; /* Empêcher le passage à la ligne des éléments */
 }
 
 .testimonial-item {
     display: inline-block;
+    width: 1500px; /* Ajustez la largeur selon vos préférences */
     margin-right: 20px;
     background-color: #f1f1f1;
-    border-radius: 8px; /* Coins arrondis */
+    border-radius: 8px;
     padding: 20px;
-    min-width: 300px; /* Largeur minimale */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     vertical-align: top;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6; /* Nombre de lignes à afficher par défaut */
+    transition: width 0.3s ease; /* Animation fluide de transition */
+}
+
+.testimonial-item:hover {
+    overflow: visible;
+    width: 350px; /* Ajustez la largeur au survol selon vos préférences */
 }
 
 .testimonial-item h3 {
     margin-top: 0;
     margin-bottom: 10px;
     color: #333; /* Couleur du texte */
-    font-size: 18px; /* Taille de la police augmentée */
+    font-size: 16px; /* Taille de la police augmentée */
 }
 
 .testimonial-item p {
@@ -141,34 +151,26 @@ section.recettes h2 {
         <ul class="testimonial-list">
             <li class="testimonial-item">
                 <h3>POIZAT Pascal</h3>
-                <p>Excellent service et plats délicieux. Je recommande vivement KOOL'IT!</p>
-                <p>Leur équipe est très professionnelle et leurs recettes sont uniques. Chaque fois que je cuisine avec leurs instructions, je suis impressionné par les saveurs et la qualité des plats. Merci KOOL'IT pour cette expérience culinaire exceptionnelle!</p>
-                <p>Je suis tellement reconnaissant d'avoir découvert KOOL'IT. Cela a vraiment amélioré ma vie en cuisine et m'a permis d'explorer de nouvelles saveurs et techniques. Je suis maintenant un cuisinier plus confiant et compétent grâce à eux!</p>
-            </li>
+                <p>Excellent service et plats délicieux.</p>
+                <p> Je recommande vivement KOOL'IT!</p>
+              </li>
             <li class="testimonial-item">
                 <h3>LEGOND Fabrice</h3>
-                <p>Je suis un grand fan de KOOL'IT! Leurs recettes sont non seulement délicieuses, mais aussi faciles à suivre.</p>
-                <p>Même les débutants en cuisine peuvent réussir avec leurs instructions claires et précises. J'ai essayé plusieurs recettes jusqu'à présent et je n'ai jamais été déçu. Merci KOOL'IT pour rendre la cuisine si agréable et accessible!</p>
-                <p>Chaque plat que j'ai préparé avec les recettes de KOOL'IT est devenu un succès instantané auprès de ma famille et de mes amis. Leur site est une ressource inestimable pour tous ceux qui veulent cuisiner avec confiance et créativité!</p>
-            </li>
+                <p>Je suis un grand fan de KOOL'IT! Leurs recettes sont non seulement délicieuses,</p><p> mais aussi faciles à suivre.</p>
+                </li>
             <li class="testimonial-item">
                 <h3>HANEN Claire</h3>
                 <p>KOOL'IT a vraiment changé ma vie en cuisine! Avant, je n'étais pas très douée en cuisine, mais grâce à leurs recettes détaillées et leurs conseils utiles, je me sens maintenant beaucoup plus confiante.</p>
-                <p>Leurs ingrédients sont toujours frais et de haute qualité, ce qui se traduit par des plats délicieux à chaque fois. Je recommande fortement KOOL'IT à tous les amateurs de cuisine!</p>
-                <p>Je suis tellement reconnaissante d'avoir découvert KOOL'IT. Leurs recettes m'ont permis d'explorer de nouveaux horizons culinaires et d'impressionner ma famille avec des plats délicieux et sophistiqués. Merci KOOL'IT pour cette opportunité!</p>
-            </li>
+                </li>
             <li class="testimonial-item">
                 <h3>COJEAN Bruno</h3>
                 <p>KOOL'IT offre une expérience culinaire incomparable! Leurs recettes créatives et innovantes m'ont permis d'explorer de nouveaux horizons gastronomiques.</p>
-                <p>Chaque plat que j'ai préparé avec leurs instructions est devenu un véritable chef-d'œuvre. Je suis reconnaissant pour leur passion et leur dévouement à fournir des recettes de qualité supérieure. Merci KOOL'IT pour cette expérience incroyable!</p>
-                <p>Je suis un grand fan de KOOL'IT depuis des années et je ne suis jamais déçu. Leurs recettes sont toujours innovantes et délicieuses, et leur équipe est toujours prête à aider en cas de besoin. Merci KOOL'IT pour votre excellence!</p>
+                
             </li>
             <li class="testimonial-item">
                 <h3>RUKOZ CASTILLO Marta</h3>
                 <p>Je suis un client fidèle de KOOL'IT depuis des années et je ne suis jamais déçu. Leurs recettes sont toujours créatives, délicieuses et faciles à suivre.</p>
-                <p>Grâce à KOOL'IT, j'ai pu impressionner ma famille et mes amis avec des plats dignes d'un chef étoilé. Leur site est une véritable mine d'or pour tous les passionnés de cuisine. Merci KOOL'IT pour votre excellence et votre engagement envers la satisfaction des clients!</p>
-                <p>Je recommande vivement KOOL'IT à tous ceux qui cherchent à améliorer leurs compétences en cuisine et à découvrir de nouvelles saveurs excitantes. Leurs recettes sont uniques et toujours délicieuses. Merci KOOL'IT pour tout ce que vous faites!</p>
-            </li>
+                 </li>
         </ul>
     </section>
     
