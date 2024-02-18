@@ -1,53 +1,34 @@
-package project.spring.backend_koolit;
+package project.spring.backend_koolit.model;
 
 import org.junit.jupiter.api.Test;
-import project.spring.backend_koolit.model.Magasin;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@SpringBootTest
 public class MagasinTest {
 
     @Test
-    public void testMagasinGetterSetter() {
-
-        Magasin magasin = new Magasin();
-
-
+    public void testMagasinConstructor() {
+        // Créer des données de test
         Long id = 1L;
-        String nom = "Supermarché XYZ";
-        String typeMagasin = "Supermarché";
-        String urlMagasin = "http://supermarche-xyz.com";
-        String typeAliment = "Épicerie";
+        String nom = "Nom du magasin";
+        String description = "Description du magasin";
+        String typeMagasin = "Type du magasin";
+        String urlMagasin = "URL du magasin";
+        String typeAliment = "Type d'aliment";
+        String ville = "Ville du magasin";
+        double lat = 123.456;
+        double lng = 456.789;
+        List<Ingredient> ingredients = new ArrayList<>();
 
-        magasin.setId(id);
-        magasin.setNom(nom);
-        magasin.setTypeMagasin(typeMagasin);
-        magasin.setUrlMagasin(urlMagasin);
-        magasin.setTypeAliment(typeAliment);
+        // Créer une instance de la classe Magasin en utilisant le constructeur
+        Magasin magasin = new Magasin(id, nom, description, typeMagasin, urlMagasin, typeAliment, ville, lat, lng, ingredients);
 
-
+        // Vérifier que l'instance a été créée avec succès
+        assertNotNull(magasin);
         assertEquals(id, magasin.getId());
         assertEquals(nom, magasin.getNom());
-        assertEquals(typeMagasin, magasin.getTypeMagasin());
-        assertEquals(urlMagasin, magasin.getUrlMagasin());
-        assertEquals(typeAliment, magasin.getTypeAliment());
-    }
-
-    @Test
-    public void testMagasinConstructor() {
-
-        String nom = "Supermarché XYZ";
-        String typeMagasin = "Supermarché";
-        String urlMagasin = "http://supermarche-xyz.com";
-        String typeAliment = "Épicerie";
-
-        Magasin magasin = new Magasin(nom, typeMagasin, urlMagasin, typeAliment);
-
-
-        assertNull(magasin.getId());
-        assertEquals(nom, magasin.getNom());
-        assertEquals(typeMagasin, magasin.getTypeMagasin());
-        assertEquals(urlMagasin, magasin.getUrlMagasin());
-        assertEquals(typeAliment, magasin.getTypeAliment());
-    }
-}
+        assertEquals(description, magasin.getDescription());
+        assertEquals
