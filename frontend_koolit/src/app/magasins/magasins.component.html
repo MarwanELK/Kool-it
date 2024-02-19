@@ -10,19 +10,11 @@
 
 <!-- magasins.component.html -->
 
-<section class="recherche">
-    <div style="display: inline-block; margin-right: 10px;">
-        <label for="searchMagasin">Rechercher un magasin :</label>
-        <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
-        <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
-    </div>
-    <div style="display: inline-block; margin-left: 10px;">
-        <label for="searchMagasin">Rechercher magasins par type d'aliment :</label>
-        <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
-        <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
-    </div>    
-</section>
-
+<div>
+    <label for="searchMagasin">Rechercher un type d'ingrédient:</label>
+    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
+</div>
 
 <div class="magasins-container">
     <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
@@ -38,9 +30,6 @@
 </div>
 
 
-<footer>
-    <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
-</footer>
 
 </body>
 </html>

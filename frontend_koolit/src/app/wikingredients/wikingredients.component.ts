@@ -136,11 +136,14 @@ export class WikingredientsComponent implements OnInit {
       if (this.wikingredientSelectionne && typeof this.wikingredientSelectionne.composant === 'string') {
         this.wikingredientSelectionne.composant = this.decodeJsonString(this.wikingredientSelectionne.composant);
       }
+      else if (this.wikingredientSelectionne && typeof this.wikingredientSelectionne.composant === 'object') {
+        // La propriété composant est déjà un objet JSON, pas besoin de la décoder
+      }
   
       this.wikingredientSelectionneIndex = index;
     }
   }
-  
+
 
   
   getStars(note: number): number[] {

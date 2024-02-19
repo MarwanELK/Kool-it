@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
-    color: #ff6f61;
+    color: #333;
 }
 
 header {
@@ -34,6 +34,8 @@ nav a {
     color: white;
     font-size: 16px;
     margin: 0 15px;
+    border-radius: 10px; /* Coins arrondis */
+    padding: 8px 10px; /* Espacement interne */
 }
 
 .recettes-list {
@@ -237,3 +239,4 @@ nav a.active {
   background-color: #ffc107; /* Jaune vif pour l'élément actif */
   color: #333; /* Couleur du texte */
 }
+
