@@ -28,7 +28,7 @@ public class RecetteTest {
         recette.setNom(nom);
         recette.setNote(note);
         recette.setNotes(notes);
-        recette.setEtapesPreparation(String.valueOf(etapesPreparation));
+        recette.setEtapesPreparation(etapesPreparation);
 
         // Vérifier les valeurs à l'aide des getters
         assertEquals(recetteId, recette.getRecetteId());
@@ -70,7 +70,7 @@ public class RecetteTest {
         recette.setNom(nom);
         recette.setNote(note);
         recette.setNotes(notes);
-        recette.setEtapesPreparation(String.valueOf(etapesPreparation));
+        recette.setEtapesPreparation(etapesPreparation);
 
         // Vérifier que les propriétés sont correctement définies
         assertEquals(recetteId, recette.getRecetteId());

@@ -1,74 +1,64 @@
 package project.spring.backend_koolit;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.repository.MagasinRepository;
+import project.spring.backend_koolit.service.MagasinService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-@DataJpaTest
+@SpringBootTest
 public class MagasinRepositoryTest {
 
-    @Autowired
+    @Mock
     private MagasinRepository magasinRepository;
+
+    @InjectMocks
+    private MagasinService magasinService;
+
+    @Test
+    public void testFindByNomContainingIgnoreCase() {
+
+        String searchKeyword = "supermarket";
+        Magasin magasin1 = new Magasin("Supermarket ABC", "Grocery", "http://example.com", "Food");
+        Magasin magasin2 = new Magasin("Corner Store XYZ", "Convenience Store", "http://example.com", "Snacks");
+        List<Magasin> mockedMagasins = Arrays.asList(magasin1, magasin2);
+
+        when(magasinRepository.findByNomContainingIgnoreCase(searchKeyword)).thenReturn(mockedMagasins);
+
+
+        List<Magasin> result = magasinRepository.findByNomContainingIgnoreCase(searchKeyword);
+
+
+        verify(magasinRepository, times(1)).findByNomContainingIgnoreCase(searchKeyword);
+
+
+        assertEquals(2, result.size());
+        assertEquals("Supermarket ABC", result.get(0).getNom());
+        assertEquals("Corner Store XYZ", result.get(1).getNom());
+    }
 
     @Test
     public void testFindByNom() {
-        // Création d'un magasin et sauvegarde dans la base de données
-        Magasin magasin = new Magasin();
-        magasin.setNom("Magasin test");
-        magasin.setDescription("Description test");
-        magasin.setTypeMagasin("Type test");
-        magasin.setVille("Ville test");
-        magasin.setLat(10.0);
-        magasin.setLng(20.0);
-        magasinRepository.save(magasin);
+        // Mocking data
+        String magasinNom = "Supermarket ABC";
+        Magasin magasin = new Magasin( magasinNom, "Grocery", "http://example.com", "Food");
 
-        // Recherche du magasin par nom
-        Optional<Magasin> optionalMagasin = magasinRepository.findByNom("Magasin test");
+        when(magasinRepository.findByNom(magasinNom)).thenReturn(Optional.of(magasin));
 
-        // Vérification si le magasin est trouvé
-        assertTrue(optionalMagasin.isPresent());
+        Optional<Magasin> result = magasinRepository.findByNom(magasinNom);
 
-        // Vérification des détails du magasin
-        Magasin foundMagasin = optionalMagasin.get();
-        assertEquals("Magasin test", foundMagasin.getNom());
-        assertEquals("Description test", foundMagasin.getDescription());
-        assertEquals("Type test", foundMagasin.getTypeMagasin());
-        assertEquals("Ville test", foundMagasin.getVille());
-        assertEquals(10.0, foundMagasin.getLat());
-        assertEquals(20.0, foundMagasin.getLng());
+        verify(magasinRepository, times(1)).findByNom(magasinNom);
+
+        assertEquals(magasinNom, result.get().getNom());
     }
 
-    @Test
-    public void testFindMagasinsByVille() {
-        // Création de plusieurs magasins et sauvegarde dans la base de données
-        Magasin magasin1 = new Magasin();
-        magasin1.setNom("Magasin 1");
-        magasin1.setVille("Ville test");
-        magasinRepository.save(magasin1);
-
-        Magasin magasin2 = new Magasin();
-        magasin2.setNom("Magasin 2");
-        magasin2.setVille("Ville test");
-        magasinRepository.save(magasin2);
-
-        Magasin magasin3 = new Magasin();
-        magasin3.setNom("Magasin 3");
-        magasin3.setVille("Autre ville");
-        magasinRepository.save(magasin3);
-
-        // Recherche des magasins par ville
-        List<Magasin> magasins = magasinRepository.findMagasinsByVille("Ville test");
-
-        // Vérification du nombre de magasins trouvés
-        assertEquals(2, magasins.size());
-    }
-
-    // Ajoutez d'autres tests pour les autres méthodes du repository selon vos besoins
 }

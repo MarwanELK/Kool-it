@@ -1,38 +1,40 @@
-/* Import Leaflet styles */
 @import "~leaflet/dist/leaflet.css";
 
-/* Define a wrapper for the map with flexbox */
 .map-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* 100% of the viewport height */
-    width: 80%;
-    float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(40vh - 40px); /* La hauteur est réduite de la hauteur de la barre de navigation */
+  width: 80%;
+  margin-bottom: 20px;
+  position: relative;
 }
 
-/* Add a border around the map wrapper (optional) */
 .map-border {
-  border: 5px solid orange;
-  height: 90%;
-  width: 75%;
+    border: 5px solid orange;
+    height: 70%;
+    width: 100%;
+    border-radius: 10px;
 }
 
-/* Set the height of the map (adjust as needed) */
 #map {
-    width: 100%; /* La carte prend toute la largeur disponible */
-    height: 100%; 
+  width: 100%; 
+  height: 70%;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.map-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    
-  }
-  
-  
-  
-  
-  
+nav {
+  background-color: #ff6f61;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999; /* Assure que la barre de navigation reste au-dessus de la carte */
+}

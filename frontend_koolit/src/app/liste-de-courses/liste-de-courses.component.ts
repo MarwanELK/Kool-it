@@ -1,10 +1,8 @@
-// liste-de-courses.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { KoolitService } from './koolit.service';
-import * as FileSaver from 'file-saver';
 import { saveAs } from 'file-saver';
-
 export interface Ingredient {
   id: number; // Ajoutez cette ligne
   nom: string;
@@ -34,7 +32,6 @@ export class ListeDeCoursesComponent implements OnInit {
     const utilisateurId = 5;
     this.chargerListeDeCourses(utilisateurId);
   }
-
   ajouterALaListeDeCourses(): void {
     const nouvelIngredientAEnvoyer = {
       id: this.nouvelIngredientEcrit.id,
@@ -154,7 +151,7 @@ export class ListeDeCoursesComponent implements OnInit {
       }
     );
   }
-  // ici la base
+
 
   telechargerListeCSV(): void {
     const csvData = this.convertToCSV(this.listesCourses);
@@ -208,6 +205,8 @@ export class ListeDeCoursesComponent implements OnInit {
     const type = row.ingredientsList?.[0]?.type || '';
     return `${nom} ${type}`;
   }
+
+
   
 }
 

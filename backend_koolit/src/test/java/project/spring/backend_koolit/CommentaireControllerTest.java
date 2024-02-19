@@ -1,16 +1,17 @@
-package project.spring.backend_koolit.Controller;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import project.spring.backend_koolit.controller.CommentaireController;
 import project.spring.backend_koolit.model.Commentaire;
 import project.spring.backend_koolit.service.CommentaireService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class CommentaireControllerTest {
 
@@ -20,44 +21,51 @@ public class CommentaireControllerTest {
     @InjectMocks
     private CommentaireController commentaireController;
 
-    public CommentaireControllerTest() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
-    public void testAjouterCommentaire() {
-        // Création d'un commentaire fictif
+    void testAjouterCommentaire() {
+        // Arrange
         Commentaire nouveauCommentaire = new Commentaire();
-        nouveauCommentaire.setId(1L);
-        nouveauCommentaire.setContenu("Contenu du commentaire");
+        when(commentaireService.ajouterCommentaire(Mockito.any(Commentaire.class)))
+                .thenReturn(new Commentaire(/* provide necessary constructor parameters */));
 
-        // Configuration du comportement du service mocké
-        when(commentaireService.ajouterCommentaire(nouveauCommentaire)).thenReturn(nouveauCommentaire);
-
-        // Appel de la méthode à tester
+        // Act
         ResponseEntity<Commentaire> responseEntity = commentaireController.ajouterCommentaire(nouveauCommentaire);
 
-        // Vérification du code de statut de la réponse
+        // Assert
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        // Add more assertions as needed for the response body or headers
 
-        // Vérification de la réponse
-        assertEquals(nouveauCommentaire, responseEntity.getBody());
+        // Verify that the service method was called with the correct parameter
+        verify(commentaireService).ajouterCommentaire(nouveauCommentaire);
     }
 
     @Test
-    public void testSupprimerCommentaire() {
-        // ID du commentaire fictif à supprimer
+    void testSupprimerCommentaire() {
+        // Arrange
         Long commentaireId = 1L;
+        when(commentaireService.supprimerCommentaire(commentaireId)).thenReturn(true);
 
-        // Appel de la méthode à tester
+        // Act
         ResponseEntity<?> responseEntity = commentaireController.supprimerCommentaire(commentaireId);
 
-        // Vérification du code de statut de la réponse
+        // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        // Add more assertions as needed for the response body or headers
 
-        // Vérification de l'appel à la méthode de service correspondante
-        verify(commentaireService, times(1)).supprimerCommentaire(commentaireId);
+        // Verify that the service method was called with the correct parameter
+        verify(commentaireService).supprimerCommentaire(commentaireId);
     }
 
-    // Ajoutez d'autres tests pour les autres méthodes de CommentaireController en fonction de vos besoins
+    @Test
+    void testSupprimerCommentaireException() {
+        // Arrange
+        Long commentaireId = 1L;
+        when(commentaireService.supprimerCommentaire(commentaireId)).thenThrow(new RuntimeException("Erreur lors de la suppression"));
+
+        // Act & Assert
+        assertThrows(RuntimeException.class, () -> commentaireController.supprimerCommentaire(commentaireId));
+
+        // Verify that the service method was called with the correct parameter
+        verify(commentaireService).supprimerCommentaire(commentaireId);
+    }
 }

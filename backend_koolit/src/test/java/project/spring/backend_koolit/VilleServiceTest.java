@@ -1,5 +1,3 @@
-package project.spring.backend_koolit;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

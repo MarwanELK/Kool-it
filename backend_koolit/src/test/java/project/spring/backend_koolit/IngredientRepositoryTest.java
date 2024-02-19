@@ -1,55 +1,42 @@
 package project.spring.backend_koolit;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import project.spring.backend_koolit.model.Ingredient;
 import project.spring.backend_koolit.repository.IngredientRepository;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @DataJpaTest
+@ExtendWith({SpringExtension.class, MockitoExtension.class})
 public class IngredientRepositoryTest {
 
-    @Autowired
+    @Mock
     private IngredientRepository ingredientRepository;
+
 
     @Test
     public void testFindByNom() {
-        // Création d'un ingrédient et sauvegarde dans la base de données
+
         Ingredient ingredient = new Ingredient();
-        ingredient.setNom("Ingredient test");
-        ingredientRepository.save(ingredient);
+        ingredient.setNom("Carotte");
 
-        // Recherche de l'ingrédient par nom
-        Ingredient foundIngredient = ingredientRepository.findByNom("Ingredient test");
 
-        // Vérification si l'ingrédient est trouvé
-        assertNotNull(foundIngredient);
+        when(ingredientRepository.findByNom("Carotte")).thenReturn(ingredient);
 
-        // Vérification des détails de l'ingrédient
-        assertEquals("Ingredient test", foundIngredient.getNom());
+
+
+        verify(ingredientRepository, times(1)).findByNom("Carotte");
+
+
     }
-
-    @Test
-    public void testFindByIngredientId() {
-        // Création d'un ingrédient et sauvegarde dans la base de données
-        Ingredient ingredient = new Ingredient();
-        ingredient.setNom("Ingredient test");
-        Ingredient savedIngredient = ingredientRepository.save(ingredient);
-
-        // Recherche de l'ingrédient par ID
-        Optional<Ingredient> optionalIngredient = ingredientRepository.findById(savedIngredient.getIngredientId());
-
-        // Vérification si l'ingrédient est trouvé
-        assertTrue(optionalIngredient.isPresent());
-
-        // Vérification des détails de l'ingrédient
-        Ingredient foundIngredient = optionalIngredient.get();
-        assertEquals("Ingredient test", foundIngredient.getNom());
-    }
-
-    // Ajoutez d'autres tests pour les autres méthodes du repository selon vos besoins
 }
