@@ -4,13 +4,15 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
-    color: #333;
+    color: #ff6f61;
 }
 
 header {
-    background-color: #333;
+    background-color: #ff6f61;
     padding: 20px;
     text-align: center;
+    border-radius: 20px 20px 0px 0px; /* Coins arrondis en bas */
+
 }
 
 header img {
@@ -19,10 +21,12 @@ header img {
 }
 
 nav {
-    background-color: #333;
+    background-color: #ff6f61;
     color: white;
     padding: 10px;
     text-align: center;
+    border-radius: 0px 0px 20px 20px; /* Coins arrondis en bas */
+
 }
 
 nav a {
@@ -49,7 +53,7 @@ router-outlet {
 }
 
 footer {
-    background-color: #333;
+    background-color: #ff6f61;
     color: white;
     padding: 20px;
     text-align: center;
@@ -215,6 +219,21 @@ input {
 footer {
   text-align: center;
   font-size: 12px; /* Taille de police réduite */
-  color: #888;
+  color: #333;
   margin-top: 20px;
+}
+header img {
+  transition: transform 0.3s ease;
+}
+header img:hover {
+  transform: rotate(360deg);
+}
+nav a:hover {
+  background-color: #ffc107; /* Jaune vif au survol */
+  color: #333; /* Couleur du texte */
+}
+
+nav a.active {
+  background-color: #ffc107; /* Jaune vif pour l'élément actif */
+  color: #333; /* Couleur du texte */
 }
