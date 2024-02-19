@@ -21,48 +21,48 @@
             <button type="button" id="searchButton" (click)="rechercheParCoords(ville.lat, ville.lng)" >Rechercher</button>
             <!--bouton recherche magasin-->
         </form>
-        <div class="modal fade" id="magasinDetailsModal" tabindex="-1" aria-labelledby="magasinDetailsModalLabel" aria-hidden="true">
-        </div>
-        <div class="modal fade" id="magasinDetailsModal" tabindex="-1" aria-labelledby="magasinDetailsModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="magasinDetailsModalLabel">Détails du Magasin</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Selectionner</button>
-                    </div>
-                    <div class="modal-body" id="magasinDetailsBody">
-                        <!-- Les détails du magasin seront affichés ici -->
-                        <div>
-                            <label for="searchMagasin">Rechercher un magasin:</label>
-                            <input type="text" id="searchMagasin" placeholder="Rechercher un magasin" required [(ngModel)]="nomMagasinRecherche" />
-                            <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
-                        </div>
+       
+    </div>
+</div>
+<div class="modal fade" id="magasinDetailsModal" tabindex="-1" aria-labelledby="magasinDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="magasinDetailsModalLabel">Détails du Magasin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Selectionner</button>
+            </div>
+            <div class="modal-body" id="magasinDetailsBody">
+                <!-- Les détails du magasin seront affichés ici -->
+                <div>
+                    <label for="searchMagasin">Rechercher un magasin:</label>
+                    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+                    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
+                </div>
+                
+                <div class="magasins-container">
+                    <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
+                        <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
+                        <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
+                        <p>Type: {{ magasin.typeMagasin }}</p>
+                        <p>Ville: {{ magasin.ville }}</p>
+                        <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
+                        <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
+                        <p>Vous y trouverez :</p>
+                        <li *ngFor="let ingredient of magasin.listesCourses">
+                            {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }}
+                            <button (click)=" acheterIngredient(ingredient)">Produit acheté</button>
+                        </li>
+                        <br>
+                        <button (click)="ajouterTousALaListeDeCourses(magasin)">Tous les produits achetés</button>
+                        <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
                         
-                        <div class="magasins-container">
-                            <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
-                                <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
-                                <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
-                                <p>Type: {{ magasin.typeMagasin }}</p>
-                                <p>Ville: {{ magasin.ville }}</p>
-                                <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
-                                <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
-                                <p>Vous y trouverez :</p>
-                                <ul>
-                                    <li *ngFor="let ingredient of magasin.listesCourses">
-                                        {{ ingredient.ingredientsList?.[0]?.quantite }} {{ ingredient.ingredientsList?.[0]?.nom }}
-                                        <button (click)="acheterIngredient(ingredient)">Produit acheté</button>
-                                    </li>
-                                </ul>
-                                <button (click)="ajouterTousALaListeDeCourses(magasin)">Tous les produits achetés</button>
-                                <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
-                            </div>
-                        </div>
-                        
-                        <footer>
-                            <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
-                        </footer>
                     </div>
                 </div>
+                
+                
+                <footer>
+                    <p>&copy; 2023 Mon Application. Tous droits réservés.</p>
+                </footer>
             </div>
         </div>
     </div>
