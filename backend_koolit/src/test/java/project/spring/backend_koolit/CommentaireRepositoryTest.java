@@ -1,46 +1,68 @@
-package project.spring.backend_koolit.repository;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import project.spring.backend_koolit.model.Commentaire;
+import project.spring.backend_koolit.repository.CommentaireRepository;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class CommentaireRepositoryTest {
 
-    @MockBean
+    @Mock
     private CommentaireRepository commentaireRepository;
 
+    @InjectMocks
+    private CommentaireService commentaireService;
+
     @Test
-    public void testFindByCommentaireId() {
-        // ID du commentaire fictif à rechercher
+    void testFindById() {
+        // Arrange
         Long commentaireId = 1L;
+        Commentaire commentaireMock = new Commentaire(/* provide necessary constructor parameters */);
+        when(commentaireRepository.findById(commentaireId)).thenReturn(Optional.of(commentaireMock));
 
-        // Création d'un commentaire fictif
-        Commentaire commentaire = new Commentaire();
-        commentaire.setCommentaireId(commentaireId);
-        commentaire.setContenu("Contenu du commentaire");
-
-        // Configuration du comportement du repository mocké
-        when(commentaireRepository.findByCommentaireId(commentaireId)).thenReturn(commentaire);
-
-        // Appel de la méthode à tester
+        // Act
         Optional<Commentaire> result = commentaireRepository.findById(commentaireId);
 
-        // Vérification du résultat
-        assertEquals(commentaire, result.orElse(null));
+        // Assert
+        assertEquals(commentaireMock, result.orElse(null));
+
+        // Verify that the repository method was called with the correct parameter
+        verify(commentaireRepository).findById(commentaireId);
     }
 
-    // Ajoutez d'autres tests pour les autres méthodes de CommentaireRepository en fonction de vos besoins
+    @Test
+    void testSave() {
+        // Arrange
+        Commentaire commentaireToSave = new Commentaire(/* provide necessary constructor parameters */);
+        when(commentaireRepository.save(commentaireToSave)).thenReturn(commentaireToSave);
+
+        // Act
+        Commentaire result = commentaireRepository.save(commentaireToSave);
+
+        // Assert
+        assertEquals(commentaireToSave, result);
+
+        // Verify that the repository method was called with the correct parameter
+        verify(commentaireRepository).save(commentaireToSave);
+    }
+
+    @Test
+    void testDeleteById() {
+        // Arrange
+        Long commentaireId = 1L;
+
+        // Act
+        commentaireRepository.deleteById(commentaireId);
+
+        // Verify that the repository method was called with the correct parameter
+        verify(commentaireRepository).deleteById(commentaireId);
+    }
 }

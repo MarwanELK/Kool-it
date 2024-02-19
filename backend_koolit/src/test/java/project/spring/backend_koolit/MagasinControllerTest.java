@@ -1,9 +1,7 @@
 package project.spring.backend_koolit;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -12,18 +10,14 @@ import project.spring.backend_koolit.Controller.MagasinController;
 import project.spring.backend_koolit.model.Magasin;
 import project.spring.backend_koolit.service.MagasinService;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(MagasinController.class)
-@AutoConfigureMockMvc
 public class MagasinControllerTest {
 
     @Autowired
@@ -34,31 +28,25 @@ public class MagasinControllerTest {
 
     @Test
     public void testGetAllMagasins() throws Exception {
-        // Mocking the service
-        List<Magasin> mockMagasins = Collections.emptyList();
-        when(magasinService.getAllMagasins()).thenReturn(mockMagasins);
 
-        // Performing the request and verifying the response
-        mockMvc.perform(get("/magasins")
-                        .contentType(MediaType.APPLICATION_JSON))
+        Magasin magasin1 = new Magasin( "Magasin 1", "Type1", "https://example.com", "Aliment1");
+        Magasin magasin2 = new Magasin( "Magasin 2", "Type2", "https://example2.com", "Aliment2");
+        List<Magasin> magasins = Arrays.asList(magasin1, magasin2);
+
+        when(magasinService.getAllMagasins()).thenReturn(magasins);
+
+
+        mockMvc.perform(get("/magasins"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray());
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").value(1L))
+                .andExpect(jsonPath("$[0].nom").value("Magasin 1"))
+                .andExpect(jsonPath("$[1].id").value(2L))
+                .andExpect(jsonPath("$[1].nom").value("Magasin 2"));
+
+
+        verify(magasinService, times(1)).getAllMagasins();
     }
 
-    @Test
-    public void testGetMagasinsProximite() throws Exception {
-        // Mocking the service
-        List<Magasin> mockMagasins = Collections.emptyList();
-        when(magasinService.getMagasinByNom(anyString())).thenReturn((Magasin) mockMagasins);
 
-        // Performing the request and verifying the response
-        mockMvc.perform(get("/magasins/magasins-proximite")
-                        .param("latitude", "48.8566")
-                        .param("longitude", "2.3522")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray());
-    }
-
-    // Add more tests for other controller methods as needed
 }

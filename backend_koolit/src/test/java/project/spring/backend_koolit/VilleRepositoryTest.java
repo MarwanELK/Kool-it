@@ -1,5 +1,3 @@
-package project.spring.backend_koolit;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -7,7 +5,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import project.spring.backend_koolit.model.Ville;
 import project.spring.backend_koolit.repository.VilleRepository;
-import project.spring.backend_koolit.service.VilleService;
 
 import java.util.Optional;
 

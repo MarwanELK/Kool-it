@@ -1,4 +1,4 @@
-package project.spring.backend_koolit;
+package project.spring.backend_koolit.Controller;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import project.spring.backend_koolit.Controller.ListeCourseAcheteController;
 import project.spring.backend_koolit.model.ListeCourseAchete;
 import project.spring.backend_koolit.service.ListeCourseAcheteService;
 

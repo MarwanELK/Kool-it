@@ -41,19 +41,28 @@ export class MagasinsComponent implements OnInit {
       }
     );
   }
+  rechercherMagasin(nomIngredient: string): void {
+    if (this.nomMagasinRecherche.trim() !== '') {
+        this.koolitService.getMagasins().subscribe(
+            (magasinsData: any[]) => {
+                console.log('Données des magasins reçues du backend :', magasinsData);
+                this.magasins = magasinsData.filter((magasin) => {
+                    // Vérifiez si le type d'aliment de chaque magasin contient l'ingrédient recherché
+                    return magasin.typeAliment.includes(nomIngredient);
+                });
+            },
+            (error) => {
+                console.error('Erreur lors de la récupération des magasins :', error);
+            }
+        );
+    } else {
+        // Si la barre de recherche est vide, rechargez tous les magasins
+        this.chargerMagasins();
+    }
+}
 
-  rechercherMagasin(nom: string){
-    this.koolitService.rechercherMagasinParNom2(this.nomMagasinRecherche).subscribe(
-      (data)=> {
-        this.magasin=data;
-        this.magasins=data;
-        console.log('Données du nom de magasin :', this.magasin);
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des données du nom de magasin:', error);
-      }
-    );
-  }
+  
+
 
   
 

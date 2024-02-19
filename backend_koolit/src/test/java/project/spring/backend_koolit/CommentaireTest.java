@@ -1,8 +1,4 @@
-package project.spring.backend_koolit;
-
 import org.junit.jupiter.api.Test;
-import project.spring.backend_koolit.model.Commentaire;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommentaireTest {
