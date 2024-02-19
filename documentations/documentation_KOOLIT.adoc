@@ -175,9 +175,10 @@ mvn clean install
 npm install leaflet --force
 npm install file-saver --force
 npm audit fix --force
-npm install file-saver
-npm install --save-dev @types/file-saver
+npm install file-saver --force
+npm install --save-dev @types/file-saver --force
 npm audit fix --force
+npm i --save-dev @types/leaflet --force
 ....
 
 === Installer Angular :
