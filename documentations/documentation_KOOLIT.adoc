@@ -174,18 +174,18 @@ mvn clean install
 ....
 npm install leaflet --force
 npm install file-saver --force
-npm audit fix --force
 npm install file-saver --force
 npm install --save-dev @types/file-saver --force
-npm audit fix --force
 npm i --save-dev @types/leaflet --force
+npm audit fix --force
 ....
 
 === Installer Angular :
 * Après avoir installé Node.js, ouvrez un terminal et exécutez la commande suivante pour installer Angular CLI de manière globale :
 
 ....
-npm install -g @angular/cli
+npm install -g @angular/cli --force
+npm audit fix --force
 ....
 
 
