@@ -11,7 +11,7 @@
 <!-- magasins.component.html -->
 
 <div>
-    <label for="searchMagasin">Rechercher un ingrédient:</label>
+    <label for="searchMagasin">Rechercher un type d'ingrédient:</label>
     <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
     <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
 </div>
@@ -22,7 +22,7 @@
         <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
         <p>Type: {{ magasin.type }}</p>
         <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
-        <p>Type d'aliment: {{ magasin.typeAliment }}</p>
+        <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
         <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
         <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
         <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
