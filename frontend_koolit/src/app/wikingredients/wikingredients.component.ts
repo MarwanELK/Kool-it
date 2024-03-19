@@ -18,9 +18,10 @@ export class WikingredientsComponent implements OnInit {
   wikingredientsFiltres: any[] = [];
   resultatsAffiches: boolean = false;
   afficherInformationsNutritionnelles: boolean = false;
-  barcode: string='3017620425035';
+  barcode: string='3484702000006';
   productData: any;
   products: any[]=[];
+  showDetails: boolean = false;
 
   constructor(private wikingredientsService: WikingredientsService, private sanitizer: DomSanitizer) {
     this.resultatsAffiches = false;
@@ -179,4 +180,8 @@ export class WikingredientsComponent implements OnInit {
       this.products = data.products;
     });
   }
+
+  toggleDetails() {
+    this.showDetails = !this.showDetails;
+}
 }
