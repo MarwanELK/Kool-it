@@ -144,5 +144,32 @@
         </div>
     </div>
 </div>
+<!-- OpenFoodFacts -->
+<div *ngIf="productData">
+    <h2>{{ productData.product.product_name }} - {{ productData.product.brands }} - {{ productData.product.quantity }}</h2>
+    <p>{{ productData.product.generic_name_fr }}</p>
+    <p>Code-barres: {{ productData.product.code }}</p>
+    <p>Catégories: {{ productData.product.categories }}</p>
+    <p>Conditionnement: {{ productData.product.packaging }}</p>
+    <p>Lieux de fabrication ou de transformation: {{ productData.product.manufacturing_places }}</p>
+    <p>Lien vers la page du produit sur le site officiel du fabricant: <a href="{{ productData.product.link }}">{{ productData.product.link }}</a></p>
+    <p>Magasins: {{ productData.product.stores }}</p>
+    <p>Pays de vente: {{ productData.product.countries }}</p>
+    <p>Correspondance avec vos préférences:</p>
+    <ul>
+      <li>Nutri-Score: {{ productData.product.nutriscore_grade }}</li>
+      <li>NOVA: {{ productData.product.nova_group }}</li>
+      <li>Eco-Score: {{ productData.product.ecoscore_grade }}</li>
+    </ul>
+    <p>Ingrédients: {{ productData.product.ingredients_text }}</p>
+    <p>Allergènes: {{ productData.product.allergens }}</p>
+    <p>Transformation des aliments: {{ productData.product.pnns_groups_1 }}</p>
+    <p>Additifs: {{ productData.product.additives_tags }}</p>
+    <p>Empreinte carbone: {{ productData.product.carbon_footprint }}</p>
+    <p>Labels, certifications, récompenses: {{ productData.product.labels }}</p>
+    <p>Service consommateur: {{ productData.product.customer_service }}</p>
+  </div>
+  
+<!-- OpenFoodFacts -->
 </body>
 </html>

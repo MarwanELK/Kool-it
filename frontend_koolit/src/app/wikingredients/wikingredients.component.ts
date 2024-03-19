@@ -18,7 +18,9 @@ export class WikingredientsComponent implements OnInit {
   wikingredientsFiltres: any[] = [];
   resultatsAffiches: boolean = false;
   afficherInformationsNutritionnelles: boolean = false;
-
+  barcode: string='3017620425035';
+  productData: any;
+  products: any[]=[];
 
   constructor(private wikingredientsService: WikingredientsService, private sanitizer: DomSanitizer) {
     this.resultatsAffiches = false;
@@ -28,6 +30,8 @@ export class WikingredientsComponent implements OnInit {
   ngOnInit(): void {
     this.chargerWikingredients();
     this.chargerNomsAliments();
+    //this.getAllProducts();
+    this.getProductData();
   }
 
   chargerWikingredients(): void {
@@ -164,4 +168,15 @@ export class WikingredientsComponent implements OnInit {
     return Array.isArray(array) && array.length > 0;
   }
 
+  getProductData() {
+    this.wikingredientsService.getProductData(this.barcode).subscribe((data: any) => {
+      this.productData = data;
+    });
+  }
+
+  getAllProducts() {
+    this.wikingredientsService.getAllProducts().subscribe(data => {
+      this.products = data.products;
+    });
+  }
 }
