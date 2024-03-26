@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    # Etape 1: Tests automatisés
+    - name: Frontend tests
+      run: |
+        # Commande pour exécuter les tests Angular
+        # Remplacez `ng test` par la commande réelle pour exécuter les tests du front-end
+        echo "Running frontend tests..."
+        npm install
+        ng test --watch=false
+        
+    - name: Backend tests
+      run: |
+        # Commande pour exécuter les tests Spring Boot
+        # Remplacez `mvn test` par la commande réelle pour exécuter les tests du back-end
+        echo "Running backend tests..."
+        mvn test
+        
+    # Etape 2: Intégration continue
+    - name: Continuous Integration
+      run: |
+        # Commande pour intégrer les modifications de code en toute sécurité
+        # Cette étape peut inclure des vérifications supplémentaires telles que la compilation, les linters, etc.
+        echo "Continuous Integration..."
+        # Insérez vos commandes CI ici
+        
+    # Etape 3: Gestion des dépendances
+    - name: Install dependencies
+      run: |
+        echo "Installing frontend dependencies..."
+        npm install
+        echo "Installing backend dependencies..."
+        mvn dependency:resolve
+        
+    # Etape 4: Maintenance de la qualité du code
+    - name: Frontend code quality check
+      run: |
+        # Commande pour vérifier la qualité du code pour le front-end (ex: ESLint)
+        echo "Checking frontend code quality..."
+        # Insérez vos commandes pour la vérification de la qualité du code du front-end ici
+        
+    - name: Backend code quality check
+      run: |
+        # Commande pour vérifier la qualité du code pour le back-end (ex: Checkstyle)
+        echo "Checking backend code quality..."
+        # Insérez vos commandes pour la vérification de la qualité du code du back-end ici
+        
+    # Etape 5: Automatisation des tâches récurrentes
+    - name: Additional tasks
+      run: |
+        # Commandes pour les tâches supplémentaires
+        echo "Additional tasks..."
+        # Insérez vos commandes pour les tâches supplémentaires ici
