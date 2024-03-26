@@ -36,12 +36,12 @@ jobs:
 
     - name: Run frontend tests
       run: |
-        cd ../..
+        cd ..
         cd frontend_koolit
         ng test
       
     - name: Return to root directory
-      run: cd ../..
+      run: cd ..
       
     - name: Navigate to backend_koolit directory
       run: cd backend_koolit
