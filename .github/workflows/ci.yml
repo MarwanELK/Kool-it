@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -14,13 +17,14 @@ jobs:
       uses: actions/checkout@v2
       
     # Etape 1: Tests automatisés
-    - name: Frontend tests
-      run: |
-        # Commande pour exécuter les tests Angular
-        # Remplacez `ng test` par la commande réelle pour exécuter les tests du front-end
-        echo "Running frontend tests..."
-        npm install
-        ng test --watch=false
+    - name: Navigate to frontend directory
+      run: cd frontend
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: ng test
         
     - name: Backend tests
       run: |
