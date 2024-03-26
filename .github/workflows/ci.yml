@@ -18,7 +18,7 @@ jobs:
       
     # Etape 1: Tests automatisés
     - name: Navigate to frontend directory
-      run: cd frontend
+      run: cd frontend_koolit
 
     - name: Install dependencies
       run: npm install
