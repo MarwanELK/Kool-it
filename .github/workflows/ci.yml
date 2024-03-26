@@ -19,6 +19,20 @@ jobs:
     # Etape 1: Tests automatisés
     - name: Navigate to frontend_koolit directory
       run: cd frontend_koolit
+      
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+      
+    - name: Install dependencies and fix vulnerabilities
+      run: |
+        npm install leaflet --force
+        npm install file-saver --force
+        npm audit fix --force
+        npm install file-saver --force
+        npm install --save-dev @types/file-saver --force
+        npm audit fix --force
+        npm i --save-dev @types/leaflet --force
+        npm audit fix --force
 
     - name: Run tests
       run: ng test
