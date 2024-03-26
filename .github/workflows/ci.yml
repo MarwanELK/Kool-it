@@ -39,6 +39,15 @@ jobs:
         cd ..
         cd Kool-it
         cd frontend_koolit
+        npm install -g @angular/cli
+        npm install leaflet --force
+        npm install file-saver --force
+        npm audit fix --force
+        npm install file-saver --force
+        npm install --save-dev @types/file-saver --force
+        npm audit fix --force
+        npm i --save-dev @types/leaflet --force
+        npm audit fix --force
         ng test
       
     - name: Return to root directory
