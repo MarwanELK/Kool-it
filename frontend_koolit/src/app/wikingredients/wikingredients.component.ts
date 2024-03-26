@@ -18,21 +18,24 @@ export class WikingredientsComponent implements OnInit {
   wikingredientsFiltres: any[] = [];
   resultatsAffiches: boolean = false;
   afficherInformationsNutritionnelles: boolean = false;
-  barcode: string='3484702000006';
+  barcode: string='3017620425035 ';
+  productName: string='';
   productData: any;
+  monProduit: any;
   products: any[]=[];
   showDetails: boolean = false;
+  selectedProduct: any;
 
   constructor(private wikingredientsService: WikingredientsService, private sanitizer: DomSanitizer) {
     this.resultatsAffiches = false;
+    this.selectedProduct = null;
+
     
   }
 
   ngOnInit(): void {
     this.chargerWikingredients();
     this.chargerNomsAliments();
-    //this.getAllProducts();
-    this.getProductData();
   }
 
   chargerWikingredients(): void {
@@ -171,17 +174,33 @@ export class WikingredientsComponent implements OnInit {
 
   getProductData() {
     this.wikingredientsService.getProductData(this.barcode).subscribe((data: any) => {
-      this.productData = data;
+      this.monProduit=data;
+      this.products.push(data);
     });
   }
 
-  getAllProducts() {
-    this.wikingredientsService.getAllProducts().subscribe(data => {
-      this.products = data.products;
-    });
+  getProductDataByName(productName : string) {
+    this.productData = null;
+    this.products=[];
+    if (!this.productName.trim()) {
+      console.log('produit nom :', productName);
+      console.log("Ma liste products ", this.products);
+    }else{
+      console.log('produit nom :', productName);
+      this.wikingredientsService.getProductDataByName(productName).subscribe((data: any) => {
+        this.productData = data;
+        for (let i = 0; i < this.productData.products.length; i++) {
+          this.barcode=this.productData.products[i]._id;
+          this.getProductData();
+        }
+        console.log("Ma liste products ", this.products);
+      });
+    } 
   }
 
   toggleDetails() {
     this.showDetails = !this.showDetails;
 }
+
+
 }

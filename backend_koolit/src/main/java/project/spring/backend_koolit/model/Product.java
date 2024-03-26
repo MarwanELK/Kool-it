@@ -8,6 +8,10 @@ public class Product {
     private String ingredientsText;
     private String allergens;
     private Map<String, Object> nutriments;
+
+    public String getProductName() {
+        return productName;
+    }
     // Ajoutez d'autres champs au besoin
 
     // Getters and setters

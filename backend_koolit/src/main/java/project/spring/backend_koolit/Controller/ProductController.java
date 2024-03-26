@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import project.spring.backend_koolit.model.Product;
 import project.spring.backend_koolit.service.OpenFoodFactsService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -18,16 +20,16 @@ public class ProductController {
         this.openFoodFactsService = openFoodFactsService;
     }
 
-    @GetMapping
-    public ResponseEntity<Product[]> getAllProducts() {
-        Product[] products = openFoodFactsService.getAllProducts();
-        return ResponseEntity.ok(products);
-    }
-
-    @GetMapping("/{barcode}")
+    @GetMapping("/barcode/{barcode}")
     public ResponseEntity<String> getProductData(@PathVariable String barcode) {
         String productData = openFoodFactsService.getProductData(barcode);
         return ResponseEntity.ok(productData);
+    }
+
+    @GetMapping("/name/{productName}")
+    public ResponseEntity<String> getProductDataByName(@PathVariable String productName) {
+        String productDataByName = openFoodFactsService.getProductDataByName(productName);
+        return ResponseEntity.ok(productDataByName);
     }
 }
 
