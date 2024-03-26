@@ -103,6 +103,66 @@
         p {
             margin-bottom: 10px;
         }
+      /* Style pour les conteneurs de produit OpenFoodFacts */
+.product-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px; /* Ajustez la largeur selon vos besoins */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background-color: #fff; /* Couleur de fond */
+    overflow: auto; /* Ajout de la barre de défilement lorsque le contenu dépasse */
+}
+
+/* Effet de transition lorsque survolé */
+.product-container:hover {
+    transform: scale(1.05);
+}
+
+/* Style pour les boutons de produit */
+.product-button {
+    padding: 10px;
+    background-color: #a5a3a3; /* Couleur du bouton */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Style pour les détails des produits OpenFoodFacts */
+.product-details {
+    margin-top: 10px;
+}
+
+/* Style pour les titres de produit */
+.product-title {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.6rem; /* Taille de police réduite */
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Style pour les listes de produits */
+.product-list {
+    padding-left: 20px;
+}
+
+/* Style pour les éléments de liste de produits */
+.product-item {
+    margin-bottom: 5px;
+}
+
+/* Style pour le texte normal des produits */
+.product-text {
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Permet le passage à la ligne pour les mots longs */
+}
+
+        
     </style>
     <title>Wikingrediens</title>
 </head>
@@ -144,5 +204,37 @@
         </div>
     </div>
 </div>
+<!-- OpenFoodFacts -->
+<label for="produitInput">Rechercher un produit :</label>
+            <input type="text" id="produitInput" name="produit" placeholder="Entrez un produit" required [(ngModel)]="productName">
+            <button type="button" id="searchButton" (click)="getProductDataByName(productName)">Rechercher</button>
+<div *ngFor="let productData of products">
+    <h2 class="product-title" (click)="toggleDetails()">{{ productData?.product?.product_name }} - {{ productData?.product?.brands }} - {{ productData?.product?.quantity }}</h2>
+    <p class="product-text">{{ productData?.product?.generic_name_fr }}</p>
+        <p class="product-text">Code-barres: {{ productData?.product?.code }}</p>
+        <p class="product-text">Catégories: {{ productData?.product?.categories }}</p>
+        <p class="product-text">Conditionnement: {{ productData?.product?.packaging }}</p>
+        <p class="product-text">Lieux de fabrication ou de transformation: {{ productData?.product?.manufacturing_places }}</p>
+        <p class="product-text">Lien vers la page du produit sur le site officiel du fabricant: <a href="{{ productData?.product?.link }}">{{ productData?.product?.link }}</a></p>
+        <p class="product-text">Magasins: {{ productData?.product?.stores }}</p>
+        <p class="product-text">Pays de vente: {{ productData?.product?.countries }}</p>
+        <p class="product-text">Correspondance avec vos préférences:</p>
+        <ul class="product-list">
+            <li class="product-item">Nutri-Score: {{ productData?.product?.nutriscore_grade }}</li>
+            <li class="product-item">NOVA: {{ productData?.product?.nova_group }}</li>
+            <li class="product-item">Eco-Score: {{ productData?.product?.ecoscore_grade }}</li>
+        </ul>
+        <p class="product-text">Ingrédients: {{ productData?.product?.ingredients_text }}</p>
+        <p class="product-text">Allergènes: {{ productData?.product?.allergens }}</p>
+        <p class="product-text">Transformation des aliments: {{ productData?.product?.pnns_groups_1 }}</p>
+        <p class="product-text">Additifs: {{ productData?.product?.additives_tags }}</p>
+        <p class="product-text">Empreinte carbone: {{ productData?.product?.carbon_footprint }}</p>
+        <p class="product-text">Labels, certifications, récompenses: {{ productData?.product?.labels }}</p>
+        <p class="product-text">Informations manquantes sur les origines des ingrédients: {{ productData?.product?.origins }}</p>
+        <p class="product-text">Service consommateur: {{ productData?.product?.customer_service }}</p>
+</div>
+<!-- OpenFoodFacts -->
+
+  
 </body>
 </html>

@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class WikingredientsService {
   private backendUrl = 'http://localhost:8080';
+  readonly ENDPOINT_API_PRODUCTS = "/api/products";
+  private apiOPF = 'http://localhost:8080/api/products';
 
   constructor(private http: HttpClient) {}
   getAllNomAliments(): Observable<string[]> {
@@ -40,4 +42,13 @@ export class WikingredientsService {
     const url = `${this.backendUrl}/wikingredients/${wikingredientId}/noter?note=${note}`;
     return this.http.post<any>(url, {});
   }
+
+  getProductData(barcode: string) {
+    return this.http.get(`${this.backendUrl}${this.ENDPOINT_API_PRODUCTS}/barcode/${barcode}`); 
+  }
+  
+  getProductDataByName(productName: string) {
+    return this.http.get(`${this.backendUrl}${this.ENDPOINT_API_PRODUCTS}/name/${productName}`); 
+  }
+
 }
