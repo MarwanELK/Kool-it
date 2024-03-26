@@ -37,7 +37,7 @@ jobs:
     - name: Run frontend tests
       run: |
         cd ..
-        ls
+        ls Kool-it
         cd frontend_koolit
         ng test
       
