@@ -17,21 +17,20 @@ jobs:
       uses: actions/checkout@v2
       
     # Etape 1: Tests automatisés
-    - name: Navigate to frontend directory
+    - name: Navigate to frontend_koolit directory
       run: cd frontend_koolit
-
-    - name: Install dependencies
-      run: npm install
 
     - name: Run tests
       run: ng test
-        
-    - name: Backend tests
-      run: |
-        # Commande pour exécuter les tests Spring Boot
-        # Remplacez `mvn test` par la commande réelle pour exécuter les tests du back-end
-        echo "Running backend tests..."
-        mvn test
+      
+    - name: Return to kool-it directory
+      run: cd ..
+      
+    - name: Navigate to backend_koolit directory
+      run: cd backend_koolit
+    
+    - name: Run tests
+      run: ng test
         
     # Etape 2: Intégration continue
     - name: Continuous Integration
