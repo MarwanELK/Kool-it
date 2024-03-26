@@ -39,7 +39,7 @@ jobs:
         cd ..
         cd Kool-it
         cd frontend_koolit
-        npm install
+        npm install --force
         ng test
       
     - name: Return to root directory
