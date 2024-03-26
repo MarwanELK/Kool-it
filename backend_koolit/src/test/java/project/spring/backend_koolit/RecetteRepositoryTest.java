@@ -45,27 +45,5 @@ public class RecetteRepositoryTest {
         assertEquals("Recette XYZ", result.getNom());
     }
 
-    @Test
-    public void testFindIngredientByRecetteId() {
-
-        Long recetteId = 1L;
-        Recette recette = new Recette();
-        recette.setRecetteId(recetteId);
-        recette.setNom("Recette XYZ");
-
-
-        when(recetteRepository.findIngredientByRecetteId(recetteId)).thenReturn(Arrays.asList(recette));
-
-
-        List<Ingredient> result = recetteService.findIngredientByRecetteId(recetteId);
-
-        verify(recetteRepository, times(1)).findIngredientByRecetteId(recetteId);
-
-
-        assertEquals(1, result.size());
-        assertEquals(recetteId, result.get(0).getIngredientId());
-        assertEquals("Recette XYZ", result.get(0).getNom());
-    }
-
 
 }

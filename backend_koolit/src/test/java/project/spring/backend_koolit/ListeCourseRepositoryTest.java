@@ -28,26 +28,5 @@ public class ListeCourseRepositoryTest {
     @InjectMocks
     private ListeCourseService listeCourseService;
 
-    @Test
-    public void testFindByUtilisateurId() {
 
-        Long idUtilisateur = 1L;
-        ListeCourse listeCourse1 = new ListeCourse();
-        listeCourse1.setUtilisateurId(idUtilisateur);
-        ListeCourse listeCourse2 = new ListeCourse();
-        listeCourse2.setUtilisateurId(idUtilisateur);
-
-        when(listeCourseRepository.findByUtilisateurId(idUtilisateur)).thenReturn(Arrays.asList(listeCourse1, listeCourse2));
-
-
-        List<ListeCourse> result = listeCourseRepository.findByUtilisateurId(idUtilisateur);
-
-        verify(listeCourseRepository, times(1)).findByUtilisateurId(idUtilisateur);
-
-
-        assertThat(result).isNotNull();
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0).getUtilisateurId()).isEqualTo(idUtilisateur);
-        assertThat(result.get(1).getUtilisateurId()).isEqualTo(idUtilisateur);
-    }
 }

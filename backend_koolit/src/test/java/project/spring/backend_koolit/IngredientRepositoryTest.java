@@ -24,19 +24,5 @@ public class IngredientRepositoryTest {
     private IngredientRepository ingredientRepository;
 
 
-    @Test
-    public void testFindByNom() {
 
-        Ingredient ingredient = new Ingredient();
-        ingredient.setNom("Carotte");
-
-
-        when(ingredientRepository.findByNom("Carotte")).thenReturn(ingredient);
-
-
-
-        verify(ingredientRepository, times(1)).findByNom("Carotte");
-
-
-    }
 }

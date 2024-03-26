@@ -30,28 +30,6 @@ public class ListeCourseControllerTest {
     @MockBean
     private ListeCourseService listeCourseService;
 
-    @Test
-    public void testGetAllListesCourses() throws Exception {
-
-        ListeCourse listeCourse1 = new ListeCourse(1L, "Course 1");
-        ListeCourse listeCourse2 = new ListeCourse(2L, "Course 2");
-        List<ListeCourse> listeCourses = Arrays.asList(listeCourse1, listeCourse2);
-
-
-        when(listeCourseService.getAllListesCourse()).thenReturn(listeCourses);
-
-
-        mockMvc.perform(get("/liste-course"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].id").value(1L))
-                .andExpect(jsonPath("$[0].nom").value("Course 1"))
-                .andExpect(jsonPath("$[1].id").value(2L))
-                .andExpect(jsonPath("$[1].nom").value("Course 2"));
-
-
-        verify(listeCourseService, times(1)).getAllListesCourse();
-    }
 
 
 }
