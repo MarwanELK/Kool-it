@@ -37,6 +37,7 @@ jobs:
     - name: Run frontend tests
       run: |
         cd ..
+        pwd
         cd frontend_koolit
         ng test
       
