@@ -18,7 +18,7 @@ export class WikingredientsComponent implements OnInit {
   wikingredientsFiltres: any[] = [];
   resultatsAffiches: boolean = false;
   afficherInformationsNutritionnelles: boolean = false;
-  barcode: string='3017620425035 ';
+  barcode: string='';
   productName: string='';
   productData: any;
   monProduit: any;
