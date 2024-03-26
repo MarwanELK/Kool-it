@@ -34,16 +34,16 @@ jobs:
         npm i --save-dev @types/leaflet --force
         npm audit fix --force
 
-    - name: Run tests
+    - name: Run frontend tests
       run: ng test
       
-    - name: Return to kool-it directory
-      run: cd ..
+    - name: Return to root directory
+      run: cd ../..
       
     - name: Navigate to backend_koolit directory
       run: cd backend_koolit
     
-    - name: Run tests
+    - name: Run backend tests
       run: ng test
         
     # Etape 2: Intégration continue
