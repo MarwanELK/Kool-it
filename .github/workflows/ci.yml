@@ -50,7 +50,7 @@ jobs:
     
     - name: Run backend tests
       run:  |
-        ls
+        cd backend_koolit
         mvn test
         
     # Etape 2: Intégration continue
