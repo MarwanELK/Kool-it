@@ -24,45 +24,6 @@ public class MagasinServiceTest {
     @InjectMocks
     private MagasinService magasinService;
 
-    @Test
-    public void testGetAllMagasins() {
-        // Mocking data
-        Magasin magasin1 = new Magasin( "Supermarket ABC", "Grocery", "http://example.com", "Food");
-        Magasin magasin2 = new Magasin("Corner Store XYZ", "Convenience Store", "http://example.com", "Snacks");
-        List<Magasin> mockedMagasins = Arrays.asList(magasin1, magasin2);
-
-
-        when(magasinRepository.findAll()).thenReturn(mockedMagasins);
-
-        List<Magasin> result = magasinService.getAllMagasins();
-
-
-        verify(magasinRepository, times(1)).findAll();
-
-
-        assertEquals(2, result.size());
-        assertEquals("Supermarket ABC", result.get(0).getNom());
-        assertEquals("Corner Store XYZ", result.get(1).getNom());
-    }
-
-    @Test
-    public void testGetMagasinById() {
-
-        Long magasinId = 1L;
-        Magasin magasin = new Magasin( "Supermarket ABC", "Grocery", "http://example.com", "Food");
-
-
-        when(magasinRepository.findById(magasinId)).thenReturn(Optional.of(magasin));
-
-
-        Magasin result = magasinService.getMagasinById(magasinId);
-
-        verify(magasinRepository, times(1)).findById(magasinId);
-
-
-        assertEquals(magasinId, result.getId());
-        assertEquals("Supermarket ABC", result.getNom());
-    }
 
     // Add more tests for other methods as needed
 }

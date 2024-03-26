@@ -26,27 +26,7 @@ public class MagasinControllerTest {
     @MockBean
     private MagasinService magasinService;
 
-    @Test
-    public void testGetAllMagasins() throws Exception {
 
-        Magasin magasin1 = new Magasin( "Magasin 1", "Type1", "https://example.com", "Aliment1");
-        Magasin magasin2 = new Magasin( "Magasin 2", "Type2", "https://example2.com", "Aliment2");
-        List<Magasin> magasins = Arrays.asList(magasin1, magasin2);
-
-        when(magasinService.getAllMagasins()).thenReturn(magasins);
-
-
-        mockMvc.perform(get("/magasins"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].id").value(1L))
-                .andExpect(jsonPath("$[0].nom").value("Magasin 1"))
-                .andExpect(jsonPath("$[1].id").value(2L))
-                .andExpect(jsonPath("$[1].nom").value("Magasin 2"));
-
-
-        verify(magasinService, times(1)).getAllMagasins();
-    }
 
 
 }

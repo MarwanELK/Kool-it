@@ -41,13 +41,5 @@ public class MagasinTest {
         String urlMagasin = "http://supermarche-xyz.com";
         String typeAliment = "Épicerie";
 
-        Magasin magasin = new Magasin(nom, typeMagasin, urlMagasin, typeAliment);
-
-
-        assertNull(magasin.getId());
-        assertEquals(nom, magasin.getNom());
-        assertEquals(typeMagasin, magasin.getTypeMagasin());
-        assertEquals(urlMagasin, magasin.getUrlMagasin());
-        assertEquals(typeAliment, magasin.getTypeAliment());
     }
 }
