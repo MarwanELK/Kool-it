@@ -49,7 +49,9 @@ jobs:
       run: cd backend_koolit
     
     - name: Run backend tests
-      run:  mvn test
+      run:  |
+        ls
+        mvn test
         
     # Etape 2: Intégration continue
     - name: Continuous Integration
