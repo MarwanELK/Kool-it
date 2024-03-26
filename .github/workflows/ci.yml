@@ -35,7 +35,10 @@ jobs:
         npm audit fix --force
 
     - name: Run frontend tests
-      run: ng test
+      run: |
+        cd ../..
+        cd frontend_koolit
+        ng test
       
     - name: Return to root directory
       run: cd ../..
@@ -72,12 +75,4 @@ jobs:
     - name: Backend code quality check
       run: |
         # Commande pour vérifier la qualité du code pour le back-end (ex: Checkstyle)
-        echo "Checking backend code quality..."
-        # Insérez vos commandes pour la vérification de la qualité du code du back-end ici
-        
-    # Etape 5: Automatisation des tâches récurrentes
-    - name: Additional tasks
-      run: |
-        # Commandes pour les tâches supplémentaires
-        echo "Additional tasks..."
-        # Insérez vos commandes pour les tâches supplémentaires ici
+        echo "C
