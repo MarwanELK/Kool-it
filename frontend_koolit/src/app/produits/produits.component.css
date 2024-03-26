@@ -1,29 +1,55 @@
+/* Reset CSS */
+body {
+  font-family: "Comic Sans MS", cursive; /* Police originale */
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
 
-/* Style pour le conteneur des commentaires */
-.commentaires-container {
-    margin-top: 20px;
-  }
-  
-  /* Style pour chaque commentaire */
-  .commentaire {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  /* Style pour le nom d'utilisateur dans le commentaire */
-  .commentaire-username {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Style pour le contenu du commentaire */
-  .commentaire-contenu {
-    margin-top: 5px;
-    color: #555;
-  }
+/* Containers */
+.container {
+  max-width: 1200px; /* Largeur maximale du contenu */
+  margin: 0 auto; /* Centrage horizontal */
+  padding: 20px;
+}
 
-  
-  
-  
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Arial", sans-serif; /* Police de secours pour les titres */
+  color: #333;
+  font-weight: bold;
+}
+
+/* Paragraphs */
+p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Links */
+a {
+  color: #007bff; /* Couleur par défaut des liens */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; /* Soulignement au survol */
+}
+
+/* Buttons */
+button {
+  font-family: "Arial", sans-serif; /* Police de secours pour les boutons */
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-top: 20px;
+}

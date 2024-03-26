@@ -16,19 +16,21 @@
         }
         
         header {
-            background-color: #ff6f61; /* Rouge vif */
+            background-color: #ffffff; /* Rouge vif */
             padding: 20px;
             text-align: center;
             border-radius: 0 0 20px 20px; /* Coins arrondis en bas */
         }
         
         header img {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-            border-radius: 50%; /* Forme arrondie */
-        }
+    width: 100px; /* Taille réduite */
+    height: 100px; /* Taille réduite */
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+    border-radius: 50%; /* Forme arrondie */
+    float: left; /* Alignement à gauche */
+    margin-right: 10px; /* Espacement entre le logo et le texte */
+}
         
         header img:hover {
             transform: rotate(360deg);
@@ -79,7 +81,7 @@
         }
         
         footer {
-    position: fixed; /* Positionnement fixe */
+   
     bottom: 0; /* Collé en bas */
     width: 100%; /* Pleine largeur */
     background-color: #333;
@@ -106,6 +108,7 @@ footer p {
         <a routerLink="/liste-de-courses" [class.active]="isSelected('/liste-de-courses')">Liste de courses</a>
         <a routerLink="/Magasins" [class.active]="isSelected('/Magasins')">Magasins</a>
         <a routerLink="/map" [class.active]="isSelected('/map')">Carte (recherche magasin)</a>
+        <a routerLink="/Wikingredients">Wikingredient</a>
         <a routerLink="/apropos" [class.active]="isSelected('/apropos')">À Propos</a>
         <a routerLink="/contact" [class.active]="isSelected('/contact')">Contact</a>
     </nav>

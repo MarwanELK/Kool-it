@@ -42,4 +42,8 @@ public class Commentaire {
     public void setContenu(String contenu) {
         this.contenu = contenu;
     }
+
+    public void setId(long l) {
+        this.commentaireId=l;
+    }
 }

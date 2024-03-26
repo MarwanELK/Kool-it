@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProduitsListComponent } from './produits-list/produits-list.component';
 import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.component';
 import { MagasinsComponent } from './magasins/magasins.component';
+import { WikingredientsComponent } from './wikingredients/wikingredients.component';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MapComponent } from './map/map.component';
     ListeDeCoursesComponent,
     MagasinsComponent,
     MapComponent,
+     WikingredientsComponent
   ],
   imports: [
     FormsModule,

@@ -1,5 +1,4 @@
-
-          .recettes-container {
+.recettes-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -19,7 +18,7 @@
     height: auto;
 }
 
-    input {
-        width: 5%;
-        margin-bottom: 20px;
-    }
+input {
+    width: 5%;
+    margin-bottom: 20px;
+}

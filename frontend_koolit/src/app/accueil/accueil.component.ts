@@ -31,6 +31,6 @@ export class AccueilComponent implements OnInit {
     this.recettes.sort((a, b) => b.note - a.note);
 
     // Gardez seulement les deux premières recettes (les mieux notées)
-    this.recettes = this.recettes.slice(0, 2);
+    this.recettes = this.recettes.slice(0, 3);
   }
 }

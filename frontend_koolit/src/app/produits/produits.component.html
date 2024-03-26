@@ -53,7 +53,7 @@
                     <div class="commentaires-container">
                         <h3>Commentaires</h3>
                         <div *ngFor="let commentaire of recette.commentaires" class="commentaire">
-                          <p class="commentaire-username">{{commentaire.commentaireId}} @{{ commentaire.username }}:</p>
+                          <p class="commentaire-username">@{{ commentaire.username }}:</p>
                           <p class="commentaire-contenu">{{ commentaire.contenu }}</p>
                           <button (click)="supprimerCommentaire(recette.recetteId, commentaire.commentaireId)">Supprimer</button>
                         </div>

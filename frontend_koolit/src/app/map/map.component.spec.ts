@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importez HttpClientTestingModule
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Importez FormsModule
 import { MapComponent } from './map.component';
 
 describe('MapComponent', () => {
@@ -8,7 +11,8 @@ describe('MapComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MapComponent]
+      declarations: [MapComponent],
+      imports: [HttpClientTestingModule, CommonModule,FormsModule]
     });
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;

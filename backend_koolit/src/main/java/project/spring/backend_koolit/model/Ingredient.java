@@ -20,11 +20,13 @@ public class Ingredient {
 
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private TypeIngredient type;
 
     public enum TypeIngredient {
-        Legume, Fruit, Viande, Boisson, Céréales, Laitier, Poisson, Oeuf, Gras, Sucré, Viennoiserie, Pain, Pâtisserie
+        Legume, Tablettes, Fruit, Viande, Boisson, Céréales, Laitier,Fromage,Condiment, Poisson, Oeuf, Gras, Sucré, Viennoiserie, Pain, Pâtisserie, Sec
     }
+
 
 
     public Ingredient() {

@@ -72,10 +72,33 @@ En prévision pour améliorer les fonctionnalités et intégrer des partenariats
 === Acquisition de Données, Usage Intelligent des Données (En prévision M2):
 En prévision pour optimiser les recommandations de recettes et les suggestions d'achats.
 
+== *FEATURES* ==
+
+=== V0.2 :
+- Grande feature 1 : Choisir des recettes et ajouter les ingrédients à sa liste de courses 
+- Grande feature 2 : Ajout des commentaires avec un id
+
+=== V0.3 :
+- Grande feature 1 : Recherche de type d'aliment dans des magasins
+- Grande feature 2 : Exporter la liste des courses en fichier .csv, et note (.txt)
+- Petite feature 1 : Faire varier la quantité d'ingrédient d'une recette en fonction du nombre de personne
+- Petite feature 2 : Ajout des notes
+
+=== V0.4:
+- Grande feature 1 : Ajout d'une carte avec recherche magasin
+- Grande feature 2 : Ajout d'un Wikingrédient ( valeur nutritionnelle des aliments )
+- Petite feature 1 : Trier les recettes par notes
+- Petite feature 2 : Supprimer/ajouter (manuellement) des aliments de sa liste (une fois acheté par exemple)
+
+=== V1.0 :
+- Grande feature 1 : Mise à jour Wikingrédient
+- Grande feature 2 : Mise à jour de la carte
+
 
 == *MODÉLISATION* ==          
-
 === Schéma architectural:
+
+
 @startuml
 
 !define RECTANGLE class
@@ -126,6 +149,44 @@ image::diagram.jpg[Diagram,200,100]
 * DELETE /api/recettes/{id}
 ** Supprimer une recette par ID.
 
+
+== *Installation* ==  
+=== Créer la base de données koolitdb :
+* Assurez-vous que votre système a un système de gestion de bases de données installé, comme MySQL ou PostgreSQL
+* Créez une base de données nommée "koolitdb"
+
+=== Actualiser Maven après avoir débugué le backend :
+* Assurez-vous que Maven est installé sur votre système.
+* Naviguez vers le répertoire du projet backend.
+* Exécutez la commande Maven pour actualiser les dépendances :
+
+....
+mvn clean install
+....
+
+=== Installer les dépendances Node.js pour le frontend :
+* Téléchargez et installez Node.js depuis le site officiel de Node.js.
+
+=== Installer les packages npm pour le frontend :
+* Dans le répertoire du projet frontend, exécutez les commandes suivantes :
+
+
+....
+npm install leaflet --force
+npm install file-saver --force
+npm audit fix --force
+npm install file-saver --force
+npm install --save-dev @types/file-saver --force
+npm audit fix --force
+npm i --save-dev @types/leaflet --force
+....
+
+=== Installer Angular :
+* Après avoir installé Node.js, ouvrez un terminal et exécutez la commande suivante pour installer Angular CLI de manière globale :
+
+....
+npm install -g @angular/cli
+....
 
 
 

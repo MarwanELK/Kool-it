@@ -23,6 +23,7 @@ export class KoolitService {
         return data.map(ingredient => ({
           nom: ingredient.nom,
           type: ingredient.type,
+          quantite: ingredient.quantite,
           ingredientsList: JSON.parse(ingredient.ingredients)
         }));
       }),
@@ -53,10 +54,8 @@ export class KoolitService {
   }
   // koolit.service.ts
 
-rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
-  // Utilisation des paramètres de requête pour envoyer le nom du magasin
+rechercherMagasinParNom(nomMagasin:string): Observable<any[]> {
   const params = new HttpParams().set('nomMagasin', nomMagasin);
-
   return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercher`, { params }).pipe(
     catchError((error: any) => {
       console.error('Erreur lors de la recherche de magasin par nom :', error);
@@ -64,16 +63,29 @@ rechercherMagasinParNom(nomMagasin: string): Observable<any[]> {
     })
   );
 }
+
+rechercherMagasinParNom2(nomMagasin:string): Observable<any> {
+  const params = new HttpParams().set('nomMagasin', nomMagasin);
+  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercherMagasinsByNom`, { params }).pipe(
+    catchError((error: any) => {
+      console.error('Erreur lors de la recherche de magasin par nom :', error);
+      throw error;
+    })
+  );
+}
+rechercherMagasinsParAliment(nomAliment: string): Observable<any[]> {
+  return this.httpClient.get<any[]>(`${this.apiUrl}${this.ENDPOINT_MAGASINS}/rechercher`, { params: { nomAliment } }).pipe(
+    catchError((error: any) => {
+      console.error('Erreur lors de la recherche de magasins par aliment :', error);
+      throw error;
+    })
+  );
+}
+
 ajouterTypeAliment(nomMagasin: string, typeAliment: string): Observable<any> {
   const url = `${this.apiUrl}/magasins/ajouterTypeAliment/${nomMagasin}`;
   return this.httpClient.post(url, typeAliment);
 }
-
-
-rechercherTypesAliment(nomMagasin: string): Observable<string[]> {
-  return this.httpClient.get<string[]>(`${this.apiUrl}/magasins/typesAliment/rechercher?nomType=${nomMagasin}`);
-}
-
 
 
   

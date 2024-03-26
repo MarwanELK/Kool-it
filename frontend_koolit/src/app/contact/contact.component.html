@@ -1,1 +1,110 @@
-<p>contact works!</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="contact.component.css">
+    <title>Contactez KOOL'IT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1; /* Couleur de fond claire */
+            color: #333; /* Couleur du texte */
+        }
+        
+        header.banner {
+            border-radius: 20px 20px 20px 20px; /* Coins arrondis en bas */
+            background-color: #ff6f61; /* Couleur de fond sombre */
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px; /* Marge inférieure */
+        }
+        
+        header.banner h1 {
+            margin-bottom: 10px; /* Marge inférieure pour le titre */
+            color: #fff; /* Texte en blanc */
+        }
+        
+        section.contact-form {
+            padding: 20px;
+        }
+        
+        section.contact-form h2 {
+            color: #333; /* Couleur du texte */
+        }
+        
+        section.contact-form form {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        section.contact-form form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        section.contact-form form input[type="text"],
+        section.contact-form form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        section.contact-form form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="banner">
+        <h1>Contactez KOOL'IT</h1>
+    </header>
+
+    <section class="contact-form">
+        <h2>Envoyez-nous un message</h2>
+        <form id="contactForm">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <input type="submit" value="Envoyer">
+        </form>
+    </section>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("rh7wWQ_cXqxBuQWXHDRyN");
+    
+            document.getElementById('contactForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+    
+                emailjs.sendForm("service_zvvmt1o", "__ejs-test-mail-service__", this)
+                    .then(function () {
+                        alert('Votre message a été envoyé avec succès!');
+                    }, function (error) {
+                        console.error('Erreur lors de l\'envoi du message:', error);
+                    });
+            });
+        })();
+    </script>
+  
+</body>
+</html>
