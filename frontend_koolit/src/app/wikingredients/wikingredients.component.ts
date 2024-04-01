@@ -25,17 +25,22 @@ export class WikingredientsComponent implements OnInit {
   products: any[]=[];
   showDetails: boolean = false;
   selectedProduct: any;
+  selectedIndex: number = -1;
+  productDetailsVisibility: boolean[] = [];
+  selectedProductIndex: number | null = null;
+  productDetailsVisible: boolean[] = [];
 
   constructor(private wikingredientsService: WikingredientsService, private sanitizer: DomSanitizer) {
     this.resultatsAffiches = false;
     this.selectedProduct = null;
-
+    this.selectedIndex = -1;
     
   }
 
   ngOnInit(): void {
     this.chargerWikingredients();
     this.chargerNomsAliments();
+    this.products.forEach(() => this.productDetailsVisibility.push(false));
   }
 
   chargerWikingredients(): void {
@@ -199,10 +204,8 @@ export class WikingredientsComponent implements OnInit {
   }
 
   toggleDetails(index: number) {
-    this.products[index].showDetails = !this.products[index].showDetails;
+    // Si les détails sont visibles, les masquer ; sinon, les afficher
+    this.productDetailsVisible[index] = !this.productDetailsVisible[index];
 }
-
-
-
 
 }
