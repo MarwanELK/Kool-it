@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="accueil.component.css">
+    <title>KOOL'IT - Découvrez des recettes innovantes</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1; /* Couleur de fond claire */
+    color: #333; /* Couleur du texte */
+}
+
+header {
+    background-color: #ff6f61; /* Rouge vif */
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px 20px 20px 20px; /* Coins arrondis en bas */
+    margin-bottom: 20px; /* Marge inférieure */
+}
+
+header h1 {
+    margin-bottom: 10px; /* Marge inférieure pour le titre */
+    color: #fff; /* Texte en blanc */
+}
+
+section.recettes {
+    padding: 20px;
+}
+
+section.recettes h2 {
+    color: #333; /* Couleur du texte */
+}
+
+
+.recettes-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.recette-card {
+    width: 30%; /* Ajustez la largeur selon vos besoins */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.recette-image {
+    max-width: 100%; /* Redimensionnez l'image pour s'adapter à la carte */
+    height: auto;
+}
+
+.recette-card:hover {
+    transform: translateY(-5px); /* Légère translation vers le haut au survol */
+}
+
+.recette-card img {
+    max-width: 100%;
+    border-radius: 8px; /* Coins arrondis pour les images */
+}
+
+.testimonials {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px; /* Ajoutez une marge inférieure pour pousser les témoignages vers le haut */
+    margin-top: 20px; /* Ajoutez une marge supérieure pour espacer les témoignages du contenu précédent */
+}
+.testimonials h2 {
+    color: #333; /* Couleur du texte */
+}
+
+.testimonial-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto; /* Ajout du défilement horizontal */
+    white-space: nowrap; /* Empêcher le passage à la ligne des éléments */
+}
+
+.testimonial-item {
+    display: inline-block;
+    width: 1500px; /* Ajustez la largeur selon vos préférences */
+    margin-right: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    vertical-align: top;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6; /* Nombre de lignes à afficher par défaut */
+    transition: width 0.3s ease; /* Animation fluide de transition */
+}
+
+.testimonial-item:hover {
+    overflow: visible;
+    width: 700px; /* Ajustez la largeur au survol selon vos préférences */
+}
+
+.testimonial-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333; /* Couleur du texte */
+    font-size: 16px; /* Taille de la police augmentée */
+}
+
+.testimonial-item p {
+    margin: 0;
+    color: #666; /* Couleur du texte légèrement plus claire */
+    font-size: 16px; /* Taille de la police augmentée */
+}
+
+    </style>
+</head>
+<body>
+
+    <header class="banner">
+        <h1>Bienvenue chez KOOL'IT</h1>
+        <p>Découvrez nos recettes innovantes et créez votre liste de courses facilement.</p>
+    </header>
+
+    <section class="recettes">
+        <h2>Recettes en Vedette</h2>
+        <div class="recettes-container">
+            <div *ngFor="let recette of recettes.slice(0, 3)" class="recette-card">
+                <h3>{{ recette.nom }} (pour {{ recette.nbPersonnes }} personnes)</h3>
+                <img src="{{recette.photoPath}}" alt="Photo de la recette" class="recette-image">
+                <p>Ingrédients:</p>
+                <ul>
+                    <li *ngFor="let ingredient of recette.ingredients">
+                        {{ ingredient.quantite }} {{ ingredient.nom }}
+                    </li>
+                </ul>
+                <p>Etapes de préparation:</p>
+                <ul>
+                    <li>{{recette.etapesPreparation}}</li>
+                </ul>
+                <p>Note: {{ recette.note }}/20</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>Témoignages</h2>
+        <ul class="testimonial-list">
+            <li class="testimonial-item">
+                <h3>POIZAT Pascal</h3>
+                <p>Excellent service et plats délicieux.</p>
+                <p> Je recommande vivement KOOL'IT!</p>
+              </li>
+            <li class="testimonial-item">
+                <h3>LEGOND Fabrice</h3>
+                <p>Je suis un grand fan de KOOL'IT! Leurs recettes sont non seulement délicieuses,</p><p> mais aussi faciles à suivre.</p>
+                </li>
+            <li class="testimonial-item">
+                <h3>HANEN Claire</h3>
+                <p>KOOL'IT a vraiment changé ma vie en cuisine! Avant, je n'étais pas très douée en cuisine, mais grâce à leurs recettes détaillées et leurs conseils utiles, je me sens maintenant beaucoup plus confiante.</p>
+                </li>
+            <li class="testimonial-item">
+                <h3>COJEAN Bruno</h3>
+                <p>KOOL'IT offre une expérience culinaire incomparable! Leurs recettes créatives et innovantes m'ont permis d'explorer de nouveaux horizons gastronomiques.</p>
+                
+            </li>
+            <li class="testimonial-item">
+                <h3>RUKOZ CASTILLO Marta</h3>
+                <p>Je suis un client fidèle de KOOL'IT depuis des années et je ne suis jamais déçu. Leurs recettes sont toujours créatives, délicieuses et faciles à suivre.</p>
+                 </li>
+        </ul>
+    </section>
+    
+    
+
+  
+</body>
+</html>

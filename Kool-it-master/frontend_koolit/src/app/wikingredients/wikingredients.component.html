@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles pour les conteneurs de produits OpenFoodFacts */
+        .product-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px auto; /* Centrer horizontalement */
+            width: 80%; /* Largeur ajustée */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: #fff; /* Couleur de fond */
+        }
+
+        /* Effet de transition au survol */
+        .product-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Styles pour les détails des produits OpenFoodFacts */
+        .product-details {
+            display: none; /* Caché par défaut */
+            margin-top: 10px;
+        }
+
+        /* Styles pour les titres de produits OpenFoodFacts */
+        .product-title {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.6rem; /* Taille de police réduite */
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer; /* Curseur pointer pour indiquer que c'est cliquable */
+        }
+
+        /* Styles pour les listes de produits OpenFoodFacts */
+        .product-list {
+            padding-left: 20px;
+        }
+
+        /* Styles pour les éléments de liste de produits OpenFoodFacts */
+        .product-item {
+            margin-bottom: 5px;
+        }
+
+        /* Styles pour le texte normal des produits OpenFoodFacts */
+        .product-text {
+            margin-bottom: 10px;
+            word-wrap: break-word; /* Permet le passage à la ligne pour les mots longs */
+        }
+    </style>
+    <title>Wikingrediens</title>
+</head>
+<body>
+
+<!-- OpenFoodFacts -->
+<div>
+    <label for="produitInput">Rechercher un produit :</label>
+    <input type="text" id="produitInput" name="produit" placeholder="Entrez un produit" required [(ngModel)]="productName">
+    <button type="button" id="searchButton" (click)="getProductDataByName(productName)">Rechercher</button>
+    <!-- Conteneur pour chaque produit -->
+    <div class="product-container" *ngFor="let product of products; let i = index">
+        <h2 class="product-title">{{ product?.product?.product_name }} - {{ product?.product?.brands }} - {{ product?.product?.quantity }}</h2>
+        <!-- Utilisez un bouton pour afficher/masquer les détails -->
+        <button type="button" (click)="toggleDetails(i)">{{ productDetailsVisible[i] ? 'Masquer' : 'Afficher' }} les détails</button>
+        <!-- Détails du produit ici -->
+        <div *ngIf="productDetailsVisible[i]">
+            <p class="product-text">Code-barres: {{ product?.product?.code }}</p>
+            <p class="product-text">Catégories: {{ product?.product?.categories }}</p>
+            <!-- Ajoutez d'autres détails ici -->
+            <p class="product-text">Conditionnement: {{ product?.product?.packaging }}</p>
+            <p class="product-text">Lieux de fabrication ou de transformation: {{ product?.product?.manufacturing_places }}</p>
+            <p class="product-text">Lien vers la page du produit sur le site officiel du fabricant: <a href="{{ product?.product?.link }}">{{ product?.product?.link }}</a></p>
+            <p class="product-text">Magasins: {{ product?.product?.stores }}</p>
+            <p class="product-text">Pays de vente: {{ product?.product?.countries }}</p>
+            <p class="product-text">Correspondance avec vos préférences:</p>
+            <ul class="product-list">
+                <li class="product-item">Nutri-Score: {{ product?.product?.nutriscore_grade }}</li>
+                <li class="product-item">NOVA: {{ product?.product?.nova_group }}</li>
+                <li class="product-item">Eco-Score: {{ product?.product?.ecoscore_grade }}</li>
+            </ul>
+            <p class="product-text">Ingrédients: {{ product?.product?.ingredients_text }}</p>
+            <p class="product-text">Allergènes: {{ product?.product?.allergens }}</p>
+            <p class="product-text">Transformation des aliments: {{ product?.product?.pnns_groups_1 }}</p>
+            <p class="product-text">Additifs: {{ product?.product?.additives_tags }}</p>
+            <p class="product-text">Empreinte carbone: {{ product?.product?.carbon_footprint }}</p>
+            <p class="product-text">Labels, certifications, récompenses: {{ product?.product?.labels }}</p>
+            <p class="product-text">Informations manquantes sur les origines des ingrédients: {{ product?.product?.origins }}</p>
+            <p class="product-text">Service consommateur: {{ product?.product?.customer_service }}</p>
+ 
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>

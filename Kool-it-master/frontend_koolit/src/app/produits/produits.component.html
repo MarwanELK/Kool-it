@@ -1,0 +1,102 @@
+<!-- produits.component.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="produits.component.css">
+    <title>KOOL'IT</title>
+    <style>
+          .recettes-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; }
+
+        .recette-card {
+            width: 48%; 
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .recette-card img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <section class="recettes">
+            <h2>Liste de Recettes</h2>
+            <button (click)="trierParNote()">Trier par note</button>
+            <div class="recettes-container">
+                <div *ngFor="let recette of recettes" class="recette-card">
+                    <h3>{{ recette.nom }} (pour {{ recette.nbPersonnes }} personnes)</h3>
+                    <img src="{{recette.photoPath}}" alt="Photo de la recette">
+                    <p>Ingrédients:</p>
+                    <ul>
+                        <li *ngFor="let ingredient of recette.ingredients">
+                            {{ ingredient.quantite }} {{ ingredient.nom }}
+                        </li>
+                    </ul>
+                    <p>Etapes de préparation:</p>
+                    <ul>
+                        <div>
+                            {{recette.etapesPreparation}}
+                        </div>
+                    </ul>
+                    <p>Note: {{ recette.note }}/20</p>
+
+                    <div class="commentaires-container">
+                        <h3>Commentaires</h3>
+                        <div *ngFor="let commentaire of recette.commentaires" class="commentaire">
+                          <p class="commentaire-username">@{{ commentaire.username }}:</p>
+                          <p class="commentaire-contenu">{{ commentaire.contenu }}</p>
+                          <button (click)="supprimerCommentaire(recette.recetteId, commentaire.commentaireId)">Supprimer</button>
+                        </div>
+                    </div>
+                   <!-- Formulaire pour envoyer un commentaire -->
+                   <div class="EnvoyerCommentaire-container">
+                    <h3>Envoyer un Commentaire</h3>
+                    <form >
+                        <label for="username">Nom d'utilisateur :</label>
+                        <input type="text" id="username" name="username" required [(ngModel)]="nouveauCommentaire.username">
+                        <br>
+                        <label for="contenu">Commentaire :</label>
+                        <textarea id="contenu" name="contenu" required [(ngModel)]="nouveauCommentaire.contenu"></textarea>
+                        <button type="button" (click)="envoyerCommentaire(recette.recetteId)">Envoyer</button>
+                    </form>
+                   </div>
+                    <br>
+                    <!-- Ajouter des personnes pour les parts  -->
+                    <form action="/votre-endpoint-de-soumission" method="post">
+                        <!-- Autres champs du formulaire -->
+                
+                        <label for="nombrePersonnes{{ recette.recetteId }}">Nombre de Personnes :</label>
+                        <input type="number" id="nombrePersonnes{{ recette.recetteId }}" name="nombrePersonnes{{ recette.recetteId }}" [(ngModel)]="recette.personnesEnPlus" min="1" max="99">
+                        
+                        <button (click)="augmenterPart(recette, recette.personnesEnPlus)">Soumettre</button>
+                    </form>
+                    <br>
+                    <!-- Ajouter un champ d'entrée pour la note -->
+                    <label for="note{{ recette.recetteId }}">Ajouter une note:</label>
+                    <input type="number" id="note{{ recette.recetteId }}" name="note{{ recette.recetteId }}" [(ngModel)]="recette.nouvelleNote" min="0" max="20" />
+                    <br>
+                    <!-- Ajouter un bouton pour soumettre la note -->
+                    <button (click)="noterRecette(recette, recette.nouvelleNote)">Noter</button>
+                    <br>
+                      <br>
+                    <button (click)="ajouterTousALaListeDeCourses(recette)">Ajouter tous à la Liste</button>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    
+    
+
+</body>
+</html>
