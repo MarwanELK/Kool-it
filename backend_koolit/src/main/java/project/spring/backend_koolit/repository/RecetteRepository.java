@@ -15,8 +15,6 @@ public interface RecetteRepository extends JpaRepository<Recette, Long> {
 
     Optional<Recette> findById(Long id);
 
-    @Query(nativeQuery = true, value = "SELECT r.nom FROM Recette r WHERE r.[recette_id] = ?1")
-    public List<Object[]> findRecetteDetail(Integer id);
 
     List<Commentaire> findCommentaireByRecetteId(Long id);
 

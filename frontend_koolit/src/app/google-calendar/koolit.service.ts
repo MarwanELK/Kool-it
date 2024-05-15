@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class KoolitService {
 
-  private apiUrl = "http://localhost:8080";
+  private apiUrl = "http://localhost:4200";
 
   constructor(private httpClient: HttpClient) { }
 
