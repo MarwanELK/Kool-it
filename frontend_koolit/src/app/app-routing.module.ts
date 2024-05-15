@@ -9,6 +9,7 @@ import { ListeDeCoursesComponent } from './liste-de-courses/liste-de-courses.com
 import { MagasinsComponent } from './magasins/magasins.component';
 import { MapComponent } from './map/map.component';
 import { WikingredientsComponent } from './wikingredients/wikingredients.component';
+import {GoogleCalendarComponent } from './google-calendar/google-calendar.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'Magasins', component: MagasinsComponent },
   { path: 'map', component: MapComponent},
   { path: 'Wikingredients', component: WikingredientsComponent },
+  { path: 'google-calendar', component: GoogleCalendarComponent},
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: '**', redirectTo: '/accueil' }
 ];

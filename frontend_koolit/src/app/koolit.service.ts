@@ -27,7 +27,7 @@ export class KoolitService {
       }),
       catchError((error: any) => {
         console.error('Erreur lors de la récupération de la liste de courses :', error);
-        throw error; // À vous de décider comment gérer l'erreur
+        throw error; 
       })
     );
   }
@@ -36,6 +36,20 @@ export class KoolitService {
 
   getRecettes(): Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.apiUrl}/recettes/1`);
+  }
+
+  exportCalendar(): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/export-calendar`, { responseType: 'text' });
+  }
+
+  oauth2Callback(code: string): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/oauth2callback?code=${code}`);
+  }
+
+  insertEvent(accessToken: string, personId: string) {
+    const url = 'http://localhost:8080/insert-event'; 
+    const body = { code: accessToken, personId: personId };
+    return this.httpClient.post(url, body, { responseType: 'text' });
   }
 
 }

@@ -141,4 +141,8 @@ public class RecetteService {
         }
     }
 
+    public  Recette getRecetteDetailById(Long idRecette){
+        return repository.findRecetteByRecetteId(idRecette);
+    }
+
 }
