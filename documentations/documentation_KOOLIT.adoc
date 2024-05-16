@@ -179,6 +179,9 @@ npm install file-saver --force
 npm install --save-dev @types/file-saver --force
 npm audit fix --force
 npm i --save-dev @types/leaflet --force
+npm audit fix --force
+npm install angularx-social-login --force
+npm audit fix --force
 ....
 
 === Installer Angular :
