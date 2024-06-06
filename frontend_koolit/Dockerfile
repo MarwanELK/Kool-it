@@ -1,35 +1,40 @@
-# Utilisez l'image Node.js comme base pour la construction
+# Utilisez l'image officielle de Node.js pour construire votre application
 FROM node:latest AS build
 
 # Définissez le répertoire de travail dans le conteneur
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copiez les fichiers de package.json et package-lock.json dans le conteneur
+# Copiez les fichiers de package.json et package-lock.json dans le répertoire de travail
 COPY package*.json ./
 
 # Installez les dépendances
-RUN npm install --force \
-    && npm install leaflet --force \
-    && npm install file-saver --force \
-    && npm audit fix --force \
-    && npm install file-saver --force \
-    && npm install --save-dev @types/file-saver --force \
-    && npm audit fix --force \
-    && npm install --save-dev @types/leaflet --force \
-    && npm audit fix --force \
-    && npm install -g @angular/cli 
+RUN npm install
+RUN npm install leaflet --force
+RUN npm install file-saver --force
+RUN npm audit fix --force
+RUN npm install file-saver --force
+RUN npm install --save-dev @types/file-saver --force
+RUN npm audit fix --force
+RUN npm i --save-dev @types/leaflet --force
+RUN npm audit fix --force
+RUN npm install angularx-social-login --force
+RUN npm audit fix --force
+RUN npm install -g @angular/cli
 
-# Copiez le reste des fichiers de l'application dans le conteneur
+# Copiez le reste des fichiers de l'application dans le répertoire de travail
 COPY . .
 
-# Construisez l'application Angular
-RUN npm run build --prod
+# Construisez l'application
+RUN npm run build
 
-# Utilisez l'image Nginx comme image finale
-FROM nginx:latest
+# Utilisez un serveur HTTP léger pour servir l'application Angular
+FROM nginx:alpine
 
-# Copiez les fichiers de l'application construite depuis l'étape précédente dans le répertoire de travail du serveur web Nginx
-COPY --from=build /app/dist/* /usr/share/nginx/html/
+# Copiez les fichiers de construction de l'application dans le répertoire de travail du serveur HTTP
+COPY --from=build /usr/src/app/dist/* /usr/share/nginx/html/
 
-# Exposez le port 80 pour permettre l'accès à l'application
+# Exposez le port 80 pour que l'application soit accessible
 EXPOSE 80
+
+# Démarrez le serveur HTTP lors du démarrage du conteneur
+CMD ["nginx", "-g", "daemon off;"]
