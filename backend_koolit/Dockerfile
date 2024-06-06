@@ -1,5 +1,5 @@
 # Utilisez l'image OpenJDK comme base
-FROM openjdk:latest
+FROM openjdk:23
 
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
