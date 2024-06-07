@@ -1,6 +1,0 @@
-Contributeur | Commits | Lignes ajoutées | Lignes supprimées | Back-end | Front-end | Principal | Contribution Totale
-106162115+Ayoubkhayef@users.noreply.github.com | 14 | 2305 | 5010 | 0 | 0 | -2705 | -2705
-100138848+MarwanELK@users.noreply.github.com | 40 | 3950 | 5282 | 0 | 0 | -1332 | -1332
-marwan_elkhaddar@hotmail.fr | 67 | 32265 | 4531 | 0 | 0 | 27734 | 27734
-107435944+amelboursali@users.noreply.github.com | 6 | 982 | 120 | 0 | 0 | 862 | 862
-boursali.amel@gmail.com | 3 | 44186 | 43394 | 0 | 0 | 792 | 792
