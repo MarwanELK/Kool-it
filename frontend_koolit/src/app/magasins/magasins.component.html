@@ -5,31 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Liste de Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff6f61;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6f61;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #e65a50;
+        }
+
+        .magasins-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .magasins-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .magasins-item:hover {
+            transform: scale(1.05);
+        }
+
+        .magasins-item h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .magasins-item h3.selected {
+            color: #ff6f61;
+        }
+
+        .magasins-item p {
+            margin: 10px 0;
+            word-wrap: break-word;
+        }
+
+        .magasins-item input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        .magasins-item button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6f61;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .magasins-item button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .magasins-item button:hover:not(:disabled) {
+            background-color: #e65a50;
+        }
+    </style>
 </head>
 <body>
 
-<!-- magasins.component.html -->
+<header>
+    <h1>Liste de Courses</h1>
+</header>
 
-<div>
-    <label for="searchMagasin">Rechercher un type d'ingrédient:</label>
-    <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
-    <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
-</div>
-
-<div class="magasins-container">
-    <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
-        <!-- Ajoutez la classe "selected" si le magasin est sélectionné -->
-        <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
-        <p>Type: {{ magasin.type }}</p>
-        <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
-        <p style="word-wrap: break-word;">Type d'aliment: {{ magasin.typeAliment }}</p>
-        <!-- Désactivez le bouton si le magasin n'est pas sélectionné -->
-        <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
-        <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
+<main>
+    <div class="search-container">
+        <label for="searchMagasin">Rechercher un type d'ingrédient:</label>
+        <input type="text" id="searchMagasin" required [(ngModel)]="nomMagasinRecherche" />
+        <button (click)="rechercherMagasin(nomMagasinRecherche)">Rechercher</button>
     </div>
-</div>
 
-
+    <div class="magasins-container">
+        <div *ngFor="let magasin of magasins" class="magasins-item" (click)="selectionnerMagasin(magasin)">
+            <h3 [class.selected]="magasin === magasinSelectionne">{{ magasin.nom }}</h3>
+            <p>Type: {{ magasin.type }}</p>
+            <p>URL: <a [href]="magasin.url" target="_blank">{{ magasin.url }}</a></p>
+            <p>Type d'aliment: {{ magasin.typeAliment }}</p>
+            <input type="text" [(ngModel)]="nouveauTypeAliment" placeholder="Nouveau Type d'Aliment">
+            <button (click)="ajouterTypeAliment()" [disabled]="!magasinSelectionne">Ajouter Type d'Aliment</button>
+        </div>
+    </div>
+</main>
 
 </body>
 </html>

@@ -1,165 +1,178 @@
+body {
+  font-family: "Comic Sans MS", cursive;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
 .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Deux colonnes de largeur égale */
-    height: 100vh;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Deux colonnes : carte à gauche, détails à droite */
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
 }
 
 .map-wrapper {
-    height: 100%;
-    border-radius: 20px; /* Coins arrondis */
-    overflow: hidden; /* Cacher le contenu qui dépasse */
+  width: 100%;
+  height: 100%; /* La carte prend toute la hauteur */
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
 }
 
 #sidebar {
-    height: 100%;
-    padding: 20px;
-    background-color: #ff6f61; /* Couleur vive */
-    color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 20px; /* Coins arrondis */
-    overflow: hidden; /* Cacher le contenu qui dépasse */
+  background-color: #ff6f61;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* Ajout du défilement si le contenu dépasse la hauteur de l'écran */
 }
 
 .sidebar-title {
-    font-size: 1.8rem; /* Taille du titre */
-    font-weight: bold; /* Texte en gras */
-    margin-bottom: 20px; /* Marge en bas */
-    text-transform: uppercase; /* Mettre en majuscules */
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#searchForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+#searchForm label {
+  margin-bottom: 5px;
+}
+
+#searchForm input[type="text"],
+#searchForm input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+#searchForm button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #ff6f61;
+  cursor: pointer;
+  align-self: center;
+  width: 50%;
+}
+
+#searchForm button:hover {
+  background-color: #e65a50;
+  color: #fff;
+}
+
+.modal-header {
+  background-color: #ff6f61;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 10px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 10px;
 }
 
 .magasins-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .magasins-item {
-    background-color: #555; /* Couleur vive */
-    border-radius: 15px; /* Coins arrondis */
-    padding: 10px;
-    color: #fff;
+  background-color: #555;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
 .magasins-item h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+  margin: 0;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
 }
 
 .magasins-item p {
-    margin: 0;
+  margin: 0;
+}
+
+.magasins-item a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.magasins-item a:hover {
+  text-decoration: underline;
 }
 
 .selected {
-    border: 2px solid #fff; /* Couleur vive pour les éléments sélectionnés */
+  border: 2px solid #fff;
 }
 
+button {
+  font-size: 12px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
 
-.magasins-container {
-    display: flex;
-    overflow-x: auto; /* Ajoutez cette ligne pour activer la barre de défilement horizontale */
-  }
-  
-  .magasins-item {
-    flex: 0 0 auto;
-    width: 300px; /* Ajustez la largeur des magasins selon vos besoins */
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-right: 10px; /* Ajoutez une marge entre les magasins */
-    border-radius: 5px;
-  }
-  
-  .magasins-item a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  
-  .magasins-item a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Reset CSS */
-body {
-    font-family: "Comic Sans MS", cursive; /* Police originale */
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-  }
-   
-  /* Container */
-  .shopping-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-   
-  /* Shopping list containers */
-  .shopping-list,
-  .shopping-list-Achete,
-  .add-to-list form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 48%;
-  }
-   
-  /* Headings */
-  h2 {
-    margin-top: 0;
-    color: #3f3d3d;
-    font-size: 1.6rem; /* Taille de police réduite */
-    font-weight: bold;
-  }
-   
-  /* Lists */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-   
-  /* Buttons */
-  button {
-    font-size: 12px;
-    padding: 10px 20px; /* Réduction de la taille des boutons */
-    border:rgb(0, 0, 0);
-    cursor: pointer;
-    border-radius: 5px;
-  }
-   
-  .delete-button {
-    background-color: #ff6f61;
-    color: #fff;
-  }
-   
-  .buy-button,
-  .add-button {
-    background-color: #52c41a;
-    color: #fff;
-  }
-   
-  /* Form labels */
-  label {
-    margin-bottom: 8px;
-    color: #333;
-    font-size: 1rem; /* Taille de police réduite */
-  }
-   
-  /* Form inputs */
-  input {
-    margin-bottom: 16px;
-    padding: 8px; /* Réduction de la taille du padding */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-   
-  /* Footer */
-  footer {
-    text-align: center;
-    font-size: 12px; /* Taille de police réduite */
-    color: #888;
-    margin-top: 20px;
-  }
+.delete-button {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+.buy-button,
+.add-button {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+label {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 1rem;
+}
+
+input {
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-top: 20px;
+}

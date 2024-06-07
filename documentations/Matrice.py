@@ -1,11 +1,11 @@
 import os
 import git
 
-# Chemin vers votre dépôt Git
+
 repo_path = r'C:\Users\Ayoub\Downloads\Kool-it'
 
-# Assurez-vous que ce chemin est correct et pointe vers un dépôt Git valide
 repo = git.Repo(repo_path)
+
 
 contributor_stats = {}
 
@@ -31,7 +31,14 @@ for commit in repo.iter_commits():
         contributor_stats[author]['lines_added'] += stats['insertions']
         contributor_stats[author]['lines_removed'] += stats['deletions']
 
+
+for contributor, stats in contributor_stats.items():
+    total_contribution = sum(stats[location] for location in ['back_end', 'front_end', 'principal'])
+    stats['total_contribution'] = total_contribution
+
 with open("Matrice2_Python_output.txt", "w") as output_file:
-    output_file.write("Contributeur | Commits | Lignes ajoutées | Lignes supprimées | Back-end | Front-end | Principal\n")
+    output_file.write("Contributeur | Commits | Lignes ajoutées | Lignes supprimées | Back-end | Front-end | Principal | Contribution Totale\n")
     for contributor, stats in contributor_stats.items():
-        output_file.write(f"{contributor} | {len(stats['commits'])} | {stats['lines_added']} | {stats['lines_removed']} | {stats['back_end']} | {stats['front_end']} | {stats['principal']}\n")
+        total_contribution = stats['total_contribution']
+        output_file.write(f"{contributor} | {len(stats['commits'])} | {stats['lines_added']} | {stats['lines_removed']} | {stats['back_end']} | {stats['front_end']} | {stats['principal']} | {total_contribution}\n")
+
