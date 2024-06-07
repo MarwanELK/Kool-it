@@ -1,33 +1,123 @@
 <!DOCTYPE html>
-<html>
-    <head>
-     
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planifier vos repas via Google Calendar</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <body>
-        <div class="card">
-            <h2>Plannifier vos repas via Google Calendar</h2>
-            <form [formGroup]="appointmentForm" (ngSubmit)="scheduleMeeting()">
-              <div class="form-group">
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2eccc9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .calendar {
+            margin-top: 20px;
+        }
+
+        .calendar button {
+            width: 100%;
+            background-color: #3498db;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .calendar button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Planifier vos repas via Google Calendar</h2>
+        <form [formGroup]="appointmentForm" (ngSubmit)="scheduleMeeting()">
+            <div class="form-group">
                 <label for="eventName">Nom de la recette : </label>
                 <input type="text" id="eventName" formControlName="eventName" />
-              </div>
-              <div class="form-group">  
+            </div>
+            <div class="form-group">
                 <label for="appointmentTime">Date et heure : </label>
-                <input type="datetime-local" id="appointmentTime" formControlName="appointmentTime"/>
-              </div>
-          
-              <div class="form-group">
-                <label for="email">Veuillez indiquer votre email google: </label>
-                <input type="email" id="email" class="form-control" formControlName="email"/>
-              </div>
-              <br/>
-              <button type="submit" id="schedule-button">Ajouter au planning</button>
-            </form>
-          </div>
-          <div class="calendar">
-            <button (click)="redirectToGoogleCalendar()" class="bretour">Google Calendar</button>
-          </div>
-        
-    </body>
+                <input type="datetime-local" id="appointmentTime" formControlName="appointmentTime" />
+            </div>
+            <div class="form-group">
+                <label for="email">Veuillez indiquer votre email Google : </label>
+                <input type="email" id="email" formControlName="email" />
+            </div>
+            <button type="submit" id="schedule-button">Ajouter au planning</button>
+        </form>
+    </div>
+    <div class="calendar">
+        <button (click)="redirectToGoogleCalendar()">Google Calendar</button>
+    </div>
+</body>
 </html>
